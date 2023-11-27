@@ -31,6 +31,7 @@
     <!-- Theme JS files -->
     <script src="{{ asset('limitless/layout_1/LTR/default/full/') }}/assets/js/app.js"></script>
     <!-- /theme JS files -->
+    @stack('css')
     @vite(['resources/js/app.js'])
     @livewireStyles
 </head>
@@ -77,21 +78,9 @@
 
                 <div class="navbar-collapse collapse" id="navbar-footer">
                     <span class="navbar-text">
-                        &copy; 2015 - 2018. <a href="#">Limitless Web App Kit</a> by <a
-                            href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+                        &copy; 2023 <a href="https://wa.me/6285157392291">Tri Maryanto</a> And <a
+                            href="https://wa.me/6282243041272" target="_blank">M Nurcholis</a>
                     </span>
-
-                    <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item"><a href="https://kopyov.ticksy.com/" class="navbar-nav-link"
-                                target="_blank"><i class="icon-lifebuoy mr-2"></i> Support</a></li>
-                        <li class="nav-item"><a href="http://demo.interface.club/limitless/docs/"
-                                class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i>
-                                Docs</a></li>
-                        <li class="nav-item"><a
-                                href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328?ref=kopyov"
-                                class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i
-                                        class="icon-cart2 mr-2"></i> Purchase</span></a></li>
-                    </ul>
                 </div>
             </div>
             <!-- /footer -->
@@ -102,6 +91,90 @@
     </div>
     <!-- /page content -->
     @livewireScripts
+    @stack('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.addEventListener('Delete', event => {
+            Swal.fire(
+                'Deleted!', 'Data has been deleted.', 'success'
+            )
+        });
+        window.addEventListener('Success', event => {
+            Swal.fire(
+                'Good job!', 'Data has been added.', 'success'
+            )
+        });
+        window.addEventListener('Update', event => {
+            Swal.fire(
+                'Good job!', 'Data has been updated.', 'success'
+            )
+        });
+        window.addEventListener('Error', event => {
+            Swal.fire(
+                'Warning !', 'Data Not Excecution.', 'error'
+            )
+        });
+
+        window.addEventListener('swal:modal', event => {
+            Swal.fire({
+                icon: event.detail.type, // Jenis alert
+                title: event.detail.title, // Judul pesan
+                text: event.detail.text, // Isi pesan
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            Livewire.on('confirmRestore', (url) => {
+                Swal.fire({
+                    title: 'Restore.',
+                    text: "Apakah akan Restore data tersebut ?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Restore!'
+                }).then((result) => {
+                    if (result.value) {
+                        Livewire.emit('restoreRecord', url);
+                    }
+                });
+            });
+        });
+        document.addEventListener('livewire:load', function() {
+            Livewire.on('confirmDelete', (url) => {
+                Swal.fire({
+                    title: 'Delete Permanen.',
+                    text: "Apakah akan delete secara permanen? Proses ini tidak bisa di ulangi.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Delete Permanen!'
+                }).then((result) => {
+                    if (result.value) {
+                        Livewire.emit('deleteRecord', url);
+                    }
+                });
+            });
+        });
+        document.addEventListener('livewire:load', function() {
+            Livewire.on('showNotification', ($message) => {
+                Swal.fire({
+                    title: 'Info Masseh !.',
+                    text: $message,
+                    type: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Siap Masseh.'
+                })
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ use App\Livewire\Admin\Pages\Role;
 use App\Livewire\Admin\Pages\User;
 use App\Livewire\Admin\Pages\Home;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('template', function () {
+    return File::get(public_path() . '/documentation.html');
+});
+
 
 Route::get('/', function () {
     return view('welcome');

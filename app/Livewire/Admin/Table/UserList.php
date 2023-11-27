@@ -18,16 +18,18 @@ class UserList extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable(),
-            Column::make("Name", "name")
-                ->sortable()->searchable(),
-            Column::make("Email", "email")
-                ->sortable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
+            Column::make('Id', 'id')->sortable(),
+            Column::make('Name', 'name')
+                ->sortable()
+                ->searchable(),
+            Column::make('Email', 'email')->sortable(),
+            Column::make('Role', 'updated_at')
+                ->format(function ($value, $row, Column $column) {
+                    return $row->getRoleNames()->first();
+                })
+                ->html()
+                ->searchable(),
+            Column::make('Action', 'id')->view('components.table-action'),
         ];
     }
 }
