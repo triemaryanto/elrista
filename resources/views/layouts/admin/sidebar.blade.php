@@ -53,7 +53,7 @@
                         title="Main"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.home') }}" class="nav-link">
+                    <a href="{{ route('home') }}" class="nav-link">
                         <i class="icon-home4"></i>
                         <span>
                             Dashboard
@@ -62,7 +62,7 @@
                 </li>
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-people"></i> <span>User
-                            pages</span></a>
+                            management</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="User pages">
                         <li class="nav-item"><a href="{{ url('user') }}"
                                 class="nav-link {{ request()->is('user') ? 'active' : '' }}" class="nav-link">User

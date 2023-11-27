@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\Admin\Page\Permission;
-use App\Livewire\Admin\Page\Role;
-use App\Livewire\Admin\Page\User;
+use App\Livewire\Admin\Pages\Permission;
+use App\Livewire\Admin\Pages\Role;
+use App\Livewire\Admin\Pages\User;
 use App\Livewire\Admin\Pages\Home;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +25,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(["prefix" => "dashboard"],function () {
+])->group(function () {
         Route::get('/dashboard', Home::class)->name('home');
         Route::get('/user', User::class)->name('user');
         Route::get('/role', Role::class)->name('role');
