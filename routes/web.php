@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\Admin\Page\Permission;
+use App\Livewire\Admin\Page\Role;
+use App\Livewire\Admin\Page\User;
 use App\Livewire\Admin\Pages\Home;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +26,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-       Route::get('/dashboard', Home::class)->name('dashboard');
+        Route::get('/dashboard', Home::class)->name('home');
+        Route::get('/user', User::class)->name('user');
+        Route::get('/role', Role::class)->name('role');
+        Route::get('/permission', Permission::class)->name('permission');
 });

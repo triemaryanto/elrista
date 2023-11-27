@@ -1,3 +1,7 @@
 <div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
+    <x-slot name="header">
+        <livewire:admin.global.page-header judul="Dashboard" subjudul="Dasboard" :breadcrumb="[]" />
+    </x-slot>
+
+
 </div>
