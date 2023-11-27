@@ -53,8 +53,7 @@
                         title="Main"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }}"
-                        class="nav-link">
+                    <a href="{{ route('dashboard.home') }}" class="nav-link">
                         <i class="icon-home4"></i>
                         <span>
                             Dashboard

@@ -25,7 +25,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+])->group(["prefix" => "dashboard"],function () {
         Route::get('/dashboard', Home::class)->name('home');
         Route::get('/user', User::class)->name('user');
         Route::get('/role', Role::class)->name('role');
