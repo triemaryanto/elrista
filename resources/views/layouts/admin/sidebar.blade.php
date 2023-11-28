@@ -61,12 +61,16 @@
                     </a>
                 </li>
                 <li
-                    class="nav-item nav-item-submenu {{ request()->is('admin/category') ? 'nav-item-expanded nav-item-open' : '' }} ">
+                    class="nav-item nav-item-submenu {{ request()->is('admin/category') || request()->is('admin/product') ? 'nav-item-expanded nav-item-open' : '' }} ">
                     <a href="#" class="nav-link"><i class="icon-database-menu"></i> <span>Product</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Product">
                         <li class="nav-item"><a href="{{ route('product.category') }}"
                                 class="nav-link {{ request()->is('admin/category') ? 'active' : '' }}"
                                 class="nav-link">Category</a>
+                        </li>
+                        <li class="nav-item"><a href="{{ route('product') }}"
+                                class="nav-link {{ request()->is('admin/product') ? 'active' : '' }}"
+                                class="nav-link">Product</a>
                         </li>
                     </ul>
                 </li>
@@ -80,7 +84,8 @@
                                 list</a>
                         </li>
                         <li class="nav-item"><a href="{{ route('role') }}"
-                                class="nav-link {{ request()->is('admin/role') ? 'active' : '' }}" class="nav-link">Role
+                                class="nav-link {{ request()->is('admin/role') ? 'active' : '' }}"
+                                class="nav-link">Role
                                 cards</a></li>
                         <li class="nav-item"><a href="{{ route('permission') }}"
                                 class="nav-link {{ request()->is('admin/permission') ? 'active' : '' }}"

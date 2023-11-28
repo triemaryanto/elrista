@@ -5,6 +5,7 @@ use App\Livewire\Admin\Pages\Role;
 use App\Livewire\Admin\Pages\User;
 use App\Livewire\Admin\Pages\Home;
 use App\Livewire\Admin\Pages\Product\Category;
+use App\Livewire\Admin\Pages\Product\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 
@@ -38,6 +39,7 @@ Route::middleware([
         Route::get('/dashboard', Home::class)->name('home');
         // Product
         Route::get('/category', Category::class)->name('product.category');
+        Route::get('/product', Product::class)->name('product');
 
         // User
         Route::get('/user', User::class)->name('user');
