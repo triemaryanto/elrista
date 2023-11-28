@@ -109,6 +109,11 @@
                 'Good job!', 'Data has been updated.', 'success'
             )
         });
+        window.addEventListener('UpdatePassword', event => {
+            Swal.fire(
+                'Good job!', 'Change Password Succesfull.', 'success'
+            )
+        });
         window.addEventListener('Error', event => {
             Swal.fire(
                 'Warning !', 'Data Not Excecution.', 'error'

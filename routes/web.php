@@ -1,12 +1,14 @@
 <?php
 
-use App\Livewire\Admin\Pages\Permission;
+use App\Livewire\Admin\Pages\Home;
 use App\Livewire\Admin\Pages\Role;
 use App\Livewire\Admin\Pages\User;
-use App\Livewire\Admin\Pages\Home;
-use App\Livewire\Admin\Pages\Product\Category;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
+use App\Livewire\Admin\Pages\Profile;
+use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Pages\Permission;
+use App\Http\Controllers\HelperController;
+use App\Livewire\Admin\Pages\Product\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,7 @@ Route::get('template', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-
+ Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -43,5 +45,6 @@ Route::middleware([
         Route::get('/user', User::class)->name('user');
         Route::get('/role', Role::class)->name('role');
         Route::get('/permission', Permission::class)->name('permission');
+        Route::get('/profile', Profile::class)->name('profile');
     });
 });
