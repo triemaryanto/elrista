@@ -60,19 +60,30 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item nav-item-submenu">
+                <li
+                    class="nav-item nav-item-submenu {{ request()->is('admin/category') ? 'nav-item-expanded nav-item-open' : '' }} ">
+                    <a href="#" class="nav-link"><i class="icon-database-menu"></i> <span>Product</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Product">
+                        <li class="nav-item"><a href="{{ route('product.category') }}"
+                                class="nav-link {{ request()->is('admin/category') ? 'active' : '' }}"
+                                class="nav-link">Category</a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item nav-item-submenu  {{ request()->is('admin/user') || request()->is('admin/role') || request()->is('admin/permission') ? 'nav-item-expanded nav-item-open' : '' }} "">
                     <a href="#" class="nav-link"><i class="icon-people"></i> <span>User
                             management</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="User pages">
-                        <li class="nav-item"><a href="{{ url('user') }}"
-                                class="nav-link {{ request()->is('user') ? 'active' : '' }}" class="nav-link">User
+                        <li class="nav-item"><a href="{{ route('user') }}"
+                                class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}" class="nav-link">User
                                 list</a>
                         </li>
-                        <li class="nav-item"><a href="{{ url('role') }}"
-                                class="nav-link {{ request()->is('role') ? 'active' : '' }}" class="nav-link">Role
-                            </a></li>
-                        <li class="nav-item"><a href="{{ url('permission') }}"
-                                class="nav-link {{ request()->is('permission') ? 'active' : '' }}"
+                        <li class="nav-item"><a href="{{ route('role') }}"
+                                class="nav-link {{ request()->is('admin/role') ? 'active' : '' }}" class="nav-link">Role
+                                cards</a></li>
+                        <li class="nav-item"><a href="{{ route('permission') }}"
+                                class="nav-link {{ request()->is('admin/permission') ? 'active' : '' }}"
                                 class="nav-link">Permission</a></li>
                     </ul>
                 </li>
