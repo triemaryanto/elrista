@@ -70,7 +70,7 @@
                         </li>
                         <li class="nav-item"><a href="{{ url('role') }}"
                                 class="nav-link {{ request()->is('role') ? 'active' : '' }}" class="nav-link">Role
-                                cards</a></li>
+                            </a></li>
                         <li class="nav-item"><a href="{{ url('permission') }}"
                                 class="nav-link {{ request()->is('permission') ? 'active' : '' }}"
                                 class="nav-link">Permission</a></li>

@@ -128,53 +128,6 @@
             });
         });
     </script>
-    <script>
-        document.addEventListener('livewire:load', function() {
-            Livewire.on('confirmRestore', (url) => {
-                Swal.fire({
-                    title: 'Restore.',
-                    text: "Apakah akan Restore data tersebut ?",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Restore!'
-                }).then((result) => {
-                    if (result.value) {
-                        Livewire.emit('restoreRecord', url);
-                    }
-                });
-            });
-        });
-        document.addEventListener('livewire:load', function() {
-            Livewire.on('confirmDelete', (url) => {
-                Swal.fire({
-                    title: 'Delete Permanen.',
-                    text: "Apakah akan delete secara permanen? Proses ini tidak bisa di ulangi.",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Delete Permanen!'
-                }).then((result) => {
-                    if (result.value) {
-                        Livewire.emit('deleteRecord', url);
-                    }
-                });
-            });
-        });
-        document.addEventListener('livewire:load', function() {
-            Livewire.on('showNotification', ($message) => {
-                Swal.fire({
-                    title: 'Info Masseh !.',
-                    text: $message,
-                    type: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Siap Masseh.'
-                })
-            });
-        });
-    </script>
 </body>
 
 </html>

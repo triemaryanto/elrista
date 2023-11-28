@@ -87,7 +87,6 @@ class User extends Component
         $user->delete();
         $this->dispatchBrowserEvent('Delete');
         $this->emit('refreshDatatable');
-        $this->cancel();
     }
     public function render()
     {

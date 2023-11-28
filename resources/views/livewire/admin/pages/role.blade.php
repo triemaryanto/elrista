@@ -53,6 +53,7 @@
             <livewire:admin.table.role-list />
         </div>
     </div>
+    <livewire:admin.global.konfirmasi-hapus />
 </div>
 @push('js')
     <script src="{{ asset('limitless/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
