@@ -4,6 +4,7 @@ use App\Livewire\Admin\Pages\Permission;
 use App\Livewire\Admin\Pages\Role;
 use App\Livewire\Admin\Pages\User;
 use App\Livewire\Admin\Pages\Home;
+use App\Livewire\Admin\Pages\Product\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\File;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('template', function () {
     return File::get(public_path() . '/documentation.html');
 });
@@ -31,8 +33,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::group(["prefix" => "admin",], function () {
+
         Route::get('/dashboard', Home::class)->name('home');
+        // Product
+        Route::get('/category', Category::class)->name('product.category');
+
+        // User
         Route::get('/user', User::class)->name('user');
         Route::get('/role', Role::class)->name('role');
         Route::get('/permission', Permission::class)->name('permission');
+    });
 });
