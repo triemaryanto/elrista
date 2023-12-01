@@ -28,14 +28,14 @@
                     </div>
 
                     <div class="media-body">
-                        <div class="media-title font-weight-semibold">Victoria Baker</div>
+                        <div class="media-title font-weight-semibold">{{ auth()->user()->name }}</div>
                         <div class="font-size-xs opacity-50">
                             <i class="icon-pin font-size-sm"></i> &nbsp;Santa Ana, CA
                         </div>
                     </div>
 
                     <div class="ml-3 align-self-center">
-                        <a href="#" class="text-white"><i class="icon-cog3"></i></a>
+                        <a href="{{ route('profile') }}" class="text-white"><i class="icon-cog3"></i></a>
                     </div>
                 </div>
             </div>
