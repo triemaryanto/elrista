@@ -10,6 +10,7 @@ use App\Livewire\Admin\Pages\Permission;
 use App\Http\Controllers\HelperController;
 use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Product\Product;
+use App\Livewire\Landing\Pages\Home as PagesHome;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +28,13 @@ Route::get('template', function () {
 });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
- Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', PagesHome::class)->name('front.home');
+
+
+Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
