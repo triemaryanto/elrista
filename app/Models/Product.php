@@ -27,4 +27,8 @@ class Product extends Model implements Auditable
             ]
         ];
     }
+
+    public function listImage(){
+        return $this->hasMany(ProductImage::class, 'product_id');
+    }
 }

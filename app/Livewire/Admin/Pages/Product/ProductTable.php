@@ -20,10 +20,10 @@ class ProductTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
+            Column::make("Name", "Name")
+                ->sortable()->searchable(),
+            Column::make('Action', 'id')
+                ->view('components.table-action')
         ];
     }
 }

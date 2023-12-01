@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->string('name')->nullable();
-            $table->string('path')->nullable();
+            $table->string('img1')->nullable();
+            $table->string('img2')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

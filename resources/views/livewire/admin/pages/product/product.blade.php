@@ -13,9 +13,10 @@
                 <button type="button" class="btn btn-primary" wire:click='AddProduct'>Add Product <i
                         class="icon-plus-circle2 ml-2"></i></button>
                 @if (session()->has('success'))
-                    <div class="alert alert-success alert-styled-left alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
-                        Data saved successfully
+                    <div class="alert alert-success alert-styled-left alert-dismissible>
+                        <button type="button"
+                        class="close" data-dismiss="alert"><span>×</span></button>
+                        {{ session('success') }}
                     </div>
                 @endif
                 <hr>
@@ -23,6 +24,23 @@
             @else
                 <form action="#" wire:submit.prevent="save">
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Name:</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" wire:model="category">
+                                        <option> - Pilih Kategori -</option>
+                                        @foreach ($listCategory as $val)
+                                            <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Name:</label>
@@ -89,10 +107,77 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Price:</label>
+                                <div class="col-lg-10">
+                                    {{ Form::number(null, null, [
+                                        'class' => 'form-control' . ($errors->has('price') ? ' border-danger' : null),
+                                        'placeholder' => 'Price Product',
+                                        'wire:model.lazy' => 'price',
+                                    ]) }}
+                                    @error('price')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Publish:</label>
+                                <div class="col-lg-10">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" wire:model="status">
+                                            @if ($status)
+                                                Publish
+                                            @else
+                                                Not Publish
+                                            @endif
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Image:</label>
                                 <div class="col-lg-10">
                                     <button type="button" class="btn btn-info" wire:click="AddImageProduct">Add
                                         Image <i class="icon-plus-circle2 ml-2"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">List Image:</label>
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        @foreach ($editListImage as $item)
+                                            <div class="col-lg-4">
+                                                <img src="{{ route('helper.show-picture', ['path' => $item->img1]) }}"
+                                                    class="img-fluid" alt="" width="50%">
+                                                <button type="button" class="btn btn-link"
+                                                    wire:click="confirmDelete({{ $item->id }},'image','edit')"><i
+                                                        class="icon-trash
+                                                        mr-2"></i></button>
+                                            </div>
+                                        @endforeach
+                                        @foreach ($listImage as $item)
+                                            <div class="col-lg-4">
+                                                <img src="{{ $item['img1']->temporaryUrl() }}" class="img-fluid"
+                                                    alt="" width="50%">
+                                                <button type="button" class="btn btn-link"
+                                                    wire:click="confirmDelete({{ $item['id'] }},'image','new')"><i
+                                                        class="icon-trash
+                                                        mr-2"></i></button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    @error('listImage')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -117,7 +202,8 @@
                                 @else
                                     <button type="submit" class="btn btn-primary">Save <i
                                             class="icon-paperplane ml-2"></i></button>
-                                    <button type="button" class="btn btn-danger" wire:click="CancelAddProduct">Cancel
+                                    <button type="button" class="btn btn-danger"
+                                        wire:click="CancelAddProduct">Cancel
                                         <i class="icon-paperplane ml-2"></i></button>
                                 @endif
                             </div>
@@ -129,8 +215,8 @@
     </div>
     <livewire:admin.global.konfirmasi-hapus />
 
-    <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
-        role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" data-backdrop="static"
+        data-keyboard="false" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-full" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,19 +227,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#">
+                    <form action="#" wire:submit.prevent="save_image">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-semibold">Your avatar:</label>
                                     <div class="media mt-0">
                                         <div class="mr-3">
-                                            @if ($img_path)
-                                                <img src="{{ $img_path->temporaryUrl() }}" class="img-fluid"
-                                                    id="mug" alt="">
+                                            @if ($img_path || $img_path_2)
+                                                <div class="product">
+                                                    @if ($img_path)
+                                                        <img src="{{ $img_path->temporaryUrl() }}"
+                                                            class="img-fluid img-1" id="mug" alt=""
+                                                            width="50%">
+                                                    @endif
+                                                    @if ($img_path_2)
+                                                        <img src="{{ $img_path_2->temporaryUrl() }}"
+                                                            class="img-fluid img-2" id="mug" alt=""
+                                                            width="50%">
+                                                    @endif
+                                                    <div class="color" wire:ignore></div>
+                                                </div>
                                             @else
                                                 <img src="{{ asset('limitless/') }}/global_assets/images/placeholders/placeholder.jpg"
-                                                    class="img-fluid" alt="">
+                                                    class="img-fluid" alt="" width="50%">
                                             @endif
                                         </div>
                                     </div>
@@ -169,49 +266,79 @@
                                                     style="user-select: none;">Choose
                                                     File</span>
                                             </div>
-                                            <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max
-                                                file size
-                                                2Mb</span>
+                                            <span class="form-text text-muted">image : 1, Accepted formats: png</span>
+                                            @error('img_path')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="media mt-0">
+                                        <div class="media-body">
+                                            <div class="uniform-uploader">
+                                                <input type="file" class="form-input-styled" data-fouc=""
+                                                    wire:model="img_path_2"><span class="filename"
+                                                    style="user-select: none;">No file
+                                                    selected</span><span class="action btn bg-pink-400"
+                                                    style="user-select: none;">Choose
+                                                    File</span>
+                                            </div>
+                                            <span class="form-text text-muted">image : 2, Accepted formats: png</span>
+                                            @error('img_path_2')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                {{-- @if ($img_path) --}}
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" wire:model="color" />
-                                        <span class="input-group-append">
-                                            <span class="input-group-text">
-                                                <input type="color" value="#CCCCCC" title="Choose a color"
-                                                    wire:model="color" placeholder="PILIH">
+                            <div class="col-md-4">
+                                @if ($img_path)
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" wire:model="color" />
+                                            <span class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <input type="color" class="color-input" value="#CCCCCC"
+                                                        title="Choose a color" wire:model="color"
+                                                        placeholder="PILIH">
+                                                </span>
                                             </span>
-                                        </span>
+                                        </div>
+                                        @error('color')
+                                            <span class="form-text text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="text-right">
-                                        <button type="button" class="btn btn-primary" wire:click="AddColor">Add
-                                            Color <i class="icon-plus-circle2 ml-2"></i></button>
+                                    <div class="form-group">
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-primary" wire:click="AddColor">Add
+                                                Color <i class="icon-plus-circle2 ml-2"></i></button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <ul>
-                                        @foreach ($listColor as $a => $b)
-                                            <li><span class="badge"
-                                                    style="background-color: {{ $a + 1 }};"></span>
-                                                {{ $b }}
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                    <div class="form-group">
+                                        <ul>
+                                            @foreach ($listColor as $b)
+                                                <li><span class="badge"
+                                                        style="background-color: {{ $b }}; color:{{ $b }};">
+                                                        = = </span>
+                                                    {{ $b }} <button type="button" class="btn btn-link"
+                                                        wire:click="confirmDelete('{{ $b }}','color','new')"><i
+                                                            class="icon-trash
+                                                        mr-2"></i></button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        @error('listColor')
+                                            <span class="form-text text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
-                                {{-- @endif --}}
+                                @endif
                             </div>
                         </div>
 
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Submit form <i
+                            <button type="submit" class="btn btn-primary">Save Image <i
                                     class="icon-paperplane ml-2"></i></button>
                         </div>
                     </form>
@@ -220,7 +347,40 @@
         </div>
     </div>
 </div>
+@push('css')
+    <style>
+        .product {
+            position: relative;
+            box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
+            border-radius: 1em;
+            overflow: hidden;
+        }
 
+        .img-1 {
+            width: 30em;
+            z-index: 0;
+        }
+
+        .img-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .color {
+            background: rgb(250, 250, 250);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            mix-blend-mode: color-burn;
+        }
+    </style>
+@endpush
 @push('js')
     <script>
         $(document).ready(function() {
@@ -230,6 +390,18 @@
 
             window.addEventListener('show-view-modal', event => {
                 $('#viewModal').modal('show');
+            });
+
+            window.addEventListener('change-color', event => {
+                // Get elements from the DOM
+                const color = document.querySelector(".color");
+                const colorInput = document.querySelector(".color-input");
+
+                // Add input event listener
+                colorInput.addEventListener("input", () => {
+                    /*Set background of the color div to the color set in the input field*/
+                    color.style.backgroundColor = colorInput.value;
+                });
             });
         });
     </script>
