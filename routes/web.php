@@ -6,11 +6,12 @@ use App\Livewire\Admin\Pages\User;
 use Illuminate\Support\Facades\File;
 use App\Livewire\Admin\Pages\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Landing\Pages\Detail;
 use App\Livewire\Admin\Pages\Permission;
-use App\Http\Controllers\HelperController;
-use App\Livewire\Admin\Pages\Product\Category;
-use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Setting\Web;
+use App\Http\Controllers\HelperController;
+use App\Livewire\Admin\Pages\Product\Product;
+use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 
 /*
