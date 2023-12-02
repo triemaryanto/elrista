@@ -36,4 +36,9 @@ class Product extends Model implements Auditable
     public function listSize(){
         return $this->hasMany(ProductSize::class, 'product_id');
     }
+
+    public function gambar_satu()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id');
+    }
 }

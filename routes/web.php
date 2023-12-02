@@ -13,6 +13,7 @@ use App\Livewire\Admin\Pages\Setting\Web;
 use App\Http\Controllers\HelperController;
 use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Product\Category;
+use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 use App\Livewire\Landing\Pages\Blog;
 use App\Livewire\Landing\Pages\Detailblog;
 use App\Livewire\Landing\Pages\Home as PagesHome;
@@ -63,5 +64,6 @@ Route::middleware([
 
         // Setting
         Route::get('/web', Web::class)->name('web');
+        Route::get('/banner', BannerController::class)->name('banner');
     });
 });

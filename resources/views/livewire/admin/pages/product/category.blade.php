@@ -32,11 +32,11 @@
                             <label class="col-lg-3 col-form-label">Image:</label>
                             <div class="col-md-9">
                                 @if ($image)
-                                    <img src="{{ $image->temporaryUrl() }}" class="img-fluid img-1" id="mug"
+                                    <img src="{{ $image->temporaryUrl() }}" class="img-fluid" id="mug"
                                         alt="" width="50%">
                                 @elseif ($edit_image)
                                     <img src="{{ route('helper.show-picture', ['path' => $edit_image]) }}"
-                                        class="img-fluid img-1" id="mug" alt="" width="50%">
+                                        class="img-fluid" id="mug" alt="" width="50%">
                                 @endif
                                 <div class="form-group">
                                     <div class="media mt-2">
