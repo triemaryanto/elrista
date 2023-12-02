@@ -3,6 +3,7 @@
 use App\Livewire\Admin\Pages\Home;
 use App\Livewire\Admin\Pages\Role;
 use App\Livewire\Admin\Pages\User;
+use App\Livewire\Landing\Pages\Shop;
 use Illuminate\Support\Facades\File;
 use App\Livewire\Admin\Pages\Profile;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,8 @@ use App\Livewire\Admin\Pages\Setting\Web;
 use App\Http\Controllers\HelperController;
 use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Product\Category;
+use App\Livewire\Landing\Pages\Blog;
+use App\Livewire\Landing\Pages\Detailblog;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 
 /*
@@ -35,6 +38,9 @@ Route::get('template', function () {
 // });
 Route::get('/', PagesHome::class)->name('front.home');
 Route::get('/detail/{slug}', Detail::class)->name('detail');
+Route::get('/shop', Shop::class)->name('shop');
+Route::get('/blog', Blog::class)->name('blog');
+Route::get('/blog/{slug}', Detailblog::class)->name('detailblog');
 
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 Route::middleware([
