@@ -10,7 +10,8 @@
     <meta name="keywords" content="multikart">
     <meta name="author" content="multikart">
     <link rel="icon" href="{{ asset('multikart_all_in_one/') }}/assets/images/favicon/2.png" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('multikart_all_in_one/') }}/assets/images/favicon/2.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('multikart_all_in_one/') }}/assets/images/favicon/2.png"
+        type="image/x-icon">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!--Google font-->
@@ -19,35 +20,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/font-awesome.css">
 
     <!--Slick slider css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/slick.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/slick-theme.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/slick-theme.css">
 
     <!-- Animate icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/animate.css">
 
     <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/themify-icons.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/themify-icons.css">
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('multikart_all_in_one/') }}/assets/css/vendors/bootstrap.css">
 
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('multikart_all_in_one/') }}/assets/css/style.css">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('costum/') }}/color.css" !important>
+    @stack('css')
+    @vite(['resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="theme-color-25">
 
 
- <!-- Main header -->
- @include('layouts.front.header')
- <!-- /main header -->
+    <!-- Main header -->
+    @include('layouts.front.header')
+    <!-- /main header -->
 
-
-    <!-- Home slider -->
+    {{ $slot ?? '' }}
+    {{-- <!-- Home slider -->
     <section class="p-0 height-100 xs-responsive bg-white">
         <div class="home-slider">
             <div>
@@ -1086,7 +1094,8 @@
                             aria-hidden="true">&times;</span></button>
                     <div class="row">
                         <div class="col-lg-6 col-xs-12">
-                            <div class="quick-view-img"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/1.jpg" alt=""
+                            <div class="quick-view-img"><img
+                                    src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/1.jpg" alt=""
                                     class="img-fluid blur-up lazyload"></div>
                         </div>
                         <div class="col-lg-6 rtl-text">
@@ -1115,13 +1124,11 @@
                                     <h6 class="product-title">quantity</h6>
                                     <div class="qty-box">
                                         <div class="input-group"><span class="input-group-prepend"><button
-                                                    type="button" class="btn quantity-left-minus"
-                                                    data-type="minus" data-field=""><i
-                                                        class="ti-angle-left"></i></button> </span>
-                                            <input type="text" name="quantity"
-                                                class="form-control input-number" value="1"> <span
-                                                class="input-group-prepend"><button type="button"
-                                                    class="btn quantity-right-plus" data-type="plus"
+                                                    type="button" class="btn quantity-left-minus" data-type="minus"
+                                                    data-field=""><i class="ti-angle-left"></i></button> </span>
+                                            <input type="text" name="quantity" class="form-control input-number"
+                                                value="1"> <span class="input-group-prepend"><button
+                                                    type="button" class="btn quantity-right-plus" data-type="plus"
                                                     data-field=""><i class="ti-angle-right"></i></button></span>
                                         </div>
                                     </div>
@@ -1145,7 +1152,8 @@
     </div>
     <!-- tap to top end -->
 
-
+    @livewireScripts
+    @stack('js')
     <!-- latest jquery-->
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/jquery-3.3.1.min.js"></script>
 
@@ -1176,7 +1184,7 @@
     <!-- Theme js-->
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/theme-setting.js"></script>
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/script.js"></script>
-
+    <script src="{{ asset('costum/') }}/color.js"></script>
     <script>
         $(window).on('load', function() {
             setTimeout(function() {
