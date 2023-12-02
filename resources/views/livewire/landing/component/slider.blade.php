@@ -2,8 +2,7 @@
     <div class="slider-animate home-slider">
         <div>
             <div class="home">
-                <img src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/main-banner.jpg" alt=""
-                    class="bg-img blur-up lazyload">
+                <img src="{{ asset('images/') }}/main-banner.jpg" alt="" class="bg-img blur-up lazyload">
                 <div class="container">
                     <div class="row">
                         <div class="col">
