@@ -5,8 +5,7 @@
                  <div class="category-wrap">
                      <div class="banner-effect">
                          <div>
-                             <img src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/multistore/1.jpg"
-                                 class="img-fluid bg-img" alt="">
+                             <img src="{{ asset('images/') }}/karpet.jpg" class="img-fluid bg-img" alt="">
                          </div>
                      </div>
                      <div class="category-content">
@@ -23,8 +22,7 @@
                      </div>
                      <div class="banner-effect">
                          <div>
-                             <img src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/multistore/2.jpg"
-                                 class="img-fluid bg-img" alt="">
+                             <img src="{{ asset('images/') }}/tangtop.jpg" class="img-fluid bg-img" alt="">
                          </div>
                      </div>
                  </div>
@@ -33,8 +31,7 @@
                  <div class="category-wrap">
                      <div class="banner-effect">
                          <div>
-                             <img src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/multistore/3.jpg"
-                                 class="img-fluid bg-img" alt="">
+                             <img src="{{ asset('images/') }}/lagging.jpg" class="img-fluid bg-img" alt="">
                          </div>
                      </div>
                      <div class="category-content">
@@ -51,8 +48,7 @@
                      </div>
                      <div class="banner-effect">
                          <div>
-                             <img src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/multistore/4.jpg"
-                                 class="img-fluid bg-img" alt="">
+                             <img src="{{ asset('images/') }}/tops.jpg" class="img-fluid bg-img" alt="">
                          </div>
                      </div>
                  </div>

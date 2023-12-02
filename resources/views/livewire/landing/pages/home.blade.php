@@ -5,6 +5,8 @@
 
     <livewire:landing.component.about />
 
+    <livewire:landing.component.category />
+
     <livewire:landing.component.product />
 
     <livewire:landing.component.collection />
@@ -12,6 +14,8 @@
     <livewire:landing.component.product2 />
 
     <livewire:landing.component.lookbook />
+
+    <livewire:landing.component.blog />
 
     <livewire:landing.component.instagram>
 </div>
