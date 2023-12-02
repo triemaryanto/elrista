@@ -80,7 +80,8 @@
                             management</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="User pages">
                         <li class="nav-item"><a href="{{ route('user') }}"
-                                class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}" class="nav-link">User
+                                class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}"
+                                class="nav-link">User
                                 list</a>
                         </li>
                         <li class="nav-item"><a href="{{ route('role') }}"
@@ -90,6 +91,16 @@
                         <li class="nav-item"><a href="{{ route('permission') }}"
                                 class="nav-link {{ request()->is('admin/permission') ? 'active' : '' }}"
                                 class="nav-link">Permission</a></li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item nav-item-submenu  {{ request()->is('admin/web') ? 'nav-item-expanded nav-item-open' : '' }} "">
+                    <a href="#" class="nav-link"><i class="icon-gear"></i> <span>Setting</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Setting pages">
+                        <li class="nav-item"><a href="{{ route('web') }}"
+                                class="nav-link {{ request()->is('admin/web') ? 'active' : '' }}"
+                                class="nav-link">Web</a>
+                        </li>
                     </ul>
                 </li>
 

@@ -10,6 +10,7 @@ use App\Livewire\Admin\Pages\Permission;
 use App\Http\Controllers\HelperController;
 use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Product\Product;
+use App\Livewire\Admin\Pages\Setting\Web;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 
 /*
@@ -52,5 +53,8 @@ Route::middleware([
         Route::get('/role', Role::class)->name('role');
         Route::get('/permission', Permission::class)->name('permission');
         Route::get('/profile', Profile::class)->name('profile');
+
+        // Setting
+        Route::get('/web', Web::class)->name('web');
     });
 });

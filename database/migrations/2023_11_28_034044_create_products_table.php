@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('shop_info')->nullable();
             $table->integer('stock')->nullable();
             $table->integer('price')->nullable();
+            $table->integer('views')->nullable()->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
