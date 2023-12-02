@@ -33,7 +33,7 @@ Route::get('template', function () {
 //     return view('welcome');
 // });
 Route::get('/', PagesHome::class)->name('front.home');
-Route::get('/detail', Detail::class)->name('detail');
+Route::get('/detail/{slug}', Detail::class)->name('detail');
 
 
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');

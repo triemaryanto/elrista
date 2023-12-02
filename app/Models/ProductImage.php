@@ -15,4 +15,8 @@ class ProductImage extends Model implements Auditable
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function listColor(){
+        return $this->hasMany(ProductImageColor::class, 'product_image_id');
+    }
 }

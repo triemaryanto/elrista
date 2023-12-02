@@ -29,13 +29,15 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div>
-                            <div>
-                                <img src="{{ asset('images/') }}/asli2.jpg" alt=""
-                                    class="img-1 img-fluid blur-up lazyload image_zoom_cls-0">
-                            </div>
-                            <div><img src="{{ asset('images/') }}/crop2.png" alt=""
-                                    class="img-2 img-fluid blur-up lazyload image_zoom_cls-0"></div>
-                            <div class="color"></div>
+                            @foreach ($data->listImage as $image)
+                                <div>
+                                    <img src="{{ route('helper.show-picture', ['path' => $image->img1]) }}"
+                                        alt="" class="img-1 img-fluid blur-up lazyload image_zoom_cls-0">
+                                </div>
+                                <div><img src="{{ route('helper.show-picture', ['path' => $image->img2]) }}"
+                                        alt="" class="img-2 img-fluid blur-up lazyload image_zoom_cls-0"></div>
+                                <div class="color"></div>
+                            @endforeach
                         </div>
 
                     </div>
@@ -58,7 +60,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2>Women Pink Shirt</h2>
+                            <h2>{{ $data->name }}</h2>
                             <div class="rating-section">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -69,12 +71,13 @@
                                 <span class="badge badge-grey-color">#1 Best seller</span>
                                 <span class="label-text">in fashion</span>
                             </div>
-                            <h3 class="price-detail">$32.96 <del>$459.00</del><span>55% off</span></h3>
+                            <h3 class="price-detail">{{ $data->price }}</h3>
                             <ul class="color-variant">
-                                <li class="bg-light0 active"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                                <input type="color" class="color-input" value="#FFFFFF" />
+                                @foreach ($this->image->listColor as $color)
+                                    <li class="block" style="background-color: {{ $color->color }};">
+                                    </li>
+                                @endforeach
+
                             </ul>
                             <div id="selectSize" class="addeffect-section product-description border-product">
                                 <h6 class="product-title size-text">select size <span><a href=""
@@ -99,10 +102,9 @@
                                 <h6 class="error-message">please select size</h6>
                                 <div class="size-box">
                                     <ul>
-                                        <li><a href="javascript:void(0)">s</a></li>
-                                        <li><a href="javascript:void(0)">m</a></li>
-                                        <li><a href="javascript:void(0)">l</a></li>
-                                        <li><a href="javascript:void(0)">xl</a></li>
+                                        @foreach ($data->listSize as $size)
+                                            <li><a href="javascript:void(0)">{{ $size->size }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <h6 class="product-title">quantity</h6>
@@ -142,9 +144,6 @@
                                 <h6 class="product-title">shipping info</h6>
                                 <ul class="shipping-info">
                                     <li>100% Original Products</li>
-                                    <li>Free Delivery on order above Rs. 799</li>
-                                    <li>Pay on delivery is available</li>
-                                    <li>Easy 30 days returns and exchanges</li>
                                 </ul>
                             </div>
                             <div class="border-product">
@@ -205,64 +204,13 @@
                             aria-labelledby="top-home-tab">
                             <div class="product-tab-discription">
                                 <div class="part">
-                                    <p>The Model is wearing a white blouse from our stylist's collection, see the image
-                                        for a mock-up of what the actual blouse would look like.it has text written on
-                                        it in a black cursive language which looks great on a white color.</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">fabric:</h5>
-                                    <p>Art silk is manufactured by synthetic fibres like rayon. It's light in weight and
-                                        is soft on the skin for comfort in summers.Art silk is manufactured by synthetic
-                                        fibres like rayon. It's light in weight and is soft on the skin for comfort in
-                                        summers.</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">size & fit:</h5>
-                                    <p>The model (height 5'8") is wearing a size S</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">Material & Care:</h5>
-                                    <p>Top fabric: pure cotton</p>
-                                    <p>Bottom fabric: pure cotton</p>
-                                    <p>Hand-wash</p>
+                                    <p> {{ $data->description }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="top-profile" role="tabpanel"
                             aria-labelledby="profile-top-tab">
-                            <p>The Model is wearing a white blouse from our stylist's collection, see the image for a
-                                mock-up of what the actual blouse would look like.it has text written on it in a black
-                                cursive language which looks great on a white color.</p>
-                            <div class="single-product-tables">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Sleeve Length</td>
-                                            <td>Sleevless</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Neck</td>
-                                            <td>Round Neck</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Occasion</td>
-                                            <td>Sports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Fabric</td>
-                                            <td>Polyester</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fit</td>
-                                            <td>Regular Fit</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <p>{{ $data->specification }}</p>
                         </div>
                         <div class="tab-pane fade" id="top-contact" role="tabpanel"
                             aria-labelledby="contact-top-tab">

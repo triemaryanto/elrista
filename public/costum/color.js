@@ -1,8 +1,14 @@
-const color = document.querySelector(".color");
-const colorInput = document.querySelector(".color-input");
+let color = document.querySelector(".color");
+let colorInput = document.querySelector(".color-input");
+// Select all elements with the class "block"
+let blocks = document.querySelectorAll(".block");
 
-// Add input event listener
-colorInput.addEventListener("input", () => {
-    /*Set background of the color div to the color set in the input field*/
-    color.style.backgroundColor = colorInput.value;
+// Add click event listener to each block
+blocks.forEach((block) => {
+    block.addEventListener("click", () => {
+        // Get the background color of the clicked block
+        let colorBlock = window.getComputedStyle(block).backgroundColor;
+        console.log(colorBlock);
+        color.style.backgroundColor = colorBlock;
+    });
 });
