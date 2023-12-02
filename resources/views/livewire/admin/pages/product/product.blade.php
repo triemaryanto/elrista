@@ -182,6 +182,47 @@
                             </div>
 
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Size:</label>
+                                <div class="col-lg-10">
+                                    <button type="button" class="btn btn-info" wire:click="AddSizeProduct">Add
+                                        Size <i class="icon-plus-circle2 ml-2"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">List Size:</label>
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        @foreach ($editListSize as $item)
+                                            <span
+                                                class="badge badge-light badge-striped badge-striped-left border-left-grey mr-3">{{ $item->size }}
+                                                <button type="button" class="btn btn-link btn-sm"
+                                                    wire:click="confirmDelete('{{ $item->id }}','size','edit')"><i
+                                                        class="icon-trash
+                                                mr-2"></i></button>
+                                            </span>
+                                        @endforeach
+                                        @foreach ($listSize as $item)
+                                            <span
+                                                class="badge badge-light badge-striped badge-striped-left border-left-grey mr-3">{{ $item }}
+                                                <button type="button" class="btn btn-link btn-sm"
+                                                    wire:click="confirmDelete('{{ $item }}','size','new')"><i
+                                                        class="icon-trash
+                                                mr-2"></i></button>
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                    @error('listSize')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
 
 
                         <div class="col-md-12">
@@ -292,7 +333,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 @if ($img_path)
                                     <div class="form-group">
                                         <div class="input-group">
@@ -346,6 +387,38 @@
             </div>
         </div>
     </div>
+    <div wire:ignore.self class="modal fade" id="ModalSize" tabindex="-1" data-backdrop="static"
+        data-keyboard="false" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-full" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Size</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        wire:click="closeModalSize">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" wire:submit.prevent="save_size">
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Add Size</label>
+                            <div class="col-lg-10">
+                                <input type="text" wire:model="size" class="form-control">
+                            </div>
+                            @error('color')
+                                <span class="form-text text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Ad Size <i
+                                    class="icon-paperplane ml-2"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @push('css')
     <style>
@@ -390,6 +463,14 @@
 
             window.addEventListener('show-view-modal', event => {
                 $('#viewModal').modal('show');
+            });
+
+            window.addEventListener('show-size-modal', event => {
+                $('#ModalSize').modal('show');
+            });
+
+            window.addEventListener('close-size-modal', event => {
+                $('#ModalSize').modal('hide');
             });
 
             window.addEventListener('change-color', event => {

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product as ModelsProduct;
 use App\Models\ProductImage;
 use App\Models\ProductImageColor;
+use App\Models\ProductSize;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,7 +15,7 @@ class Product extends Component
 {
     use WithFileUploads;
 
-    public $idnya, $listCategory, $category, $name, $description, $specification, $shop_info, $img_path, $img_path_2, $color, $listColor = [], $listImage = [], $price, $status = false, $editListImage = [];
+    public $idnya, $listCategory, $category, $name, $description, $specification, $shop_info, $img_path, $img_path_2, $color, $listColor = [], $listImage = [], $price, $status = false, $editListImage = [], $editListSize = [], $listSize = [], $size;
     public $isAdd = false;
     public $isEdit = false;
     protected $listeners = ['edit', 'delete'];
@@ -87,11 +88,17 @@ class Product extends Component
         if ($from == 'color' && $action == 'new') {
             $this->deleteColor($id, $action);
         }
+        if ($from == 'size' && $action == 'new') {
+            $this->deleteSize($id, $action);
+        }
         if ($from == 'image' && $action == 'new') {
             $this->deleteImage($id, $action);
         }
         if ($from == 'image' && $action == 'edit') {
             $this->deleteImageEdit($id);
+        }
+        if ($from == 'size' && $action == 'edit') {
+            $this->deleteSizeEdit($id);
         }
     }
 
@@ -102,6 +109,22 @@ class Product extends Component
                 return $color !== $id;
             }));
         }
+    }
+
+    public function deleteSize($id, $action)
+    {
+        if ($action == 'new') {
+            $this->listSize = array_values(array_filter($this->listSize, function ($size) use ($id) {
+                return $size !== $id;
+            }));
+        }
+    }
+
+    public function deleteSizeEdit($id)
+    {
+        $data = ProductSize::find($id);
+        $data->delete();
+        $this->getSize($this->idnya);
     }
 
     public function deleteImageEdit($id)
@@ -153,6 +176,13 @@ class Product extends Component
                     ]);
                 }
             }
+            
+            foreach ($this->listSize as $size) {
+                ProductSize::create([
+                    'product_id' => $data->id,
+                    'size' => $size
+                ]);
+            }
             $data->save();
             $this->emit('refreshDatatable');
             session()->flash('success', 'Data updated successfully');
@@ -165,6 +195,8 @@ class Product extends Component
             $this->isEdit = false;
             $this->listImage = [];
             $this->editListImage = [];
+            $this->listSize = [];
+            $this->editListSize = [];
         } else {
             $rules['listImage'] = 'required';
             $this->validate($rules);
@@ -192,6 +224,13 @@ class Product extends Component
                         ]);
                     }
                 }
+
+                foreach ($this->listSize as $size) {
+                    ProductSize::create([
+                        'product_id' => $produk->id,
+                        'size' => $size
+                    ]);
+                }
             });
             $this->emit('refreshDatatable');
             session()->flash('success', 'Data saved successfully');
@@ -202,6 +241,7 @@ class Product extends Component
             $this->status = false;
             $this->isAdd = false;
             $this->listImage = [];
+            $this->listSize = [];
         }
     }
 
@@ -217,6 +257,7 @@ class Product extends Component
         $this->price = $data->price;
         $this->status = $data->status ? true : false;
         $this->getImage($id);
+        $this->getSize($id);
         $this->isAdd = true;
         $this->isEdit = true;
     }
@@ -224,6 +265,11 @@ class Product extends Component
     public function getImage($id)
     {
         $this->editListImage = ProductImage::where('product_id', $id)->get();
+    }
+
+    public function getSize($id)
+    {
+        $this->editListSize = ProductSize::where('product_id', $id)->get();
     }
 
     public function delete($id)
@@ -235,8 +281,28 @@ class Product extends Component
             ProductImageColor::where('product_image_id', $a->id)->delete();
         }
         ProductImage::where('product_id', $id)->delete();
+        ProductSize::where('product_id', $id)->delete();
         $this->emit('refreshDatatable');
         session()->flash('success', 'Data Delete successfully');
+    }
+
+    public function AddSizeProduct()
+    {
+        $this->dispatchBrowserEvent('show-size-modal');
+    }
+
+    public function closeModalSize()
+    {
+        $this->dispatchBrowserEvent('close-size-modal');
+    }
+
+    public function save_size()
+    {
+        $rules['size'] = 'required';
+        $this->validate($rules);
+        $this->listSize[] = $this->size;
+        $this->size = null;
+        $this->dispatchBrowserEvent('close-size-modal');
     }
 
     public function mount()
