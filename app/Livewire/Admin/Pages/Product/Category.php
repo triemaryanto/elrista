@@ -3,25 +3,33 @@
 namespace App\Livewire\Admin\Pages\Product;
 
 use App\Models\Category as ModelsCategory;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Category extends Component
 {
-    public $idnya, $name;
+    use WithFileUploads;
+
+    public $idnya, $name, $image, $edit_image;
     public $isEdit = false;
     protected $listeners = ['edit', 'delete'];
-    protected $rules = [
-        'name' => 'required',
-    ];
 
     public function simpan()
     {
-        $this->validate();
+        $rules['name'] = 'required';
         if ($this->idnya) {
+            $this->validate($rules);
             $this->update();
         } else {
-            ModelsCategory::create(["name" => $this->name]);
+            $rules['image'] = 'required';
+            $this->validate($rules);
+            ModelsCategory::create([
+                "name" => $this->name,
+                'image' => $this->image->store('image/catgory'),
+            ]);
             $this->name = "";
+            $this->image = "";
             $this->emit('refreshDatatable');
             session()->flash('success', 'Data saved successfully');
         }
@@ -40,6 +48,7 @@ class Category extends Component
         $a = ModelsCategory::find($id);
         $this->idnya = $a->id;
         $this->name = $a->name;
+        $this->edit_image = $a->image;
         $this->isEdit = true;
     }
 
@@ -52,9 +61,22 @@ class Category extends Component
 
     public function update()
     {
-        ModelsCategory::find($this->idnya)->update(["name" => $this->name, "slug" => null]);
+        $cari = ModelsCategory::find($this->idnya);
+        $cari->name = $this->name;
+        $cari->slug = null;
+        if ($this->image != '') {
+            if ($this->edit_image != "") {
+                if (Storage::exists($this->edit_image)) {
+                    Storage::delete($this->edit_image);
+                }
+            }
+            $cari->image = $this->image->store('public/image');
+        }
+        $cari->save();
         $this->idnya = "";
         $this->name = "";
+        $this->image = "";
+        $this->edit_image = "";
         $this->isEdit = false;
         $this->emit('refreshDatatable');
         session()->flash('success', 'Data berhasil diubah.');

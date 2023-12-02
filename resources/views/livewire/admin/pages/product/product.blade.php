@@ -272,7 +272,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="font-weight-semibold">Your avatar:</label>
+                                    <label class="font-weight-semibold">Image:</label>
                                     <div class="media mt-0">
                                         <div class="mr-3">
                                             @if ($img_path || $img_path_2)
