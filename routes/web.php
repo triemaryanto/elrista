@@ -6,10 +6,11 @@ use App\Livewire\Admin\Pages\User;
 use Illuminate\Support\Facades\File;
 use App\Livewire\Admin\Pages\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Landing\Pages\Detail;
 use App\Livewire\Admin\Pages\Permission;
 use App\Http\Controllers\HelperController;
-use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Product\Product;
+use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 
 /*
@@ -32,6 +33,7 @@ Route::get('template', function () {
 //     return view('welcome');
 // });
 Route::get('/', PagesHome::class)->name('front.home');
+Route::get('/detail', Detail::class)->name('detail');
 
 
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
