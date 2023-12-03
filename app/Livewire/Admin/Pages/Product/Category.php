@@ -57,6 +57,7 @@ class Category extends Component
         $this->idnya = "";
         $this->name = "";
         $this->isEdit = false;
+        $this->edit_image = null;
     }
 
     public function update()

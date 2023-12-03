@@ -30,6 +30,13 @@ class BannerController extends Component
     {
         $this->kategori_banner = [
             1 => ['halaman_depan_banner', 'Halaman Depan Banner', 'ukuran 1920 x 700 px', asset('multikart_all_in_one/assets/images/yoga') . "/main-banner.jpg"],
+            2 => ['halaman_depan_kiri_atas', 'Halaman Depan Kiri Atas', 'ukuran 610 x 610 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/Banner-1.jpg"],
+            3 => ['halaman_depan_tengah_atas', 'Halaman Depan Tengah Atas', 'ukuran 610 x 610 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/Banner-2.jpg"],
+            4 => ['halaman_depan_kanan_atas', 'Halaman Depan Kanan Atas', 'ukuran 610 x 610 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/Banner-3.jpg"],
+            5 => ['halaman_depan_kiri_tengah', 'Halaman Depan kiri Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
+            6 => ['halaman_depan_kiri_2_tengah', 'Halaman Depan kiri 2 Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
+            7 => ['halaman_depan_Kanan_2_tengah', 'Halaman Depan Kanan 2 Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
+            8 => ['halaman_depan_Kanan_tengah', 'Halaman Depan Kanan Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
         ];
     }
 
@@ -84,7 +91,7 @@ class BannerController extends Component
         $this->category = $this->data->category;
         $this->name = $this->data->name;
         $this->promo = $this->data->promo;
-        $this->data_p = Product::find($id);
+        $this->data_p = Product::find($this->product_id);
     }
 
     public function hapus($id)
