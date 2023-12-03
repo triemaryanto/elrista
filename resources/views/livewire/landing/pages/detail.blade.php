@@ -120,11 +120,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-buttons"><a href="javascript:void(0)" id="cartEffect"
+                            <div class="product-buttons">
+                                <a href="javascript:void(0)" id="cartEffect"
                                     class="btn btn-solid hover-solid btn-animation"><i
-                                        class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart</a> <a
-                                    href="#" class="btn btn-solid"><i class="fa fa-bookmark fz-16 me-2"
-                                        aria-hidden="true"></i>wishlist</a></div>
+                                        class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart</a>
+                                <button type="button" class="btn btn-solid" wire:click='addwishlist'><i
+                                        class="fa fa-bookmark fz-16 me-2" aria-hidden="true"
+                                        wire:click="addwishlist"></i>wishlist</button>
+                            </div>
                             <div class="product-count">
                                 <ul>
                                     <li>
