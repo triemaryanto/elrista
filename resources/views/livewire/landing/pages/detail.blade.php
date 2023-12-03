@@ -71,7 +71,8 @@
                                 <span class="badge badge-grey-color">#1 Best seller</span>
                                 <span class="label-text">in fashion</span>
                             </div>
-                            <h3 class="price-detail">{{ $data->price }}</h3>
+                            <h3 class="price-detail">Rp.
+                                {{ number_format($data->price, 0, ',', '.') }}</h3>
                             <ul class="color-variant">
                                 @foreach ($this->image->listColor as $color)
                                     <li class="block" style="background-color: {{ $color->color }};">
