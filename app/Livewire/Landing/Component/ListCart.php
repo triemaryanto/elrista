@@ -3,18 +3,36 @@
 namespace App\Livewire\Landing\Component;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class ListCart extends Component
 {
-    public $data, $sub_total;
+    public $data, $sub_total, $cart = [], $daftar = [];
 
     protected $listeners = ['GetLIst'];
 
     public function GetLIst()
     {
-        $this->data = Cart::where('user_id', Auth::user()->id)->get();
+        if (Auth::check()) {
+            $this->data = Cart::where('user_id', Auth::user()->id)->get();
+        }
+
+        if (Session::has('cart')) {
+            $this->cart = session('cart');
+            $this->daftar = [];
+            foreach ($this->cart as $item) {
+                $cb = [
+                    'img1' => Product::find($item['product_id'])->gambar_satu->img1,
+                    'name' => Product::find($item['product_id'])->name,
+                    'qty' => $item['qty'],
+                    'price' => Product::find($item['product_id'])->price,
+                ];
+                array_push($this->daftar, $cb);
+            }
+        }
     }
 
     public function deleteCart($id)

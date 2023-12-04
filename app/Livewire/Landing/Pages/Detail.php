@@ -10,12 +10,13 @@ use App\Models\ProductSize;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Detail extends Component
 {
 
-    public $data, $color, $image, $hallo, $color_id, $size_id, $qty = 1;
+    public $data, $color, $image, $color_id, $size_id, $qty = 1;
 
     public function addColor($id)
     {
@@ -39,7 +40,6 @@ class Detail extends Component
 
     public function addwishlist()
     {
-        $this->hallo = "okelah";
         $existingWishlist = Wishlist::where('product_id', $this->data->id)
             ->where('user_id', Auth::user()->id)
             ->first();
@@ -70,23 +70,44 @@ class Detail extends Component
         $rules['color_id'] = 'required';
         $rules['size_id'] = 'required';
         $this->validate($rules);
+        if (Auth::check()) {
+            DB::transaction(function () {
+                Cart::create([
+                    'user_id' => Auth::user()->id,
+                    'product_id' => $this->data->id,
+                    'color_id' => $this->color_id,
+                    'size_id' => $this->size_id,
+                    'qty' => $this->qty,
+                ]);
 
-        DB::transaction(function () {
-            Cart::create([
-                'user_id' => Auth::user()->id,
-                'product_id' => $this->data->id,
-                'color_id' => $this->color_id,
-                'size_id' => $this->size_id,
-                'qty' => $this->qty,
-            ]);
-
+                $this->emit('GetLIst');
+                $this->dispatchBrowserEvent('swal:modal', [
+                    'type' => 'success',
+                    'title' => '',
+                    'text' => 'Product successfully added to cart...',
+                ]);
+            });
+        } else {
+            // Session::forget('cart');
+            if (Session::has('cart')) {
+                $cart = [
+                    'product_id' => $this->data->id,
+                    'color_id' => $this->color_id,
+                    'size_id' => $this->size_id,
+                    'qty' => $this->qty,
+                ];
+                Session()->push('cart', $cart);
+            } else {
+                $cart[] = [
+                    'product_id' => $this->data->id,
+                    'color_id' => $this->color_id,
+                    'size_id' => $this->size_id,
+                    'qty' => $this->qty,
+                ];
+                session(['cart' => $cart]);
+            }
             $this->emit('GetLIst');
-            $this->dispatchBrowserEvent('swal:modal', [
-                'type' => 'success',
-                'title' => '',
-                'text' => 'Product successfully added to cart...',
-            ]);
-        });
+        }
     }
 
     public function mount($slug)
