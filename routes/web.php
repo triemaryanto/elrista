@@ -15,6 +15,8 @@ use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 use App\Livewire\Landing\Pages\Blog;
+use App\Livewire\Landing\Pages\Cart\Cart;
+use App\Livewire\Landing\Pages\Cart\Checkout;
 use App\Livewire\Landing\Pages\Detailblog;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 use App\Livewire\Landing\Pages\Wishlist\Wishlist;
@@ -44,6 +46,8 @@ Route::get('/shop', Shop::class)->name('shop');
 Route::get('/wishlist', Wishlist::class)->name('wishlist');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/blog/{slug}', Detailblog::class)->name('detailblog');
+Route::get('/cart', Cart::class)->name('cart');
+Route::get('/checkout', Checkout::class)->name('checkout');
 
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 Route::middleware([
