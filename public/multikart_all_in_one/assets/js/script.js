@@ -2069,22 +2069,22 @@ if ((width_content) < '991') {
     });
 }
 
-$('.color-variant li').on('click', function (e) {
-    $(".color-variant li").removeClass("active");
-    $(this).addClass("active");
-});
+// $('.color-variant li').on('click', function (e) {
+//     $(".color-variant li").removeClass("active");
+//     $(this).addClass("active");
+// });
 
 $('.custom-variations li').on('click', function (e) {
     $(".custom-variations li").removeClass("active");
     $(this).addClass("active");
 });
 
-$('.size-box ul li').on('click', function (e) {
-    $(".size-box ul li").removeClass("active");
-    $('#selectSize').removeClass('cartMove');
-    $(this).addClass("active");
-    $(this).parent().addClass('selected');
-});
+// $('.size-box ul li').on('click', function (e) {
+//     $(".size-box ul li").removeClass("active");
+//     $('#selectSize').removeClass('cartMove');
+//     $(this).addClass("active");
+//     $(this).parent().addClass('selected');
+// });
 
 $('#cartEffect').on('click', function (e) {
     if ($("#selectSize .size-box ul").hasClass('selected')) {

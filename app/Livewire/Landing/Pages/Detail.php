@@ -2,17 +2,40 @@
 
 namespace App\Livewire\Landing\Pages;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductImageColor;
+use App\Models\ProductSize;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Detail extends Component
 {
 
-    public $data, $color, $image, $hallo;
+    public $data, $color, $image, $hallo, $color_id, $size_id, $qty = 1;
+
+    public function addColor($id)
+    {
+        $this->color_id = $id;
+        $data = ProductImageColor::find($id);
+        $this->dispatchBrowserEvent('add-color', [
+            'id' => 'color-' . $id,
+            'color' => $data->color,
+        ]);
+    }
+
+    public function addSize($id)
+    {
+        $this->size_id = $id;
+        $data = ProductSize::find($id);
+        $this->dispatchBrowserEvent('add-size', [
+            'id' => 'size-' . $id,
+            'size' => $data->size,
+        ]);
+    }
 
     public function addwishlist()
     {
@@ -41,6 +64,29 @@ class Detail extends Component
                 'text' => 'Product successfully added to wishlist...',
             ]);
         }
+    }
+
+    public function addCart()
+    {
+        $rules['color_id'] = 'required';
+        $rules['size_id'] = 'required';
+        $this->validate($rules);
+
+        DB::transaction(function () {
+            Cart::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $this->data->id,
+                'color_id' => $this->color_id,
+                'size_id' => $this->size_id,
+                'qty' => $this->qty,
+            ]);
+
+            $this->dispatchBrowserEvent('swal:modal', [
+                'type' => 'success',
+                'title' => '',
+                'text' => 'Product successfully added to cart...',
+            ]);
+        });
     }
 
     public function mount($slug)

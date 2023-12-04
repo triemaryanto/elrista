@@ -75,7 +75,8 @@
                                 {{ number_format($data->price, 0, ',', '.') }}</h3>
                             <ul class="color-variant">
                                 @foreach ($this->image->listColor as $color)
-                                    <li class="block" style="background-color: {{ $color->color }};">
+                                    <li id="color-{{ $color->id }}" style="background-color: {{ $color->color }};"
+                                        wire:click="addColor({{ $color->id }})">
                                     </li>
                                 @endforeach
 
@@ -104,27 +105,26 @@
                                 <div class="size-box">
                                     <ul>
                                         @foreach ($data->listSize as $size)
-                                            <li><a href="javascript:void(0)">{{ $size->size }}</a></li>
+                                            <li id="size-{{ $size->id }}">
+                                                <a href="javascript:void(0)"
+                                                    wire:click='addSize({{ $size->id }})'>{{ $size->size }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
                                 <h6 class="product-title">quantity</h6>
-                                <div class="qty-box">
-                                    <div class="input-group"><span class="input-group-prepend"><button type="button"
-                                                class="btn quantity-left-minus" data-type="minus" data-field=""><i
-                                                    class="ti-angle-left"></i></button> </span>
-                                        <input type="text" name="quantity" class="form-control input-number"
-                                            value="1">
-                                        <span class="input-group-prepend"><button type="button"
-                                                class="btn quantity-right-plus" data-type="plus" data-field=""><i
-                                                    class="ti-angle-right"></i></button></span>
+                                <div class="qty-box" style="border-right-color: #ddc7c7">
+                                    <div class="input-group">
+                                        <input type="number" name="quantity"
+                                            class="form-control" value="1" min="1"
+                                            wire:model="qty">
                                     </div>
                                 </div>
                             </div>
                             <div class="product-buttons">
-                                <a href="javascript:void(0)" id="cartEffect"
-                                    class="btn btn-solid hover-solid btn-animation"><i
-                                        class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart</a>
+                                <button type="button" wire:click="addCart"
+                                    class="btn btn-solid hover-solid btn-animation"><i class="fa fa-shopping-cart me-1"
+                                        aria-hidden="true"></i> add to cart</button>
                                 <button type="button" class="btn btn-solid" wire:click='addwishlist'><i
                                         class="fa fa-bookmark fz-16 me-2" aria-hidden="true"
                                         wire:click="addwishlist"></i>wishlist</button>
@@ -519,3 +519,27 @@
     </section>
     <!-- product section end -->z
 </div>
+
+@push('js')
+    <script>
+        window.addEventListener('add-color', event => {
+            // console.log(event.detail.color);
+            $(".color-variant li").removeClass("active");
+            $("#" + event.detail.id).addClass("active");
+
+            let color = document.querySelector(".color");
+            color.style.backgroundColor = event.detail.color;
+
+        });
+
+        window.addEventListener('add-size', event => {
+            // console.log(event.detail.size);
+
+            $(".size-box ul li").removeClass("active");
+            $('#selectSize').removeClass('cartMove');
+            $("#" + event.detail.id).addClass("active");
+            $("#" + event.detail.id).parent().addClass('selected');
+
+        });
+    </script>
+@endpush
