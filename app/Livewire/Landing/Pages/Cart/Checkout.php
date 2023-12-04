@@ -11,7 +11,13 @@ class Checkout extends Component
 
     public $origin = 501, $ongkir , $etd, $pilih_service;
 
-   
+   public function domestik(){
+    $this->pengiriman = false;
+   }
+
+   public function internasional(){
+     $this->pengiriman = true;
+   }
     public function render()
     {
         $response = Http::withHeaders([
