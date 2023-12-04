@@ -57,7 +57,6 @@ class Detail extends Component
                 'product_id' => $this->data->id,
                 'user_id' => Auth::user()->id,
             ]);
-
             $this->dispatchBrowserEvent('swal:modal', [
                 'type' => 'success',
                 'title' => '',
@@ -81,6 +80,7 @@ class Detail extends Component
                 'qty' => $this->qty,
             ]);
 
+            $this->emit('GetLIst');
             $this->dispatchBrowserEvent('swal:modal', [
                 'type' => 'success',
                 'title' => '',

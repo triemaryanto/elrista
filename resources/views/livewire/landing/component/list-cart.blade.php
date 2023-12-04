@@ -8,7 +8,7 @@
                 <div class="media">
                     <a href="#">
                         <img alt="" class="me-3"
-                            src="{{ asset('multikart_all_in_one/') }}/assets/images/fashion/product/1.jpg">
+                            src="{{ route('helper.show-picture', ['path' => $item->product->gambar_satu->img1]) }}">
                     </a>
                     <div class="media-body">
                         <a href="#">
@@ -18,12 +18,16 @@
                         </h4>
                     </div>
                 </div>
-                <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"
+                            wire:click="deleteCart({{ $item->id }})"></i></a></div>
             </li>
+            @php
+                $sub_total = $sub_total + $item->product->price;
+            @endphp
         @endforeach
         <li>
             <div class="total">
-                <h5>subtotal : <span>$299.00</span></h5>
+                <h5>subtotal : <span>{{ number_format($sub_total, 0, ',', '.') }}</span></h5>
             </div>
         </li>
         <li>
