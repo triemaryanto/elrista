@@ -8,13 +8,24 @@ use Livewire\Component;
 
 class ListCart extends Component
 {
-    public $data;
+    public $data, $sub_total;
 
     protected $listeners = ['GetLIst'];
 
     public function GetLIst()
     {
         $this->data = Cart::where('user_id', Auth::user()->id)->get();
+    }
+
+    public function deleteCart($id)
+    {
+        Cart::find($id)->delete();
+        $this->dispatchBrowserEvent('swal:modal', [
+            'type' => 'success',
+            'title' => '',
+            'text' => 'Product successfully removed from cart...',
+        ]);
+        $this->GetLIst();
     }
 
     public function mount()
