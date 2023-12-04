@@ -15,4 +15,9 @@ class Wishlist extends Model implements Auditable
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

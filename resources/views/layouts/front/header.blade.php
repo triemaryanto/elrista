@@ -12,18 +12,40 @@
                     </div>
                 </div>
                 <div class="col-lg-6 text-end">
-                    <ul class="header-dropdown">
-                        <li class="mobile-wishlist"><a href="{{ route('wishlist') }}"><i class="fa fa-heart"
-                                    aria-hidden="true"></i></a>
-                        </li>
-                        <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
-                            My Account
-                            <ul class="onhover-show-div">
-                                <li><a href="{{ route('login') }}">Login</a></li>
-                                <li><a href="{{ route('register') }}">register</a></li>
+                    @if (Route::has('login'))
+                        @auth
+                            <ul class="header-dropdown">
+                                <li class="mobile-wishlist"><a href="{{ route('wishlist') }}"><i class="fa fa-heart"
+                                            aria-hidden="true"></i></a>
+                                </li>
+                                <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+                                    My Account
+                                    <ul class="onhover-show-div">
+                                        <li><a href="{{ route('profile') }}">My Account</a></li>
+                                        <li>
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-light">Sign out</a>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
+                        @else
+                            <ul class="header-dropdown">
+                                <li class="mobile-wishlist"><a href="{{ route('login') }}"><i class="fa fa-heart"
+                                            aria-hidden="true"></i></a>
+                                </li>
+                                <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+                                    My Account
+                                    <ul class="onhover-show-div">
+                                        <li><a href="{{ route('login') }}">Login</a></li>
+                                        <li><a href="{{ route('register') }}">register</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        @endauth
+                    @endif
                 </div>
             </div>
         </div>

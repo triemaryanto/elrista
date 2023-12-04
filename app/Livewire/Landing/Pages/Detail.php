@@ -26,7 +26,7 @@ class Detail extends Component
             $this->dispatchBrowserEvent('swal:modal', [
                 'type' => 'error',
                 'title' => '',
-                'text' => 'Produk sudah ada dalam daftar wishlist...',
+                'text' => 'The product is already on the wishlist...',
             ]);
         } else {
             // Data belum ada dalam daftar Wishlist, tambahkan data baru.
@@ -38,7 +38,7 @@ class Detail extends Component
             $this->dispatchBrowserEvent('swal:modal', [
                 'type' => 'success',
                 'title' => '',
-                'text' => 'Produk berhasil ditambahkan ke daftar wishlist...',
+                'text' => 'Product successfully added to wishlist...',
             ]);
         }
     }

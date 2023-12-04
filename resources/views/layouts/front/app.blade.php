@@ -115,6 +115,21 @@
             document.getElementById("search-overlay").style.display = "none";
         }
     </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.addEventListener('swal:modal', event => {
+            Swal.fire({
+                icon: event.detail.type, // Jenis alert
+                title: event.detail.title, // Judul pesan
+                text: event.detail.text, // Isi pesan
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        });
+    </script>
 </body>
 
 </html>
