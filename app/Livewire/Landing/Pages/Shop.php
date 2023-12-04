@@ -20,7 +20,7 @@ class Shop extends Component
         $sizes = ProductSize::get();
         $data = Product::with('listImage', 'listSize');
         
-        $products = $data->where('status', 0)->orderBy('id', $this->order)->paginate($this->limit);;
+        $products = $data->where('status', 1)->orderBy('id', $this->order)->paginate($this->limit);;
         return view('livewire.landing.pages.shop', [
             'category' => $category,
             'colors' => $colors,

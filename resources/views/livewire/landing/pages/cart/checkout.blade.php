@@ -105,20 +105,58 @@
                                         </div>
 
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                            <div class="field-label">Berat</div>
-                                            <input type="number" name="field-name" value="" placeholder=""
-                                                wire:model="weight">
-                                        </div>
-
-                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Courier</div>
-                                            <input type="number" name="field-name" value="" placeholder=""
-                                                wire:model="courier">
+                                            <select wire:model="courier">
+                                                <option>Pilih Courier</option>
+                                                <option value="jne">JNE</option>
+                                                <option value="tiki"> TIKI</option>
+                                            </select>
                                         </div>
-                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <input type="checkbox" name="shipping-option" id="account-option"> &ensp;
-                                            <label for="account-option">Create An Account?</label>
-                                        </div>
+                                        @if (empty($rincian_ongkir))
+                                            <div wire:loading>
+                                                Loading...
+                                            </div>
+                                        @else
+                                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <label for="account-option">Rincian Ongkir</label>
+                                            </div>
+                                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <label>Kota Asal</label> :
+                                                {{ $rincian_ongkir['origin_details']['city_name'] }}<br>
+                                                <label>Kota Tujuan</label> :
+                                                {{ $rincian_ongkir['destination_details']['city_name'] }}<br>
+                                                <label>Berat Paket</label> : {{ $rincian_ongkir['query']['weight'] }}
+                                                gram<br>
+                                            </div>
+                                            @foreach ($rincian_ongkir['results'] as $item)
+                                                <div class="col-md-12">
+                                                    <div class="field-label">Name : {{ $item['name'] }}</div>
+                                                </div>
+                                                @foreach ($item['costs'] as $cost)
+                                                    <div class="col-md-12">
+                                                        <div class="field-label">Service : {{ $cost['service'] }}
+                                                        </div>
+                                                    </div>
+                                                    @foreach ($cost['cost'] as $harga)
+                                                        <div class="col-md-5">
+                                                            <div class="field-label">Harga</div>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <div class="field-label">:</div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="field-label">{{ $harga['value'] }} (est:
+                                                                {{ $harga['etd'] }} Hari)</div>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <input type="radio" wire:model="pilih_service"
+                                                                checked="checked" value={{ $harga['value'] }}>
+                                                        </div>
+                                                    @endforeach
+                                                @endforeach
+                                            @endforeach
+
+                                        @endif
                                     </div>
                                 @endif
                             </div>
@@ -133,7 +171,8 @@
                                             <li>SLim Fit Jeans × 1 <span>$555.00</span></li>
                                         </ul>
                                         <ul class="qty">
-                                            <li>Ongkir <span>{{ $ongkir }}</span></li>
+                                            <li>Ongkir <span> Rp.
+                                                    {{ number_format($pilih_service, 0, ',', '.') ?? '' }}
                                         </ul>
                                         <ul class="sub-total">
                                             <li>Subtotal <span class="count">$380.10</span></li>
@@ -164,8 +203,10 @@
                                                             <input type="radio" name="payment-group" id="payment-1"
                                                                 checked="checked">
                                                             <label for="payment-1">Check Payments<span
-                                                                    class="small-text">Please send a check to Store
-                                                                    Name, Store Street, Store Town, Store State /
+                                                                    class="small-text">Please send a check
+                                                                    to Store
+                                                                    Name, Store Street, Store Town, Store
+                                                                    State /
                                                                     County, Store Postcode.</span></label>
                                                         </div>
                                                     </li>
@@ -174,8 +215,10 @@
                                                             <input type="radio" name="payment-group"
                                                                 id="payment-2">
                                                             <label for="payment-2">Cash On Delivery<span
-                                                                    class="small-text">Please send a check to Store
-                                                                    Name, Store Street, Store Town, Store State /
+                                                                    class="small-text">Please send a check
+                                                                    to Store
+                                                                    Name, Store Street, Store Town, Store
+                                                                    State /
                                                                     County, Store Postcode.</span></label>
                                                         </div>
                                                     </li>
