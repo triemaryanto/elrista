@@ -1,3 +1,6 @@
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@endpush
 <div>
     <!-- breadcrumb start -->
     <div class="breadcrumb-section">
@@ -35,14 +38,20 @@
                                 </div>
                                 <div class="row check-out">
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12 text-end">
-                                        <a href="#" wire:click='domestik' class="btn-solid btn">Domestik</a>
+                                        <a href="#" wire:click="domestik" class="btn-solid btn">
+                                            <i wire:loading wire:target="domestik" class="fa fa-spinner fa-spin"></i>
+                                            Domestik
+                                        </a>
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <a href="#" wire:click='internasional'
-                                            class="btn-solid btn">Internasional</a>
+                                        <a href="#" wire:click='internasional' class="btn-solid btn">
+                                            <i wire:loading wire:target="internasional"
+                                                class="fa fa-spinner fa-spin"></i>
+                                            Internasional</a>
                                     </div>
                                 </div>
                                 @if ($pengiriman)
+                                    <label>Coming Soon</label>
                                 @else
                                     {{-- domestik --}}
                                     <div class="row check-out">
@@ -65,7 +74,7 @@
 
                                         <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                             <div class="field-label">Provinsi</div>
-                                            <select wire:model="provinsi_id">
+                                            <select wire:model.live="provinsi_id">
                                                 <option>Pilih Provinsi</option>
                                                 @foreach ($provinsi_list as $provinsi)
                                                     <option value="{{ $provinsi['province_id'] }}">
@@ -77,11 +86,10 @@
                                         <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                             <div class="field-label">Kota Tujuan</div>
                                             @if (empty($city_list))
-                                                <div wire:loading>
-                                                    <option value="" disabled>Loading...</option>
-                                                </div>
+                                                <i wire:loading
+                                                    wire:target="provinsi_id"class="fa fa-refresh fa-spin"></i>
                                             @else
-                                                <select wire:model="city_id" wire:loading.attr="disabled">
+                                                <select wire:model.live="city_id">
                                                     <option>Pilih Kota Tujuan</option>
                                                     @foreach ($city_list as $city)
                                                         <option value="{{ $city['city_id'] }}">
@@ -95,9 +103,7 @@
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Postal Code</div>
                                             @if (empty($hasil))
-                                                <div wire:loading>
-                                                    <option value="" disabled>Loading...</option>
-                                                </div>
+                                                <i wire:loading wire:target="city_id"class="fa fa-refresh fa-spin"></i>
                                             @else
                                                 <input type="text" name="field-name" value="{{ $postal_code }}"
                                                     placeholder="">
@@ -112,10 +118,16 @@
                                                 <option value="tiki"> TIKI</option>
                                             </select>
                                         </div>
+
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <a href="#" wire:click="cekongkirdomestik" class ="btn-solid btn">
+                                                <i wire:loading wire:target="cekongkirdomestik"
+                                                    class="fa fa-spinner fa-spin"></i>
+                                                Cek Ongkir
+                                            </a>
+
+                                        </div>
                                         @if (empty($rincian_ongkir))
-                                            <div wire:loading>
-                                                Loading...
-                                            </div>
                                         @else
                                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <label for="account-option">Rincian Ongkir</label>
@@ -149,7 +161,7 @@
                                                                 {{ $harga['etd'] }} Hari)</div>
                                                         </div>
                                                         <div class="col-md-1">
-                                                            <input type="radio" wire:model="pilih_service"
+                                                            <input type="radio" wire:model.live="pilih_service"
                                                                 checked="checked" value={{ $harga['value'] }}>
                                                         </div>
                                                     @endforeach
@@ -171,8 +183,11 @@
                                             <li>SLim Fit Jeans × 1 <span>$555.00</span></li>
                                         </ul>
                                         <ul class="qty">
-                                            <li>Ongkir <span> Rp.
-                                                    {{ number_format($pilih_service, 0, ',', '.') ?? '' }}
+                                            <li>Ongkir <span>
+                                                    <div wire:loading wire:target='pilih_service'>
+                                                        Akumulasi ..
+                                                    </div>
+                                                    Rp. {{ number_format($pilih_service, 0, ',', '.') ?? '' }}
                                         </ul>
                                         <ul class="sub-total">
                                             <li>Subtotal <span class="count">$380.10</span></li>

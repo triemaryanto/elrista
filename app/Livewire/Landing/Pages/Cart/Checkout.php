@@ -18,6 +18,20 @@ class Checkout extends Component
    public function internasional(){
      $this->pengiriman = true;
    }
+
+   public function cekongkirdomestik(){
+             $response = Http::withHeaders([
+            'Key' => '87ad5c88a0a97bb8cab0c2f25ae82ca9',
+            ])->post('https://api.rajaongkir.com/starter/cost',[
+                'origin' => $this->origin,
+                'destination' => $this->city_id,
+                'weight' => $this->weight,
+                'courier' => $this->courier
+            ]);
+            
+            $this->rincian_ongkir = $response['rajaongkir'];
+       
+   }
     public function render()
     {
         $response = Http::withHeaders([
@@ -42,19 +56,7 @@ class Checkout extends Component
             $this->hasil = $response['rajaongkir']['results'];
             $this->postal_code = $this->hasil['postal_code'];
         }
-
-        if (isset($this->courier)) {
-             $response = Http::withHeaders([
-            'Key' => '87ad5c88a0a97bb8cab0c2f25ae82ca9',
-            ])->post('https://api.rajaongkir.com/starter/cost',[
-                'origin' => $this->origin,
-                'destination' => $this->city_id,
-                'weight' => $this->weight,
-                'courier' => $this->courier
-            ]);
-            
-            $this->rincian_ongkir = $response['rajaongkir'];
-        }
+        
         return view('livewire.landing.pages.cart.checkout', [
             'provinsi_list' => $provinsi_list,
         ])->layout('layouts.front.app');
