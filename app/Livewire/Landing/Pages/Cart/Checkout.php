@@ -2,14 +2,19 @@
 
 namespace App\Livewire\Landing\Pages\Cart;
 
-use Illuminate\Support\Facades\Http;
+
+use App\Models\Cart;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class Checkout extends Component
 {
-    public $pengiriman = false, $provinsi_id, $city_id, $city_list = [], $hasil = [], $rincian_ongkir=[], $postal_code, $weight = 1200, $courier, $cost = []; 
+    public $pengiriman = false, $provinsi_id, $city_id, $city_list = [], $hasil = [], $rincian_ongkir=[], $postal_code, $weight, $courier, $cost = []; 
 
-    public $origin = 501, $ongkir , $etd, $pilih_service;
+    public $origin = 501, $ongkir , $etd, $pilih_service, $subtotal, $total;
+
+    public $data;
 
    public function domestik(){
     $this->pengiriman = false;
@@ -30,7 +35,27 @@ class Checkout extends Component
             ]);
             
             $this->rincian_ongkir = $response['rajaongkir'];
-       
+
+            $this->total = $this->subtotal + $this->pilih_service;
+   }
+
+   public function hitungtotal(){
+    $this->total = $this->subtotal + $this->pilih_service;
+   }
+   public function mount(){
+    $this->data = Cart::with('product')->where('user_id', auth()->user()->id)->get();
+
+    $this->weight = DB::table('carts')
+    ->join('products', 'carts.product_id', '=', 'products.id')
+    ->where('carts.user_id', '=', auth()->user()->id)
+    ->sum(DB::raw('products.weight * carts.qty'));
+
+    $this->subtotal = DB::table('carts')
+    ->join('products', 'carts.product_id', '=', 'products.id')
+    ->where('carts.user_id', '=', auth()->user()->id)
+    ->sum(DB::raw('products.price * carts.qty'));
+
+    
    }
     public function render()
     {

@@ -145,26 +145,35 @@
                                                     <div class="field-label">Name : {{ $item['name'] }}</div>
                                                 </div>
                                                 @foreach ($item['costs'] as $cost)
-                                                    <div class="col-md-12">
-                                                        <div class="field-label">Service : {{ $cost['service'] }}
+                                                    @if (!empty($cost))
+                                                        <div class="col-md-12">
+                                                            <div class="field-label">Service : {{ $cost['service'] }}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    @foreach ($cost['cost'] as $harga)
-                                                        <div class="col-md-5">
-                                                            <div class="field-label">Harga</div>
+                                                        @foreach ($cost['cost'] as $harga)
+                                                            <div class="col-md-5">
+                                                                <div class="field-label">Harga</div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <div class="field-label">:</div>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <div class="field-label">{{ $harga['value'] }} (est:
+                                                                    {{ $harga['etd'] }} Hari)</div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <input type="radio" wire:model.live="pilih_service"
+                                                                    checked="checked" wire:click="hitungtotal"
+                                                                    value={{ $harga['value'] }}>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="col-md-12">
+                                                            <div class="field-label">Service : {{ $cost['service'] }}
+                                                                Tidak tercover
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-1">
-                                                            <div class="field-label">:</div>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <div class="field-label">{{ $harga['value'] }} (est:
-                                                                {{ $harga['etd'] }} Hari)</div>
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <input type="radio" wire:model.live="pilih_service"
-                                                                checked="checked" value={{ $harga['value'] }}>
-                                                        </div>
-                                                    @endforeach
+                                                    @endif
                                                 @endforeach
                                             @endforeach
 
@@ -179,8 +188,22 @@
                                             <div>Product <span>Total</span></div>
                                         </div>
                                         <ul class="qty">
-                                            <li>Pink Slim Shirt × 1 <span>$25.10</span></li>
-                                            <li>SLim Fit Jeans × 1 <span>$555.00</span></li>
+                                            @foreach ($data as $cart)
+                                                @php
+                                                    $a = $cart->product->price * $cart->qty;
+                                                @endphp
+                                                <li>{{ $cart->product->name }} ×
+                                                    {{ $cart->qty }}<span> Rp.
+                                                        {{ number_format($a, 0, ',', '.') ?? '' }} </span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+
+                                        <ul class="sub-total">
+                                            <li>Subtotal <span class="count">
+                                                    Rp.{{ number_format($subtotal, 0, ',', '.') ?? '' }} </span></span>
+                                            </li>
+
                                         </ul>
                                         <ul class="qty">
                                             <li>Ongkir <span>
@@ -189,24 +212,9 @@
                                                     </div>
                                                     Rp. {{ number_format($pilih_service, 0, ',', '.') ?? '' }}
                                         </ul>
-                                        <ul class="sub-total">
-                                            <li>Subtotal <span class="count">$380.10</span></li>
-                                            <li>Shipping
-                                                <div class="shipping">
-                                                    <div class="shopping-option">
-                                                        <input type="checkbox" name="free-shipping"
-                                                            id="free-shipping">
-                                                        <label for="free-shipping">Free Shipping</label>
-                                                    </div>
-                                                    <div class="shopping-option">
-                                                        <input type="checkbox" name="local-pickup" id="local-pickup">
-                                                        <label for="local-pickup">Local Pickup</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
                                         <ul class="total">
-                                            <li>Total <span class="count">$620.00</span></li>
+                                            <li>Total <span class="count"> Rp.
+                                                    {{ number_format($total, 0, ',', '.') ?? '' }}</span></li>
                                         </ul>
                                     </div>
                                     <div class="payment-box">
