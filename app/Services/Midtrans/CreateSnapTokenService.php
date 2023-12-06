@@ -2,6 +2,8 @@
 
 namespace App\Services\Midtrans;
 
+use App\Models\Cart;
+use App\Models\Order;
 use Midtrans\Snap;
 
 class CreateSnapTokenService extends Midtrans
@@ -17,29 +19,34 @@ class CreateSnapTokenService extends Midtrans
 
     public function getSnapToken()
     {
+        $order = Order::find($this->order);
+
+        $data[] = [
+            'id' => 1,
+            'price' => $order->pilih_service,
+            'quantity' => 1,
+            'name' => 'Pengiriman Lewat ' . $order->courier,
+        ];
+
+        foreach ($order->detail_order as $val) {
+            $data[] = [
+                'id' => $val->product_id,
+                'price' => $val->price,
+                'quantity' => $val->qty,
+                'name' => $val->product->name,
+            ];
+        }
+
         $params = [
             'transaction_details' => [
-                'order_id' => "1",
-                'gross_amount' => 1,
+                'order_id' => $order->number,
+                'gross_amount' => $order->total_price,
             ],
-            'item_details' => [
-                [
-                    'id' => 1,
-                    'price' => '1200',
-                    'quantity' => 1,
-                    'name' => 'Flashdisk Toshiba 32GB',
-                ],
-                [
-                    'id' => 2,
-                    'price' => '600',
-                    'quantity' => 2,
-                    'name' => 'Memory Card VGEN 4GB',
-                ],
-            ],
+            'item_details' => $data,
             'customer_details' => [
-                'first_name' => 'Nama',
-                'email' => 'muhamadduki@gmail.com',
-                'phone' => '081234567890',
+                'first_name' => $order->user->name,
+                'email' => $order->user->email,
+                'phone' => $order->user->wa,
             ]
         ];
 

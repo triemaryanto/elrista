@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Order extends Model implements Auditable
+class DetailOrder extends Model implements Auditable
 {
     use HasFactory;
     use AuditableTrait;
@@ -16,13 +16,13 @@ class Order extends Model implements Auditable
 
     protected $guarded = [];
 
-    public function user()
+    public function product()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function detail_order()
+    public function order()
     {
-        return $this->hasMany(DetailOrder::class, 'order_id');
+        return $this->belongsTo(Order::class, 'order_id');
     }
 }

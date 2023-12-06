@@ -81,6 +81,9 @@
                                                         {{ $provinsi['province'] }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('provinsi_id')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -97,8 +100,9 @@
                                                     @endforeach
                                                 </select>
                                             @endif
-
-
+                                            @error('city_id')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Postal Code</div>
@@ -108,6 +112,9 @@
                                                 <input type="text" name="field-name" value="{{ $postal_code }}"
                                                     placeholder="">
                                             @endif
+                                            @error('postal_code')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -117,6 +124,9 @@
                                                 <option value="jne">JNE</option>
                                                 <option value="tiki"> TIKI</option>
                                             </select>
+                                            @error('courier')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
@@ -126,6 +136,9 @@
                                                     class="fa fa-spinner fa-spin"></i>
                                                 Cek Ongkir
                                             </button>
+                                            @error('pilih_service')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                         @if (empty($rincian_ongkir))
@@ -216,6 +229,9 @@
                                         <ul class="total">
                                             <li>Total <span class="count"> Rp.
                                                     {{ number_format($total, 0, ',', '.') ?? '' }}</span></li>
+                                            @error('total')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </ul>
                                     </div>
                                     <div class="payment-box">
@@ -235,18 +251,6 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <div class="radio-option">
-                                                            <input type="radio" name="payment-group"
-                                                                id="payment-2">
-                                                            <label for="payment-2">Cash On Delivery<span
-                                                                    class="small-text">Please send a check
-                                                                    to Store
-                                                                    Name, Store Street, Store Town, Store
-                                                                    State /
-                                                                    County, Store Postcode.</span></label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
                                                         <div class="radio-option paypal">
                                                             <input type="radio" name="payment-group"
                                                                 id="payment-3">
@@ -258,8 +262,10 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="text-end"><a href="#" class="btn-solid btn"
-                                                wire:click="cobaSnap">Place Order</a>
+                                        <div class="text-end">
+                                            <button type="button" class="btn-solid btn" wire:click="pay"><i
+                                                    wire:loading wire:target="pay"
+                                                    class="fa fa-spinner fa-spin"></i>Pay</button>
                                         </div>
                                     </div>
                                 </div>

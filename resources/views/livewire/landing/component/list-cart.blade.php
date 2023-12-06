@@ -36,7 +36,7 @@
                 <li>
                     <div class="buttons">
                         <a href="{{ route('cart') }}" class="view-cart">view cart</a>
-                        <a href="{{ route('checkout') }}" class="checkout">checkout</a>
+                        <a href="{{ route('listorder') }}" class="checkout">List Order</a>
                     </div>
                 </li>
             </ul>
@@ -76,7 +76,6 @@
                 <li>
                     <div class="buttons">
                         <a href="{{ route('cart') }}" class="view-cart">view cart</a>
-                        <a href="{{ route('checkout') }}" class="checkout">checkout</a>
                     </div>
                 </li>
             </ul>

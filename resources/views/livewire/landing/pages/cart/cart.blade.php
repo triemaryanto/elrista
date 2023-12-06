@@ -53,12 +53,7 @@
                                                 <h2>Rp, {{ number_format($item->product->price, 0, ',', '.') }}</h2>
                                             </td>
                                             <td>
-                                                <div class="qty-box">
-                                                    <div class="input-group">
-                                                        <input type="number" name="quantity"
-                                                            class="form-control input-number" value="{{ $item->qty }}">
-                                                    </div>
-                                                </div>
+                                                {{ $item->qty }}
                                             </td>
                                             <td><a href="#" class="icon"
                                                     wire:click="deleteCart({{ $item->id }})"><i
@@ -91,12 +86,7 @@
                                                 <h2>Rp, {{ number_format($item['price'], 0, ',', '.') }}</h2>
                                             </td>
                                             <td>
-                                                <div class="qty-box">
-                                                    <div class="input-group">
-                                                        <input type="number" name="quantity"
-                                                            class="form-control input-number" value="{{ $item['qty'] }}">
-                                                    </div>
-                                                </div>
+                                                {{ $item['qty'] }}
                                             </td>
                                             <td><a href="#" class="icon"
                                                     wire:click="deletecartsession({{ $val }})"><i
@@ -135,7 +125,8 @@
             </div>
             <div class="row cart-buttons">
                 <div class="col-6"><a href="{{ route('shop') }}" class="btn btn-solid">continue shopping</a></div>
-                <div class="col-6"><a href="{{ route('checkout') }}" class="btn btn-solid">check out</a>
+                <div class="col-6"><button type="button" wire:click='checkout' class="btn btn-solid">check
+                        out</button>
                 </div>
             </div>
         </div>

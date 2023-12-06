@@ -4,6 +4,8 @@ namespace App\Livewire\Landing\Pages\Cart;
 
 
 use App\Models\Cart;
+use App\Models\DetailOrder;
+use App\Models\Order;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -11,11 +13,11 @@ use App\Services\Midtrans\CreateSnapTokenService;
 
 class Checkout extends Component
 {
-    public $pengiriman = false, $provinsi_id, $city_id, $city_list = [], $hasil = [], $rincian_ongkir = [], $postal_code, $weight, $courier, $cost = [], $snapToken;
+    public $provinsi_list, $pengiriman = false, $provinsi, $provinsi_id, $city, $city_id, $city_list = [], $hasil = [], $rincian_ongkir = [], $postal_code, $weight, $courier, $cost = [], $snapToken;
 
     public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total;
 
-    public $data;
+    public $data, $order;
 
     public function domestik()
     {
@@ -32,18 +34,25 @@ class Checkout extends Component
 
         $rules['provinsi_id'] = 'required';
         $rules['city_id'] = 'required';
+        $rules['courier'] = 'required';
+        $rules['postal_code'] = 'required';
         $this->validate($rules);
 
         $response = Http::withHeaders([
-            'Key' => '87ad5c88a0a97bb8cab0c2f25ae82ca9',
+            'Key' => '576efad87cff1269a05d640b3ea1e52a',
         ])->post('https://api.rajaongkir.com/starter/cost', [
             'origin' => $this->origin,
             'destination' => $this->city_id,
             'weight' => $this->weight,
-            'courier' => $this->courier
+            'courier' => $this->courier,
         ]);
 
+        // dd($response);
+
         $this->rincian_ongkir = $response['rajaongkir'];
+
+        $this->provinsi = $this->rincian_ongkir['destination_details']['province'];
+        $this->city = $this->rincian_ongkir['destination_details']['city_name'];
 
         $this->total = $this->subtotal + $this->pilih_service;
     }
@@ -53,52 +62,85 @@ class Checkout extends Component
         $this->total = $this->subtotal + $this->pilih_service;
     }
 
-    public function cobaSnap()
+    public function pay()
     {
         $rules['total'] = 'required';
         $rules['subtotal'] = 'required';
         $rules['pilih_service'] = 'required';
+        $rules['provinsi_id'] = 'required';
+        $rules['city_id'] = 'required';
+        $rules['courier'] = 'required';
         $rules['postal_code'] = 'required';
         $this->validate($rules);
 
-        // $order = auth()->user()->id;
-        // $midtrans = new CreateSnapTokenService($order);
-        // $snapToken = $midtrans->getSnapToken();
-        // $this->dispatchBrowserEvent('hitung', [
-        //     'snapToken' => $snapToken,
-        // ]);
+        $this->order->provinsi = $this->provinsi;
+        $this->order->provinsi_id = $this->provinsi_id;
+        $this->order->city = $this->city;
+        $this->order->city_id = $this->city_id;
+        $this->order->courier = $this->courier;
+        $this->order->postal_code = $this->postal_code;
+        $this->order->weight = $this->weight;
+        $this->order->pilih_service = $this->pilih_service;
+        $this->order->total_price = $this->total;
+        $this->order->save();
+        if ($this->order->snap_token) {
+            $this->snapToken = $this->order->snap_token;
+        } else {
+            $midtrans = new CreateSnapTokenService($this->order->id);
+            $this->snapToken = $midtrans->getSnapToken();
+            $this->order->snap_token = $this->snapToken;
+            $this->order->save();
+        }
+
+
+        $this->dispatchBrowserEvent('hitung', [
+            'snapToken' => $this->snapToken,
+        ]);
     }
 
-    public function mount()
+    public function mount($idnya)
     {
-        $this->data = Cart::with('product')->where('user_id', auth()->user()->id)->get();
+        $this->order = Order::find($idnya);
 
-        $this->weight = Cart::join('products', 'carts.product_id', '=', 'products.id')
-            ->where('carts.user_id', '=', auth()->user()->id)
-            ->sum(DB::raw('products.weight * carts.qty'));
+        $this->provinsi = $this->order->provinsi ?? null;
+        $this->provinsi_id = $this->order->provinsi_id ?? null;
+        $this->city = $this->order->city ?? null;
+        $this->city_id = $this->order->city_id ?? null;
+        $this->courier = $this->order->courier ?? null;
+        $this->postal_code = $this->order->postal_code ?? null;
+        $this->weight = $this->order->weight ?? null;
+        $this->pilih_service = $this->order->pilih_service ?? null;
+        $this->total = $this->order->total_price ?? null;
 
-        $this->subtotal = Cart::join('products', 'carts.product_id', '=', 'products.id')->where('user_id', auth()->user()->id)->sum(DB::raw('products.price * carts.qty'));
+        $this->data = DetailOrder::with('product')->where('user_id', auth()->user()->id)->where('order_id', $idnya)->get();
+
+        $this->weight = DetailOrder::join('products', 'detail_orders.product_id', '=', 'products.id')
+            ->where('detail_orders.user_id', '=', auth()->user()->id)->where('order_id', $idnya)
+            ->sum(DB::raw('products.weight * detail_orders.qty'));
+
+        $this->subtotal = DetailOrder::join('products', 'detail_orders.product_id', '=', 'products.id')->where('user_id', auth()->user()->id)->where('order_id', $idnya)->sum(DB::raw('products.price * detail_orders.qty'));
     }
 
     public function render()
     {
         $response = Http::withHeaders([
-            'Key' => '87ad5c88a0a97bb8cab0c2f25ae82ca9',
+            'Key' => '576efad87cff1269a05d640b3ea1e52a',
         ])->get('https://api.rajaongkir.com/starter/province');
         $provinsi_list = $response['rajaongkir']['results'];
+        $this->provinsi_list = $response['rajaongkir']['results'];
 
         if (isset($this->provinsi_id)) {
             $this->city_list = [];
 
             $response = Http::withHeaders([
-                'Key' => '87ad5c88a0a97bb8cab0c2f25ae82ca9',
+                'Key' => '576efad87cff1269a05d640b3ea1e52a',
             ])->get('https://api.rajaongkir.com/starter/city?province=' . $this->provinsi_id);
 
             $this->city_list = $response['rajaongkir']['results'];
         }
         if (isset($this->city_id)) {
             $response = Http::withHeaders([
-                'Key' => '87ad5c88a0a97bb8cab0c2f25ae82ca9',
+                'Key' => '576efad87cff1269a05d640b3ea1e52a',
             ])->get('https://api.rajaongkir.com/starter/city?province=' . $this->provinsi_id . '&id=' . $this->city_id);
 
             $this->hasil = $response['rajaongkir']['results'];
