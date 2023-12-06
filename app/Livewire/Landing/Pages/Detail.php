@@ -107,6 +107,11 @@ class Detail extends Component
                 session(['cart' => $cart]);
             }
             $this->emit('GetLIst');
+            $this->dispatchBrowserEvent('swal:modal', [
+                'type' => 'success',
+                'title' => '',
+                'text' => 'Product successfully added to cart...',
+            ]);
         }
     }
 

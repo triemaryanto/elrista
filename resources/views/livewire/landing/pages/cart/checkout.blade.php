@@ -120,11 +120,12 @@
                                         </div>
 
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
-                                            <a href="#" wire:click="cekongkirdomestik" class ="btn-solid btn">
+                                            <button type="button" wire:click="cekongkirdomestik"
+                                                class ="btn-solid btn">
                                                 <i wire:loading wire:target="cekongkirdomestik"
                                                     class="fa fa-spinner fa-spin"></i>
                                                 Cek Ongkir
-                                            </a>
+                                            </button>
 
                                         </div>
                                         @if (empty($rincian_ongkir))
@@ -257,7 +258,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="text-end"><a href="#" class="btn-solid btn">Place Order</a>
+                                        <div class="text-end"><a href="#" class="btn-solid btn"
+                                                wire:click="cobaSnap">Place Order</a>
                                         </div>
                                     </div>
                                 </div>
@@ -269,3 +271,32 @@
         </div>
     </section>
 </div>
+@push('js')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
+    <script>
+        window.addEventListener('hitung', event => {
+
+            snap.pay(event.detail.snapToken, {
+                // Optional
+                onSuccess: function(result) {
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result)
+                },
+                // Optional
+                onPending: function(result) {
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result)
+                },
+                // Optional
+                onError: function(result) {
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result)
+                }
+            });
+        });
+    </script>
+@endpush

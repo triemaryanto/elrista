@@ -45,7 +45,7 @@
                     class="img-fluid blur-up lazyload" alt=""> <i class="ti-shopping-cart"></i></div>
             <span class="cart_qty_cls">{{ count($cart) }}</span>
             <ul class="show-div shopping-cart">
-                @foreach ($daftar as $item)
+                @foreach ($daftar as $val => $item)
                     <li>
                         <div class="media">
                             <a href="#">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"
-                                    wire:click="deleteCart()"></i></a></div>
+                                    wire:click="deleteCartsession({{ $val }})"></i></a></div>
                     </li>
                     @php
                         $sub_total = $sub_total + $item['price'];
