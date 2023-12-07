@@ -10,14 +10,17 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Services\Midtrans\CreateSnapTokenService;
+use Illuminate\Support\Facades\Redirect;
 
 class Checkout extends Component
 {
     public $provinsi_list, $pengiriman = false, $provinsi, $provinsi_id, $city, $city_id, $city_list = [], $hasil = [], $rincian_ongkir = [], $postal_code, $weight, $courier, $cost = [], $snapToken;
 
-    public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total;
+    public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total, $status;
 
     public $data, $order;
+
+    protected $listeners = ['toListOrder', 'berhasiltoListOrder'];
 
     public function domestik()
     {
@@ -60,6 +63,21 @@ class Checkout extends Component
     public function hitungtotal()
     {
         $this->total = $this->subtotal + $this->pilih_service;
+    }
+
+    public function berhasiltoListOrder()
+    {
+        if ($this->status == 'settlement') {
+            return Redirect::to('/listorder')->with('success', 'Pembayaran Berhasil...');;
+        } else {
+            return Redirect::to('/listorder');
+        }
+    }
+
+    public function toListOrder()
+    {
+
+        // return Redirect::to('/listorder');
     }
 
     public function pay()

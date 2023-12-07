@@ -66,7 +66,7 @@
     <!-- tap to top end -->
 
     @livewireScripts
-    @stack('js')
+
     <!-- latest jquery-->
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/jquery-3.3.1.min.js"></script>
 
@@ -130,6 +130,7 @@
             });
         });
     </script>
+    @stack('js')
 </body>
 
 </html>

@@ -11,6 +11,7 @@ use App\Livewire\Landing\Pages\Detail;
 use App\Livewire\Admin\Pages\Permission;
 use App\Livewire\Admin\Pages\Setting\Web;
 use App\Http\Controllers\HelperController;
+use App\Http\Controllers\PaymentCallbackController;
 use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
@@ -76,3 +77,5 @@ Route::middleware([
         Route::get('/banner', BannerController::class)->name('banner');
     });
 });
+
+Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
