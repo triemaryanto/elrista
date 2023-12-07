@@ -15,7 +15,7 @@ class Product extends Component
 {
     use WithFileUploads;
 
-    public $idnya, $listCategory, $category, $name, $description, $specification, $shop_info, $img_path, $img_path_2, $color, $listColor = [], $listImage = [], $price, $status = false, $editListImage = [], $editListSize = [], $listSize = [], $size;
+    public $idnya, $listCategory, $category, $name, $description, $specification, $shop_info, $img_path, $img_path_2, $color, $listColor = [], $listImage = [], $weight, $price, $status = false, $editListImage = [], $editListSize = [], $listSize = [], $size;
     public $isAdd = false;
     public $isEdit = false;
     protected $listeners = ['edit', 'delete'];
@@ -147,11 +147,12 @@ class Product extends Component
     public function save()
     {
         $rules['category'] = 'required';
-        $rules['name'] = 'required';
+        $rules['name'] = 'required|max:255';
         $rules['description'] = 'required';
         $rules['specification'] = 'required';
         $rules['shop_info'] = 'required';
-        $rules['price'] = 'required';
+        $rules['price'] = 'required|max:255';
+        $rules['weight'] = 'required|max:255';
         if ($this->isEdit) {
             $this->validate($rules);
             $data = ModelsProduct::find($this->idnya);
@@ -163,6 +164,7 @@ class Product extends Component
             $data->shop_info = $this->shop_info;
             $data->status = $this->status;
             $data->price = $this->price;
+            $data->weight = $this->weight;
             foreach ($this->listImage as $item) {
                 $a = ProductImage::create([
                     'product_id' => $data->id,
@@ -209,6 +211,7 @@ class Product extends Component
                     'shop_info' => $this->shop_info,
                     'price' => $this->price,
                     'status' => $this->status,
+                    'weight' => $this->weight,
                 ]);
 
                 foreach ($this->listImage as $item) {
@@ -238,6 +241,8 @@ class Product extends Component
             $this->description = null;
             $this->specification = null;
             $this->shop_info = null;
+            $this->weight = null;
+            $this->price = null;
             $this->status = false;
             $this->isAdd = false;
             $this->listImage = [];
@@ -256,6 +261,7 @@ class Product extends Component
         $this->shop_info = $data->shop_info;
         $this->price = $data->price;
         $this->status = $data->status ? true : false;
+        $this->weight = $data->weight;
         $this->getImage($id);
         $this->getSize($id);
         $this->isAdd = true;

@@ -24,9 +24,9 @@
             @else
                 <form action="#" wire:submit.prevent="save">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Name:</label>
+                                <label class="col-lg-2 col-form-label">Category</label>
                                 <div class="col-lg-10">
                                     <select class="form-control" wire:model="category">
                                         <option> - Pilih Kategori -</option>
@@ -41,9 +41,9 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Name:</label>
+                                <label class="col-lg-2 col-form-label">Nama Product</label>
                                 <div class="col-lg-10">
                                     {{ Form::text(null, null, [
                                         'class' => 'form-control' . ($errors->has('name') ? ' border-danger' : null),
@@ -57,9 +57,9 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Description:</label>
+                                <label class="col-lg-2 col-form-label">Description</label>
                                 <div class="col-lg-10">
                                     {{ Form::textarea(null, null, [
                                         'class' => 'form-control' . ($errors->has('description') ? ' border-danger' : null),
@@ -73,9 +73,9 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Specification:</label>
+                                <label class="col-lg-2 col-form-label">Specification</label>
                                 <div class="col-lg-10">
                                     {{ Form::textarea(null, null, [
                                         'class' => 'form-control' . ($errors->has('specification') ? ' border-danger' : null),
@@ -89,9 +89,9 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Shop info:</label>
+                                <label class="col-lg-2 col-form-label">Shop info</label>
                                 <div class="col-lg-10">
                                     {{ Form::textarea(null, null, [
                                         'class' => 'form-control' . ($errors->has('shop_info') ? ' border-danger' : null),
@@ -105,9 +105,9 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Price:</label>
+                                <label class="col-lg-2 col-form-label">Price</label>
                                 <div class="col-lg-10">
                                     {{ Form::number(null, null, [
                                         'class' => 'form-control' . ($errors->has('price') ? ' border-danger' : null),
@@ -119,11 +119,21 @@
                                     @enderror
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-md-12">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Publish:</label>
+                                <label class="col-lg-2 col-form-label">Weight (*gram)</label>
+                                <div class="col-lg-10">
+                                    {{ Form::number(null, null, [
+                                        'class' => 'form-control' . ($errors->has('weight') ? ' border-danger' : null),
+                                        'placeholder' => 'Price Product',
+                                        'wire:model.lazy' => 'weight',
+                                    ]) }}
+                                    @error('weight')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Publish</label>
                                 <div class="col-lg-10">
                                     <div class="form-check">
                                         <label class="form-check-label">
@@ -137,21 +147,17 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Image:</label>
+                                <label class="col-lg-2 col-form-label">Image</label>
                                 <div class="col-lg-10">
                                     <button type="button" class="btn btn-info" wire:click="AddImageProduct">Add
                                         Image <i class="icon-plus-circle2 ml-2"></i></button>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-md-12">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">List Image:</label>
+                                <label class="col-lg-2 col-form-label">Priview Image</label>
                                 <div class="col-lg-10">
                                     <div class="row">
                                         @foreach ($editListImage as $item)
@@ -182,19 +188,16 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Size:</label>
+                                <label class="col-lg-2 col-form-label">Size</label>
                                 <div class="col-lg-10">
                                     <button type="button" class="btn btn-info" wire:click="AddSizeProduct">Add
                                         Size <i class="icon-plus-circle2 ml-2"></i></button>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-md-12">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">List Size:</label>
+                                <label class="col-lg-2 col-form-label">List Size</label>
                                 <div class="col-lg-10">
                                     <div class="row">
                                         @foreach ($editListSize as $item)
@@ -221,9 +224,7 @@
                                     @enderror
                                 </div>
                             </div>
-
                         </div>
-
 
                         <div class="col-md-12">
                             <div class="text-right">
@@ -261,7 +262,7 @@
         <div class="modal-dialog modal-full" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Informasi Detail</h5>
+                    <h5 class="modal-title">Add Product Image</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                         wire:click="closeViewModal">
                         <span aria-hidden="true">&times;</span>
@@ -273,41 +274,44 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-semibold">Image:</label>
-                                    <div class="media mt-0">
-                                        <div class="mr-3">
-                                            @if ($img_path || $img_path_2)
-                                                <div class="product">
-                                                    @if ($img_path)
-                                                        <img src="{{ $img_path->temporaryUrl() }}"
-                                                            class="img-fluid img-1" id="mug" alt=""
-                                                            width="50%">
-                                                    @endif
-                                                    @if ($img_path_2)
-                                                        <img src="{{ $img_path_2->temporaryUrl() }}"
-                                                            class="img-fluid img-2" id="mug" alt=""
-                                                            width="50%">
-                                                    @endif
-                                                    <div class="color" wire:ignore></div>
-                                                </div>
-                                            @else
-                                                <img src="{{ asset('limitless/') }}/global_assets/images/placeholders/placeholder.jpg"
-                                                    class="img-fluid" alt="" width="50%">
-                                            @endif
-                                        </div>
+                                    <div class="text-center">
+                                        @if ($img_path || $img_path_2)
+                                            <div class="product">
+                                                @if ($img_path)
+                                                    <img src="{{ $img_path->temporaryUrl() }}"
+                                                        class="img-fluid img-1" id="mug" alt=""
+                                                        style="width: 50%;">
+                                                @endif
+                                                @if ($img_path_2)
+                                                    <img src="{{ $img_path_2->temporaryUrl() }}"
+                                                        class="img-fluid img-2" id="mug" alt=""
+                                                        style="width: 50%;">
+                                                @endif
+                                                <div class="color" wire:ignore></div>
+                                            </div>
+                                        @else
+                                            <img src="{{ asset('limitless/') }}/global_assets/images/placeholders/placeholder.jpg"
+                                                class="img-fluid" alt="" width="50%">
+                                        @endif
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="media mt-0">
                                         <div class="media-body">
                                             <div class="uniform-uploader">
+
                                                 <input type="file" class="form-input-styled" data-fouc=""
-                                                    wire:model="img_path"><span class="filename"
+                                                    wire:model.live="img_path"><span class="filename"
                                                     style="user-select: none;">No file
                                                     selected</span><span class="action btn bg-pink-400"
-                                                    style="user-select: none;">Choose
+                                                    style="user-select: none;"><i wire:loading wire:target='img_path'
+                                                        class="icon-spinner9 spinner mr-2"></i>Choose
                                                     File</span>
                                             </div>
-                                            <span class="form-text text-muted">image : 1, Accepted formats: png</span>
+                                            <span class="form-text text-muted">image : 1, Accepted formats: png, Image
+                                                Product</span>
                                             @error('img_path')
                                                 <span class="form-text text-danger">{{ $message }}</span>
                                             @enderror
@@ -319,25 +323,28 @@
                                         <div class="media-body">
                                             <div class="uniform-uploader">
                                                 <input type="file" class="form-input-styled" data-fouc=""
-                                                    wire:model="img_path_2"><span class="filename"
+                                                    wire:model.live="img_path_2"><span class="filename"
                                                     style="user-select: none;">No file
                                                     selected</span><span class="action btn bg-pink-400"
-                                                    style="user-select: none;">Choose
+                                                    style="user-select: none;"><i wire:loading
+                                                        wire:target='img_path_2'
+                                                        class="icon-spinner9 spinner mr-2"></i>Choose
                                                     File</span>
                                             </div>
-                                            <span class="form-text text-muted">image : 2, Accepted formats: png</span>
+                                            <span class="form-text text-muted">image : 2, Accepted formats: png, Edit
+                                                Crop Image product.<a
+                                                    href="https://www.gifgit.com/image/magic-wand-tool"
+                                                    target="_blank"> Online Crop Image Selection </a></span>
                                             @error('img_path_2')
                                                 <span class="form-text text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                @if ($img_path)
+                                @if ($img_path_2)
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" wire:model="color" />
+                                            <input type="text" class="form-control" wire:model.live="color" />
                                             <span class="input-group-append">
                                                 <span class="input-group-text">
                                                     <input type="color" class="color-input" value="#CCCCCC"
@@ -352,7 +359,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="text-right">
-                                            <button type="button" class="btn btn-primary" wire:click="AddColor">Add
+                                            <button type="button" class="btn btn-primary" wire:click="AddColor"><i
+                                                    wire:loading wire:target='color'
+                                                    class="icon-spinner9 spinner mr-2"></i>Add
                                                 Color <i class="icon-plus-circle2 ml-2"></i></button>
                                         </div>
                                     </div>
@@ -389,7 +398,7 @@
     </div>
     <div wire:ignore.self class="modal fade" id="ModalSize" tabindex="-1" data-backdrop="static"
         data-keyboard="false" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-full" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Size</h5>
@@ -403,7 +412,16 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Add Size</label>
                             <div class="col-lg-10">
-                                <input type="text" wire:model="size" class="form-control">
+                                <select class="form-control" wire:model="size">
+                                    <option value="XS">Choice Size</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="3XL">3XL</option>
+                                </select>
                             </div>
                             @error('color')
                                 <span class="form-text text-danger">{{ $message }}</span>
@@ -411,7 +429,7 @@
                         </div>
 
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Ad Size <i
+                            <button type="submit" class="btn btn-primary">Add Size <i
                                     class="icon-paperplane ml-2"></i></button>
                         </div>
                     </form>
@@ -430,7 +448,9 @@
         }
 
         .img-1 {
-            width: 30em;
+            top: 0;
+            left: 0;
+            width: 100%;
             z-index: 0;
         }
 
