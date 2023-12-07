@@ -17,6 +17,7 @@ use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 use App\Livewire\Landing\Pages\Blog;
 use App\Livewire\Landing\Pages\Cart\Cart;
 use App\Livewire\Landing\Pages\Cart\Checkout;
+use App\Livewire\Landing\Pages\Cart\ListOrder;
 use App\Livewire\Landing\Pages\Detailblog;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 use App\Livewire\Landing\Pages\Wishlist\Wishlist;
@@ -47,7 +48,6 @@ Route::get('/wishlist', Wishlist::class)->name('wishlist');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/blog/{slug}', Detailblog::class)->name('detailblog');
 Route::get('/cart', Cart::class)->name('cart');
-Route::get('/checkout', Checkout::class)->name('checkout');
 
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 Route::middleware([
@@ -55,6 +55,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/listorder', ListOrder::class)->name('listorder');
+    Route::get('/checkout/{idnya}', Checkout::class)->name('checkout');
+
     Route::group(["prefix" => "admin",], function () {
 
         Route::get('/dashboard', Home::class)->name('home');

@@ -5,6 +5,7 @@ namespace App\Livewire\Landing\Component;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -17,10 +18,22 @@ class ListCart extends Component
     public function GetLIst()
     {
         if (Auth::check()) {
-            $this->data = Cart::where('user_id', Auth::user()->id)->get();
-        }
+            if (Session::has('cart')) {
+                $this->cart = session('cart');
+                foreach ($this->cart as $item) {
+                    Cart::create([
+                        'user_id' => Auth::user()->id,
+                        'product_id' => $item['product_id'],
+                        'color_id' => $item['color_id'],
+                        'size_id' => $item['size_id'],
+                        'qty' => $item['qty'],
+                    ]);
+                }
+                Session::forget('cart');
+            }
 
-        if (Session::has('cart')) {
+            $this->data = Cart::where('user_id', Auth::user()->id)->get();
+        } else if (Session::has('cart')) {
             $this->cart = session('cart');
             $this->daftar = [];
             foreach ($this->cart as $item) {
@@ -44,6 +57,18 @@ class ListCart extends Component
             'text' => 'Product successfully removed from cart...',
         ]);
         $this->GetLIst();
+    }
+
+    public function deleteCartsession($id)
+    {
+        Session()->pull('cart.' . $id);
+        $this->GetLIst();
+        $this->emit('GetLIst');
+        $this->dispatchBrowserEvent('swal:modal', [
+            'type' => 'success',
+            'title' => '',
+            'text' => 'Product successfully removed from cart...',
+        ]);
     }
 
     public function mount()

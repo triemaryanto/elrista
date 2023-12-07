@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <nav aria-label="breadcrumb" class="theme-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
                             <li class="breadcrumb-item active">cart</li>
                         </ol>
                     </nav>
@@ -38,41 +38,76 @@
                                 <th scope="col">total</th>
                             </tr>
                         </thead>
-                        @foreach ($data as $item)
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="{{ url('') }}"><img
-                                                src="{{ route('helper.show-picture', ['path' => $item->product->gambar_satu->img1]) }}"
-                                                alt=""></a>
-                                    </td>
-                                    <td>{{ $item->product->name }}
-                                    <td>
-                                        <h2>Rp, {{ number_format($item->product->price, 0, ',', '.') }}</h2>
-                                    </td>
-                                    <td>
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="number" name="quantity" class="form-control input-number"
-                                                    value="{{ $item->qty }}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
-                                    <td>
-                                        @php
-                                            $sub = $item->product->price * $item->qty;
-                                        @endphp
-                                        <h2 class="td-color">
-                                            Rp,
-                                            {{ number_format($sub, 0, ',', '.') }}</h2>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            @php
-                                $tot += $sub;
-                            @endphp
-                        @endforeach
+                        @if (Route::has('login'))
+                            @auth
+                                @foreach ($data as $item)
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="{{ url('') }}"><img
+                                                        src="{{ route('helper.show-picture', ['path' => $item->product->gambar_satu->img1]) }}"
+                                                        alt=""></a>
+                                            </td>
+                                            <td>{{ $item->product->name }}
+                                            <td>
+                                                <h2>Rp, {{ number_format($item->product->price, 0, ',', '.') }}</h2>
+                                            </td>
+                                            <td>
+                                                {{ $item->qty }}
+                                            </td>
+                                            <td><a href="#" class="icon"
+                                                    wire:click="deleteCart({{ $item->id }})"><i
+                                                        class="ti-close"></i></a></td>
+                                            <td>
+                                                @php
+                                                    $sub = $item->product->price * $item->qty;
+                                                @endphp
+                                                <h2 class="td-color">
+                                                    Rp,
+                                                    {{ number_format($sub, 0, ',', '.') }}</h2>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    @php
+                                        $tot += $sub;
+                                    @endphp
+                                @endforeach
+                            @else
+                                @foreach ($daftar as $val => $item)
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="{{ url('') }}"><img
+                                                        src="{{ route('helper.show-picture', ['path' => $item['img1']]) }}"
+                                                        alt=""></a>
+                                            </td>
+                                            <td>{{ $item['name'] }}
+                                            <td>
+                                                <h2>Rp, {{ number_format($item['price'], 0, ',', '.') }}</h2>
+                                            </td>
+                                            <td>
+                                                {{ $item['qty'] }}
+                                            </td>
+                                            <td><a href="#" class="icon"
+                                                    wire:click="deletecartsession({{ $val }})"><i
+                                                        class="ti-close"></i></a>
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $sub = $item['price'] * $item['qty'];
+                                                @endphp
+                                                <h2 class="td-color">
+                                                    Rp,
+                                                    {{ number_format($sub, 0, ',', '.') }}</h2>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    @php
+                                        $tot += $sub;
+                                    @endphp
+                                @endforeach
+                            @endauth
+                        @endif
                     </table>
                     <div class="table-responsive-md">
                         <table class="table cart-table ">
@@ -90,7 +125,8 @@
             </div>
             <div class="row cart-buttons">
                 <div class="col-6"><a href="{{ route('shop') }}" class="btn btn-solid">continue shopping</a></div>
-                <div class="col-6"><a href="{{ route('checkout') }}" class="btn btn-solid">check out</a>
+                <div class="col-6"><button type="button" wire:click='checkout' class="btn btn-solid">check
+                        out</button>
                 </div>
             </div>
         </div>

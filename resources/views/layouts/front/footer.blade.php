@@ -8,7 +8,7 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo">
-                            <img src="../assets/images/icon/logo/f5.png" alt="">
+                            <img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/logo/f5.png" alt="">
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
@@ -98,20 +98,20 @@
                     <div class="payment-card-bottom">
                         <ul>
                             <li>
-                                <a href="#"><img src="../assets/images/icon/visa.png" alt=""></a>
+                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/visa.png" alt=""></a>
                             </li>
                             <li>
-                                <a href="#"><img src="../assets/images/icon/mastercard.png" alt=""></a>
+                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/mastercard.png" alt=""></a>
                             </li>
                             <li>
-                                <a href="#"><img src="../assets/images/icon/paypal.png" alt=""></a>
+                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/paypal.png" alt=""></a>
                             </li>
                             <li>
-                                <a href="#"><img src="../assets/images/icon/american-express.png"
+                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/american-express.png"
                                         alt=""></a>
                             </li>
                             <li>
-                                <a href="#"><img src="../assets/images/icon/discover.png" alt=""></a>
+                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/discover.png" alt=""></a>
                             </li>
                         </ul>
                     </div>

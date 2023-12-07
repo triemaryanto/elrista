@@ -81,6 +81,9 @@
                                                         {{ $provinsi['province'] }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('provinsi_id')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -97,8 +100,9 @@
                                                     @endforeach
                                                 </select>
                                             @endif
-
-
+                                            @error('city_id')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Postal Code</div>
@@ -108,6 +112,9 @@
                                                 <input type="text" name="field-name" value="{{ $postal_code }}"
                                                     placeholder="">
                                             @endif
+                                            @error('postal_code')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -117,14 +124,21 @@
                                                 <option value="jne">JNE</option>
                                                 <option value="tiki"> TIKI</option>
                                             </select>
+                                            @error('courier')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
-                                            <a href="#" wire:click="cekongkirdomestik" class ="btn-solid btn">
+                                            <button type="button" wire:click="cekongkirdomestik"
+                                                class ="btn-solid btn">
                                                 <i wire:loading wire:target="cekongkirdomestik"
                                                     class="fa fa-spinner fa-spin"></i>
                                                 Cek Ongkir
-                                            </a>
+                                            </button>
+                                            @error('pilih_service')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                         @if (empty($rincian_ongkir))
@@ -215,6 +229,9 @@
                                         <ul class="total">
                                             <li>Total <span class="count"> Rp.
                                                     {{ number_format($total, 0, ',', '.') ?? '' }}</span></li>
+                                            @error('total')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </ul>
                                     </div>
                                     <div class="payment-box">
@@ -234,18 +251,6 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <div class="radio-option">
-                                                            <input type="radio" name="payment-group"
-                                                                id="payment-2">
-                                                            <label for="payment-2">Cash On Delivery<span
-                                                                    class="small-text">Please send a check
-                                                                    to Store
-                                                                    Name, Store Street, Store Town, Store
-                                                                    State /
-                                                                    County, Store Postcode.</span></label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
                                                         <div class="radio-option paypal">
                                                             <input type="radio" name="payment-group"
                                                                 id="payment-3">
@@ -257,7 +262,10 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="text-end"><a href="#" class="btn-solid btn">Place Order</a>
+                                        <div class="text-end">
+                                            <button type="button" class="btn-solid btn" wire:click="pay"><i
+                                                    wire:loading wire:target="pay"
+                                                    class="fa fa-spinner fa-spin"></i>Pay</button>
                                         </div>
                                     </div>
                                 </div>
@@ -269,3 +277,32 @@
         </div>
     </section>
 </div>
+@push('js')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
+    <script>
+        window.addEventListener('hitung', event => {
+
+            snap.pay(event.detail.snapToken, {
+                // Optional
+                onSuccess: function(result) {
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result)
+                },
+                // Optional
+                onPending: function(result) {
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result)
+                },
+                // Optional
+                onError: function(result) {
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result)
+                }
+            });
+        });
+    </script>
+@endpush

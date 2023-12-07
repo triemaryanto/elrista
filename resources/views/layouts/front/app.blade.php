@@ -80,7 +80,7 @@
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/menu.js"></script>
 
     <!-- Timer js-->
-    <script src="{{ asset('multikart_all_in_one/') }}/assets/js/timer.js"></script>
+    {{-- <script src="{{ asset('multikart_all_in_one/') }}/assets/js/timer.js"></script> --}}
 
     <!-- slick js-->
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/slick.js"></script>
@@ -95,7 +95,7 @@
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/bootstrap-notify.min.js"></script>
 
     <!-- Theme js-->
-    <script src="{{ asset('multikart_all_in_one/') }}/assets/js/theme-setting.js"></script>
+    {{-- <script src="{{ asset('multikart_all_in_one/') }}/assets/js/theme-setting.js"></script> --}}
     <script src="{{ asset('multikart_all_in_one/') }}/assets/js/script.js"></script>
     <script src="{{ asset('costum/') }}/color.js"></script>
     <script>
