@@ -290,7 +290,7 @@
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     console.log(result)
                     @this.set('status', result['transaction_status']);
-                    // Livewire.emit('berhasiltoListOrder');
+                    Livewire.emit('berhasiltoListOrder');
                 },
                 // Optional
                 onPending: function(result) {

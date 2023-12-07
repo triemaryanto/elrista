@@ -27,54 +27,77 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 table-responsive-xs">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {{-- <table class="table cart-table">
+                    @if (session()->has('success'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <table class="table cart-table">
                         <thead>
                             <tr class="table-head">
-                                <th scope="col">image</th>
-                                <th scope="col">product name</th>
+                                <th scope="col">username</th>
+                                <th scope="col">Order ID</th>
                                 <th scope="col">price</th>
-                                <th scope="col">quantity</th>
+                                <th scope="col">Payment Status</th>
                                 <th scope="col">action</th>
-                                <th scope="col">total</th>
                             </tr>
                         </thead>
                         @foreach ($data as $item)
                             <tbody>
                                 <tr>
                                     <td>
-                                        <a href="{{ url('') }}"><img
-                                                src="{{ route('helper.show-picture', ['path' => $item->product->gambar_satu->img1]) }}"
-                                                alt=""></a>
-                                    </td>
-                                    <td>{{ $item->product->name }}
-                                    <td>
-                                        <h2>Rp, {{ number_format($item->product->price, 0, ',', '.') }}</h2>
+                                        {{ $item->user->name }}
                                     </td>
                                     <td>
-                                        {{ $item->qty }}
+                                        {{ $item->number }}
+                                    <td>
+                                        <h2>Rp, {{ number_format($item->total_price, 0, ',', '.') }}</h2>
                                     </td>
-                                    <td><a href="#" class="icon" wire:click="deleteCart({{ $item->id }})"><i
-                                                class="ti-close"></i></a></td>
                                     <td>
                                         @php
-                                            $sub = $item->product->price * $item->qty;
+                                            // 1=menunggu pembayaran, 2=sudah dibayar, 3=kadaluarsa, 4=batal
+                                            if ($item->payment_status == 1) {
+                                                echo 'menunggu pembayaran';
+                                            }
+                                            if ($item->payment_status == 2) {
+                                                echo 'sudah bayar';
+                                            }
+                                            if ($item->payment_status == 3) {
+                                                echo 'kadaluarsa';
+                                            }
+                                            if ($item->payment_status == 4) {
+                                                echo 'batal';
+                                            }
+                                            if ($item->payment_status == 5) {
+                                                echo 'selesai';
+                                            }
                                         @endphp
-                                        <h2 class="td-color">
-                                            Rp,
-                                            {{ number_format($sub, 0, ',', '.') }}</h2>
+                                    </td>
+                                    <td>
+                                        @if ($item->payment_status == 2)
+                                            <button type="button" class="btn btn-info btn-xs"
+                                                wire:click="sampai({{ $item->id }})">
+                                                Konfirmasi Sampai
+                                            </button>
+                                        @endif
+                                        @if ($item->payment_status == 1)
+                                            <a href="{{ route('checkout', $item->id) }}" class="btn btn-info btn-xs">
+                                                Pay
+                                            </a>
+                                            <button type="button" class="btn btn-info btn-xs"
+                                                wire:click="batal({{ $item->id }})">
+                                                Batal
+                                            </button>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>
-                            @php
-                                $tot += $sub;
-                            @endphp
                         @endforeach
 
-                    </table>--}}
+                    </table>
                 </div>
             </div>
             <div class="row cart-buttons">
