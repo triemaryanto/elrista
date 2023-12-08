@@ -10,14 +10,17 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Services\Midtrans\CreateSnapTokenService;
+use Illuminate\Support\Facades\Redirect;
 
 class Checkout extends Component
 {
     public $provinsi_list, $pengiriman = false, $provinsi, $provinsi_id, $city, $city_id, $city_list = [], $hasil = [], $rincian_ongkir = [], $postal_code, $weight, $courier, $cost = [], $snapToken;
 
-    public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total;
+    public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total, $status;
 
     public $data, $order;
+
+    protected $listeners = ['toListOrder', 'berhasiltoListOrder'];
 
     public function domestik()
     {
@@ -39,7 +42,7 @@ class Checkout extends Component
         $this->validate($rules);
 
         $response = Http::withHeaders([
-            'Key' => '576efad87cff1269a05d640b3ea1e52a',
+            'Key' => 'fdeafd9b4b4ebaea6268209487c8b765',
         ])->post('https://api.rajaongkir.com/starter/cost', [
             'origin' => $this->origin,
             'destination' => $this->city_id,
@@ -60,6 +63,22 @@ class Checkout extends Component
     public function hitungtotal()
     {
         $this->total = $this->subtotal + $this->pilih_service;
+    }
+
+    public function berhasiltoListOrder()
+    {
+        if ($this->status == 'settlement') {
+            $this->order->payment_status = 2;
+            $this->order->save();
+            return Redirect::to('/listorder')->with('success', 'Pembayaran Berhasil...');;
+        } else {
+            return Redirect::to('/listorder');
+        }
+    }
+
+    public function toListOrder()
+    {
+        return Redirect::to('/listorder');
     }
 
     public function pay()
@@ -124,7 +143,7 @@ class Checkout extends Component
     public function render()
     {
         $response = Http::withHeaders([
-            'Key' => '576efad87cff1269a05d640b3ea1e52a',
+            'Key' => 'fdeafd9b4b4ebaea6268209487c8b765',
         ])->get('https://api.rajaongkir.com/starter/province');
         $provinsi_list = $response['rajaongkir']['results'];
         $this->provinsi_list = $response['rajaongkir']['results'];
@@ -133,14 +152,14 @@ class Checkout extends Component
             $this->city_list = [];
 
             $response = Http::withHeaders([
-                'Key' => '576efad87cff1269a05d640b3ea1e52a',
+                'Key' => 'fdeafd9b4b4ebaea6268209487c8b765',
             ])->get('https://api.rajaongkir.com/starter/city?province=' . $this->provinsi_id);
 
             $this->city_list = $response['rajaongkir']['results'];
         }
         if (isset($this->city_id)) {
             $response = Http::withHeaders([
-                'Key' => '576efad87cff1269a05d640b3ea1e52a',
+                'Key' => 'fdeafd9b4b4ebaea6268209487c8b765',
             ])->get('https://api.rajaongkir.com/starter/city?province=' . $this->provinsi_id . '&id=' . $this->city_id);
 
             $this->hasil = $response['rajaongkir']['results'];

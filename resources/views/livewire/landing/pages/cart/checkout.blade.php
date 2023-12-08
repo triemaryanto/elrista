@@ -289,12 +289,17 @@
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     console.log(result)
+                    @this.set('status', result['transaction_status']);
+                    Livewire.emit('berhasiltoListOrder');
                 },
                 // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     console.log(result)
+                    @this.set('status', result['transaction_status']);
+                    // @this.set('isi', contents);
+                    Livewire.emit('toListOrder');
                 },
                 // Optional
                 onError: function(result) {
