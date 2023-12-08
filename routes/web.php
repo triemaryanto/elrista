@@ -11,6 +11,7 @@ use App\Livewire\Landing\Pages\Detail;
 use App\Livewire\Admin\Pages\Permission;
 use App\Livewire\Admin\Pages\Setting\Web;
 use App\Http\Controllers\HelperController;
+use App\Livewire\Admin\Pages\LookBook;
 use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
@@ -64,6 +65,7 @@ Route::middleware([
         // Product
         Route::get('/category', Category::class)->name('product.category');
         Route::get('/product', Product::class)->name('product');
+        Route::get('/lookbook', LookBook::class)->name('lookbook');
 
         // User
         Route::get('/user', User::class)->name('user');

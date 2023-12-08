@@ -11,10 +11,23 @@
              <div class="col-md-6">
                  <div class="lookbook-block">
                      <div>
-                         <img src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/lookbook/1.jpg"
+                         <img src="{{ asset('images/') }}/188CA378-B204-453E-8F9C-88A5C37A208C.png"
                              class="img-fluid blur-up lazyload bg-img" alt="">
                      </div>
-                     <div class="lookbook-dot dot16"><span><i class="fa fa-plus" aria-hidden="true"></i></span>
+                     <div class="lookbook-dot dot2"><span><i class="fa fa-plus" aria-hidden="true"></i></span>
+                         <a href="#">
+                             <div class="dot-showbox"><img
+                                     src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/pro/4.jpg"
+                                     class="img-fluid blur-up lazyload" alt="">
+                                 <div class="dot-info">
+                                     <h5 class="title">beater</h5>
+                                     <h5>200$</h5>
+                                     <h6>details</h6>
+                                 </div>
+                             </div>
+                         </a>
+                     </div>
+                     <div class="lookbook-dot dot4"><span><i class="fa fa-plus" aria-hidden="true"></i></span>
                          <a href="#">
                              <div class="dot-showbox"><img
                                      src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/pro/4.jpg"

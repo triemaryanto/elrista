@@ -274,18 +274,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-semibold">Image:</label>
-                                    <div class="text-center">
+                                    <div class="form_group">
                                         @if ($img_path || $img_path_2)
                                             <div class="product">
                                                 @if ($img_path)
                                                     <img src="{{ $img_path->temporaryUrl() }}"
-                                                        class="img-fluid img-1" id="mug" alt=""
-                                                        style="width: 50%;">
+                                                        class="img-fluid img-1" id="mug" alt="">
                                                 @endif
                                                 @if ($img_path_2)
                                                     <img src="{{ $img_path_2->temporaryUrl() }}"
-                                                        class="img-fluid img-2" id="mug" alt=""
-                                                        style="width: 50%;">
+                                                        class="img-fluid img-2" id="mug" alt="">
                                                 @endif
                                                 <div class="color" wire:ignore></div>
                                             </div>

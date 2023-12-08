@@ -45,3 +45,10 @@ if (!function_exists('get_kab')) {
         return $results->pluck( 'city_name', 'city_id');
     }
 }
+
+if (!function_exists('get_setting')) {
+    function get_setting()
+    {
+        return \App\Models\SettingWeb::find(1);
+    }
+}

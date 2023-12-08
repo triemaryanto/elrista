@@ -29,9 +29,9 @@
 
                     <div class="media-body">
                         <div class="media-title font-weight-semibold">{{ auth()->user()->name }}</div>
-                        <div class="font-size-xs opacity-50">
+                        {{-- <div class="font-size-xs opacity-50">
                             <i class="icon-pin font-size-sm"></i> &nbsp;Santa Ana, CA
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="ml-3 align-self-center">
@@ -73,6 +73,14 @@
                                 class="nav-link">Product</a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('lookbook') }}" class="nav-link">
+                        <i class="icon-gallery"></i>
+                        <span>
+                            Look Book
+                        </span>
+                    </a>
                 </li>
                 <li
                     class="nav-item nav-item-submenu  {{ request()->is('admin/user') || request()->is('admin/role') || request()->is('admin/permission') ? 'nav-item-expanded nav-item-open' : '' }} "">

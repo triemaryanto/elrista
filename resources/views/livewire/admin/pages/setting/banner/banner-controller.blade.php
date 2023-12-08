@@ -105,7 +105,7 @@
                             @if ($product_id)
                                 {{ $data_p->name }}
                                 <button type="button" class="btn btn-info" wire:click="AddProduct_link">Get Product <i
-                                    class="icon-plus-circle2 ml-2"></i></button>
+                                        class="icon-plus-circle2 ml-2"></i></button>
                             @else
                                 <button type="button" class="btn btn-info" wire:click="AddProduct_link">Get Product <i
                                         class="icon-plus-circle2 ml-2"></i></button>

@@ -50,7 +50,7 @@
                                             </td>
                                             <td>{{ $item->product->name }}
                                             <td>
-                                                <h2>Rp, {{ number_format($item->product->price, 0, ',', '.') }}</h2>
+                                                <h2>Rp. {{ number_format($item->product->price, 0, ',', '.') }}</h2>
                                             </td>
                                             <td>
                                                 {{ $item->qty }}
