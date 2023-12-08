@@ -18,6 +18,7 @@ use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 use App\Livewire\Landing\Pages\Blog;
 use App\Livewire\Landing\Pages\Cart\Cart;
 use App\Livewire\Landing\Pages\Cart\Checkout;
+use App\Livewire\Landing\Pages\Cart\DetailOrder;
 use App\Livewire\Landing\Pages\Cart\ListOrder;
 use App\Livewire\Landing\Pages\Detailblog;
 use App\Livewire\Landing\Pages\Home as PagesHome;
@@ -51,15 +52,17 @@ Route::get('/blog/{slug}', Detailblog::class)->name('detailblog');
 Route::get('/cart', Cart::class)->name('cart');
 
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
     Route::get('/listorder', ListOrder::class)->name('listorder');
+    Route::get('/detailorder/{idnya}', DetailOrder::class)->name('detailorder');
     Route::get('/checkout/{idnya}', Checkout::class)->name('checkout');
 
-    Route::group(["prefix" => "admin",], function () {
+    Route::group(["prefix" => "admin", 'middleware' => 'is_user'], function () {
 
         Route::get('/dashboard', Home::class)->name('home');
         // Product

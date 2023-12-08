@@ -52,7 +52,7 @@
                                         {{ $item->user->name }}
                                     </td>
                                     <td>
-                                        {{ $item->number }}
+                                        <a href="{{ route('detailorder', $item->id) }}">{{ $item->number }}</a>
                                     <td>
                                         <h2>Rp, {{ number_format($item->total_price, 0, ',', '.') }}</h2>
                                     </td>
@@ -101,9 +101,8 @@
                 </div>
             </div>
             <div class="row cart-buttons">
-                <div class="col-6"><a href="{{ route('shop') }}" class="btn btn-solid">continue shopping</a></div>
-                <div class="col-6"><button type="button" wire:click='checkout' class="btn btn-solid">check
-                        out</button>
+                <div class="col-6">
+                    <a href="{{ route('shop') }}" class="btn btn-solid">continue shopping</a>
                 </div>
             </div>
         </div>
