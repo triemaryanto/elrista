@@ -53,10 +53,20 @@
                         title="Main"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link">
+                    <a href="{{ route('home') }}"
+                        class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                         <i class="icon-home4"></i>
                         <span>
                             Dashboard
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('user.order') }}"
+                        class="nav-link {{ request()->is('admin/order') ? 'active' : '' }}">
+                        <i class="icon-cart4"></i>
+                        <span>
+                            User Order
                         </span>
                     </a>
                 </li>
@@ -75,7 +85,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('lookbook') }}" class="nav-link">
+                    <a href="{{ route('lookbook') }}"
+                        class="nav-link {{ request()->is('admin/lookbook') ? 'active' : '' }}">
                         <i class="icon-gallery"></i>
                         <span>
                             Look Book

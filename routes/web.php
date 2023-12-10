@@ -12,6 +12,7 @@ use App\Livewire\Admin\Pages\Permission;
 use App\Livewire\Admin\Pages\Setting\Web;
 use App\Http\Controllers\HelperController;
 use App\Livewire\Admin\Pages\LookBook;
+use App\Livewire\Admin\Pages\Order\OrderUser;
 use App\Livewire\Admin\Pages\Product\Product;
 use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
@@ -65,6 +66,10 @@ Route::middleware([
     Route::group(["prefix" => "admin", 'middleware' => 'is_user'], function () {
 
         Route::get('/dashboard', Home::class)->name('home');
+
+        // Order User
+        Route::get('/order', OrderUser::class)->name('user.order');
+
         // Product
         Route::get('/category', Category::class)->name('product.category');
         Route::get('/product', Product::class)->name('product');
