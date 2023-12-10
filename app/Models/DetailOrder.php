@@ -25,4 +25,14 @@ class DetailOrder extends Model implements Auditable
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+
+    public function color()
+    {
+        return $this->belongsTo(ProductImageColor::class, 'color_id');
+    }
+
+    public function size()
+    {
+        return $this->belongsTo(ProductSize::class, 'size_id');
+    }
 }
