@@ -92,6 +92,15 @@
                                     Sign In <i class="icon-circle-right2 ml-2"></i>
                                 </button>
                             </div>
+                            <div class="form-group text-center text-muted content-divider">
+                                <span class="px-2">or sign in with</span>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <a href="/auth/google"
+                                    class="btn btn-outline bg-indigo border-indigo text-indigo btn-icon rounded-round border-2"><i
+                                        class="icon-google"></i></a>
+                            </div>
 
                         </div>
                     </div>

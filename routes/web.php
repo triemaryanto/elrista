@@ -3,27 +3,28 @@
 use App\Livewire\Admin\Pages\Home;
 use App\Livewire\Admin\Pages\Role;
 use App\Livewire\Admin\Pages\User;
+use App\Livewire\Landing\Pages\Blog;
 use App\Livewire\Landing\Pages\Shop;
 use Illuminate\Support\Facades\File;
 use App\Livewire\Admin\Pages\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Pages\LookBook;
 use App\Livewire\Landing\Pages\Detail;
 use App\Livewire\Admin\Pages\Permission;
 use App\Livewire\Admin\Pages\Setting\Web;
+use App\Livewire\Landing\Pages\Cart\Cart;
 use App\Http\Controllers\HelperController;
-use App\Livewire\Admin\Pages\LookBook;
+use App\Livewire\Landing\Pages\Detailblog;
 use App\Livewire\Admin\Pages\Order\OrderUser;
 use App\Livewire\Admin\Pages\Product\Product;
-use App\Livewire\Admin\Pages\Product\Category;
-use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
-use App\Livewire\Landing\Pages\Blog;
-use App\Livewire\Landing\Pages\Cart\Cart;
 use App\Livewire\Landing\Pages\Cart\Checkout;
-use App\Livewire\Landing\Pages\Cart\DetailOrder;
+use App\Livewire\Admin\Pages\Product\Category;
 use App\Livewire\Landing\Pages\Cart\ListOrder;
-use App\Livewire\Landing\Pages\Detailblog;
+use App\Livewire\Landing\Pages\Cart\DetailOrder;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 use App\Livewire\Landing\Pages\Wishlist\Wishlist;
+use App\Http\Controllers\Auth\SocialiteController;
+use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::get('template', function () {
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider']);
+Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
 Route::get('/', PagesHome::class)->name('front.home');
 Route::get('/detail/{slug}', Detail::class)->name('detail');
 Route::get('/shop', Shop::class)->name('shop');
