@@ -36,15 +36,15 @@
                 <div class="col offset-xl-1 ">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>my account</h4>
+                            <h4>Category</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">mens</a></li>
-                                <li><a href="#">womens</a></li>
-                                <li><a href="#">clothing</a></li>
-                                <li><a href="#">accessories</a></li>
-                                <li><a href="#">featured</a></li>
+                                @foreach (get_category() as $key => $value)
+                                    <li><a
+                                            href="{{ route('shop') . '?category=' . $value->slug }}">{{ $value->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -98,20 +98,29 @@
                     <div class="payment-card-bottom">
                         <ul>
                             <li>
-                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/visa.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/mastercard.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/paypal.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/american-express.png"
+                                <a href="#"><img
+                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/visa.png"
                                         alt=""></a>
                             </li>
                             <li>
-                                <a href="#"><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/discover.png" alt=""></a>
+                                <a href="#"><img
+                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/mastercard.png"
+                                        alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img
+                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/paypal.png"
+                                        alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img
+                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/american-express.png"
+                                        alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img
+                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/discover.png"
+                                        alt=""></a>
                             </li>
                         </ul>
                     </div>

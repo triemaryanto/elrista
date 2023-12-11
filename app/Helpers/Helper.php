@@ -22,27 +22,27 @@ if (!function_exists('get_prov')) {
         $response = Http::withHeaders([
             'Key' => '2ce3e71067298be75b7b116d08cc1410',
         ])->get('https://api.rajaongkir.com/starter/province');
-     
+
         // Convert the array to a Laravel Collection
         $results = collect($response['rajaongkir']['results']);
 
         // Use pluck() on the Collection
-        return $results->pluck( 'province', 'province_id');
+        return $results->pluck('province', 'province_id');
     }
 }
 
 if (!function_exists('get_kab')) {
     function get_kab($code)
     {
-         $response = Http::withHeaders([
+        $response = Http::withHeaders([
             'Key' => '2ce3e71067298be75b7b116d08cc1410',
-        ])->get('https://api.rajaongkir.com/starter/city?province='.$code .'');
-     
+        ])->get('https://api.rajaongkir.com/starter/city?province=' . $code . '');
+
         // Convert the array to a Laravel Collection
         $results = collect($response['rajaongkir']['results']);
 
         // Use pluck() on the Collection
-        return $results->pluck( 'city_name', 'city_id');
+        return $results->pluck('city_name', 'city_id');
     }
 }
 
@@ -50,5 +50,12 @@ if (!function_exists('get_setting')) {
     function get_setting()
     {
         return \App\Models\SettingWeb::find(1);
+    }
+}
+
+if (!function_exists('get_category')) {
+    function get_category()
+    {
+        return \App\Models\Category::get();
     }
 }
