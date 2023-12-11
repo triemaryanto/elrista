@@ -25,6 +25,9 @@ use App\Livewire\Landing\Pages\Home as PagesHome;
 use App\Livewire\Landing\Pages\Wishlist\Wishlist;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
+use App\Livewire\Admin\Pages\Stock\StockIn;
+use App\Livewire\Admin\Pages\Stock\StockOut;
+use App\Models\Stock;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +80,8 @@ Route::middleware([
         Route::get('/category', Category::class)->name('product.category');
         Route::get('/product', Product::class)->name('product');
         Route::get('/lookbook', LookBook::class)->name('lookbook');
-
+        Route::get('/stock-in', StockIn::class)->name('stock.in');
+        Route::get('/stock-out', StockOut::class)->name('stock.out');
         // User
         Route::get('/user', User::class)->name('user');
         Route::get('/role', Role::class)->name('role');
