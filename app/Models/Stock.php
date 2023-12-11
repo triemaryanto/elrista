@@ -21,4 +21,9 @@ class Stock extends Model implements Auditable
     {
         return $this->BelongsTo(Product::class, 'product_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -25,13 +25,32 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Tanggal Masuk:</label>
+                                <div class="col-lg-10">
+                                    {{ Form::date(null, null, [
+                                        'class' => 'form-control' . ($errors->has('tgl_masuk') ? ' border-danger' : null),
+                                        'wire:model.lazy' => 'tgl_masuk',
+                                    ]) }}
+                                    @error('tgl_masuk')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Product:</label>
                                 <div class="col-lg-10">
                                     @if ($product_id)
-                                        {{ $data_p->name }}
                                         <button type="button" class="btn btn-info" wire:click="AddProduct_link">Get
                                             Product
                                             <i class="icon-plus-circle2 ml-2"></i></button>
+                                        <label> <b>Product :</b>
+                                            <input class="form-control" value="{{ $data_p->name ?? '' }}" readonly>
+                                        </label> , <label> <b>Initial Stock
+                                                :</b><input class="form-control" value="{{ $data_p->stock ?? 0 }}"
+                                                readonly>
+                                        </label>
                                     @else
                                         <button type="button" class="btn btn-info" wire:click="AddProduct_link">Get
                                             Product
@@ -43,8 +62,34 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">qty:</label>
+                                <div class="col-lg-10">
+                                    {{ Form::number(null, null, [
+                                        'class' => 'form-control' . ($errors->has('qty') ? ' border-danger' : null),
+                                        'wire:model.lazy' => 'qty',
+                                    ]) }}
+                                    @error('qty')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Detail</label>
+                                <div class="col-lg-10">
+                                    {{ Form::textarea(null, null, [
+                                        'class' => 'form-control' . ($errors->has('detail') ? ' border-danger' : null),
+                                        'placeholder' => 'Detail',
+                                        'wire:model.lazy' => 'detail',
+                                    ]) }}
+                                    @error('detail')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <div class="text-right">
