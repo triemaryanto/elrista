@@ -84,6 +84,21 @@
                         </li>
                     </ul>
                 </li>
+
+                <li
+                    class="nav-item nav-item-submenu {{ request()->is('admin/stock-in') || request()->is('admin/stock-out') ? 'nav-item-expanded nav-item-open' : '' }} ">
+                    <a href="#" class="nav-link"><i class="icon-paste2"></i> <span>Stock</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Product">
+                        <li class="nav-item"><a href="{{ route('stock.in') }}"
+                                class="nav-link {{ request()->is('admin/stock-in') ? 'active' : '' }}"
+                                class="nav-link">Stock In</a>
+                        </li>
+                        <li class="nav-item"><a href="{{ route('stock.out') }}"
+                                class="nav-link {{ request()->is('admin/stock-out') ? 'active' : '' }}"
+                                class="nav-link">Stock Out</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('lookbook') }}"
                         class="nav-link {{ request()->is('admin/lookbook') ? 'active' : '' }}">

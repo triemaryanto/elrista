@@ -30,7 +30,11 @@ class SocialiteController extends Controller
         Auth()->login($authUser, true);
 
         // setelah login redirect ke dashboard
-        return redirect()->route('front.home');
+        if (auth()->check()) {
+            return redirect()->route('front.home');
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     public function findOrCreateUser($socialUser, $provider)
