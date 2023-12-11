@@ -1,4 +1,13 @@
 <div>
+    <x-slot:title>
+        {{ $data->name }}&nbsp;-&nbsp;
+    </x-slot>
+    <x-slot:description>
+        {{ $data->description }}
+    </x-slot>
+    <x-slot:keywords>
+        {{ $data->description }}
+    </x-slot>
     <!-- breadcrumb start -->
     <div class="breadcrumb-section">
         <div class="container">

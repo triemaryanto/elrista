@@ -7,7 +7,7 @@
                     <div class="header-contact">
                         <ul>
                             <li>Welcome to Our store Elrista</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: {{ get_setting()->phone ?? '123 - 456 - 7890' }}</li>
                         </ul>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="main-menu">
                     <div class="menu-left">
                         <div class="navbar">
-                            <a href="javascript:void(0)" onclick="openNav()">
+                            {{-- <a href="javascript:void(0)" onclick="openNav()">
                                 <div class="bar-style"><i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
                                 </div>
                             </a>
@@ -193,10 +193,10 @@
                                         <li><a href="#">kitchen</a></li>
                                     </ul>
                                 </nav>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="brand-logo">
-                            <a href="{{ url('/') }}"><img src="{{ asset('images/') }}/logo2.png"
+                            <a href="{{ url('/') }}"><img src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo ]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
                                     class="img-fluid blur-up lazyload" style="width:50%;" alt=""></a>
                         </div>
                     </div>
@@ -252,7 +252,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="onhover-div mobile-setting">
+                                    {{-- <li class="onhover-div mobile-setting">
                                         <div><img
                                                 src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/setting.png"
                                                 class="img-fluid blur-up lazyload" alt=""> <i
@@ -271,7 +271,7 @@
                                                 <li><a href="#">doller</a></li>
                                             </ul>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                     <li class="onhover-div mobile-cart">
                                         <livewire:landing.component.list-cart />
                                     </li>

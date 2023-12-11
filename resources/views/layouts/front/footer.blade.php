@@ -8,10 +8,13 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo">
-                            <img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/logo/f5.png" alt="">
+                            <img src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo ]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
+                                alt="" width="80%">
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                        <p>{{ get_setting()->description ??
+                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam.' }}
+                        </p>
                         <div class="footer-social">
                             <ul>
                                 <li>
@@ -72,12 +75,11 @@
                         </div>
                         <div class="footer-contant">
                             <ul class="contact-list">
-                                <li><i class="fa fa-map-marker"></i>Multikart Demo Store, Demo store
-                                    India 345-659</li>
-                                <li><i class="fa fa-phone"></i>Call Us: 123-456-7898</li>
-                                <li><i class="fa fa-envelope"></i>Email Us: <a href="#">Support@Multikart.com</a>
+                                <li><i class="fa fa-map-marker"></i>{{ get_setting()->address ?? 'Alamate Belum di Setting' }}</li>
+                                <li><i class="fa fa-phone"></i>Call Us: {{ get_setting()->phone ?? '123-456-7898' }}</li>
+                                <li><i class="fa fa-envelope"></i>Email Us: <a href="#">{{ get_setting()->email ?? 'Support@admin.com' }}</a>
                                 </li>
-                                <li><i class="fa fa-fax"></i>Fax: 123456</li>
+                                <li><i class="fa fa-fax"></i>Fax: {{ get_setting()->fax ?? '123456' }}</li>
                             </ul>
                         </div>
                     </div>
@@ -90,7 +92,7 @@
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-12">
                     <div class="footer-end">
-                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2023-24 themeforest powered by
+                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2023-24 t                     hemeforest powered by
                             pixelstrap</p>
                     </div>
                 </div>
