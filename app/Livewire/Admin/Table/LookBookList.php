@@ -11,12 +11,13 @@ class LookBookList extends DataTableComponent
     protected $model = LookBook::class;
 
 
-    public function AddProduct_link(){
-        
+    public function AddProduct_link()
+    {
     }
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setDefaultSort('id', 'desc');
     }
 
     public function columns(): array

@@ -22,6 +22,8 @@ class ProductTable extends DataTableComponent
                 ->sortable(),
             Column::make("Name", "Name")
                 ->sortable()->searchable(),
+            Column::make("Stock", "stock")
+                ->sortable()->searchable(),
             Column::make('Action', 'id')
                 ->view('components.table-action')
         ];

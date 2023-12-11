@@ -14,6 +14,7 @@ class StockIn extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setDefaultSort('id', 'desc');
     }
 
     public function builder(): Builder
@@ -23,13 +24,14 @@ class StockIn extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make("Id Stock", "id")
                 ->sortable(),
             Column::make("Id Produk", "product.id")
                 ->sortable(),
             Column::make('Product', 'product.name')->sortable()->searchable(),
             Column::make('Qty', 'qty')->sortable()->searchable(),
-            Column::make("Tanggal Masuk", "tgl_masuk")->sortable(),
+            Column::make("Tanggal Masuk", "tgl_masuk")->sortable()->searchable(),
+            Column::make("Oleh", "user.name")->sortable()->searchable(),
             Column::make('Action', 'id')->view('components.table-action'),
         ];
     }

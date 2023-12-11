@@ -19,10 +19,10 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->longText('specification')->nullable();
             $table->longText('shop_info')->nullable();
-            $table->integer('stock')->nullable();
+            $table->integer('stock')->default(0);
             $table->integer('price')->nullable();
             $table->integer('weight')->nullable();
-            $table->integer('views')->nullable()->default(0);
+            $table->integer('views')->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
