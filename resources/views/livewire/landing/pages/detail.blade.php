@@ -44,7 +44,7 @@
 
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
-                            <div class="product-count">
+                            {{-- <div class="product-count">
                                 <ul>
                                     <li>
                                         <img src="{{ asset('multikart_all_in_one/') }}/assets/images/fire.gif"
@@ -59,17 +59,20 @@
                                         <span class="lang">active view this</span>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
                             <h2>{{ $data->name }}</h2>
-                            <div class="rating-section">
+                            {{-- <div class="rating-section">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                 </div>
                                 <h6>120 ratings</h6>
-                            </div>
-                            <div class="label-section">
+                            </div> --}}
+                            {{-- <div class="label-section">
                                 <span class="badge badge-grey-color">#1 Best seller</span>
                                 <span class="label-text">in fashion</span>
+                            </div> --}}
+                            <div class="label-section">
+                                <span class="label-text">Harga :</span>
                             </div>
                             <h3 class="price-detail">Rp.
                                 {{ number_format($data->price, 0, ',', '.') }}</h3>
@@ -115,9 +118,8 @@
                                 <h6 class="product-title">quantity</h6>
                                 <div class="qty-box" style="border-right-color: #ddc7c7">
                                     <div class="input-group">
-                                        <input type="number" name="quantity"
-                                            class="form-control" value="1" min="1"
-                                            wire:model="qty">
+                                        <input type="number" name="quantity" class="form-control" value="1"
+                                            min="1" wire:model="qty">
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +131,7 @@
                                         class="fa fa-bookmark fz-16 me-2" aria-hidden="true"
                                         wire:click="addwishlist"></i>wishlist</button>
                             </div>
-                            <div class="product-count">
+                            {{-- <div class="product-count">
                                 <ul>
                                     <li>
                                         <img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/truck.png"
@@ -137,13 +139,7 @@
                                         <span class="lang">Free shipping for orders above $500 USD</span>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="border-product">
-                                <h6 class="product-title">Sales Ends In</h6>
-                                <div class="timer">
-                                    <p id="demo"></p>
-                                </div>
-                            </div>
+                            </div> --}}
                             <div class="border-product">
                                 <h6 class="product-title">shipping info</h6>
                                 <ul class="shipping-info">
@@ -163,7 +159,7 @@
                                 </div>
                             </div>
                             <div class="border-product">
-                                <h6 class="product-title">100% secure payment</h6>
+                                <h class="product-title">100% secure payment</h 6>
                                 <img src="{{ asset('multikart_all_in_one/') }}/assets/images/payment.png"
                                     class="img-fluid mt-1" alt="">
                             </div>
