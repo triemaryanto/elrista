@@ -55,21 +55,24 @@
                                 @else
                                     {{-- domestik --}}
                                     <div class="row check-out">
-                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                             <div class="field-label">First Name</div>
-                                            <input type="text" name="field-name" value="" placeholder="">
-                                        </div>
-                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                            <div class="field-label">Last Name</div>
-                                            <input type="text" name="field-name" value="" placeholder="">
+                                            <input type="text" name="field-name" value="{{ auth()->user()->name }}"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Phone</div>
-                                            <input type="text" name="field-name" value="" placeholder="">
+                                            <input type="number" name="field-name"
+                                                value="{{ auth()->user()->wa ?? '' }}" placeholder="" wire:model="wa">
+
+                                            @error('wa')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Email Address</div>
-                                            <input type="text" name="field-name" value="" placeholder="">
+                                            <input type="text" name="field-name" value="{{ auth()->user()->email }}"
+                                                placeholder="">
                                         </div>
 
                                         <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -128,6 +131,19 @@
                                                 <span class="form-text text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <div class="field-label">Alamat Lengkap</div>
+                                            {{ Form::text(null, null, [
+                                                'class' => 'form-control' . ($errors->has('address') ? ' border-danger' : null),
+                                                'placeholder' => 'Alamat Lengkap',
+                                                'wire:model.lazy' => 'address',
+                                            ]) }}
+                                            @error('address')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
 
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
                                             <button type="button" wire:click="cekongkirdomestik"

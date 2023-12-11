@@ -6,6 +6,7 @@ namespace App\Livewire\Landing\Pages\Cart;
 use App\Models\Cart;
 use App\Models\DetailOrder;
 use App\Models\Order;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -16,7 +17,7 @@ class Checkout extends Component
 {
     public $provinsi_list, $pengiriman = false, $provinsi, $provinsi_id, $city, $city_id, $city_list = [], $hasil = [], $rincian_ongkir = [], $postal_code, $weight, $courier, $cost = [], $snapToken;
 
-    public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total, $status;
+    public $origin = 501, $ongkir, $etd, $pilih_service, $subtotal, $total, $status, $address, $wa;
 
     public $data, $order;
 
@@ -90,7 +91,13 @@ class Checkout extends Component
         $rules['city_id'] = 'required';
         $rules['courier'] = 'required';
         $rules['postal_code'] = 'required';
+        $rules['address'] = 'required|255';
+        $rules['wa'] = 'required|max:20';
         $this->validate($rules);
+
+        $user = User::find(auth()->user()->id);
+        $user->wa = $this->wa;
+        $user->save();
 
         $this->order->provinsi = $this->provinsi;
         $this->order->provinsi_id = $this->provinsi_id;
@@ -101,6 +108,7 @@ class Checkout extends Component
         $this->order->weight = $this->weight;
         $this->order->pilih_service = $this->pilih_service;
         $this->order->total_price = $this->total;
+        $this->order->addres = $this->address;
         $this->order->save();
         if ($this->order->snap_token) {
             $this->snapToken = $this->order->snap_token;

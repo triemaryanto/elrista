@@ -61,4 +61,9 @@ class User extends Authenticatable implements Auditable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function socialAccounts()
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
 }
