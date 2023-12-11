@@ -55,6 +55,8 @@
 
     {{ $slot ?? '' }}
 
+    <livewire:landing.component.modal-quick-view :wire:key="modalquickview" />
+
     <!-- footer section start -->
     @include('layouts.front.footer')
     <!-- footer section end -->
