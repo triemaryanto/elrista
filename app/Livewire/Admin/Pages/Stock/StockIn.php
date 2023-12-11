@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class StockIn extends Component
 {
-    public $idNya, $isAdd, $isEdit, $product_id, $data_p, $tgl_masuk, $qty, $detail;
+    public $isAdd, $isEdit, $product_id, $data_p, $tgl_masuk, $qty, $detail;
     protected $listeners = ['edit', 'GetProduct'];
 
     public $rules = [
@@ -31,7 +31,6 @@ class StockIn extends Component
         $this->tgl_masuk = $stock->tgl_masuk;
         $this->detail = $stock->detail;
         $this->qty = $stock->qty;
-        $this->idNya = $stock->id;
     }
 
     public function AddProduct_link()
@@ -52,33 +51,29 @@ class StockIn extends Component
     public function save()
     {
         $this->validate($this->rules);
-        if ($this->idNya) {
-            $this->update();
-        } else {
-            DB::transaction(
-                function () {
-                    $stok = Stock::create([
-                        'product_id' => $this->product_id,
-                        'type' => 'in',
-                        'user_id' => auth()->user()->id,
-                        'tgl_masuk' => $this->tgl_masuk,
-                        'detail' => $this->detail,
-                        'qty' => $this->qty,
-                    ]);
-                    $product = Product::find($this->product_id);
+        DB::transaction(
+            function () {
+                Stock::create([
+                    'product_id' => $this->product_id,
+                    'type' => 'in',
+                    'user_id' => auth()->user()->id,
+                    'tgl_masuk' => $this->tgl_masuk,
+                    'detail' => $this->detail,
+                    'qty' => $this->qty,
+                ]);
+                $product = Product::find($this->product_id);
 
-                    if ($product) {
-                        $newQty = $product->stock + $this->qty;
+                if ($product) {
+                    $newQty = $product->stock + $this->qty;
 
-                        // Update the quantity of the product
-                        $product->stock = $newQty;
+                    // Update the quantity of the product
+                    $product->stock = $newQty;
 
-                        // Save the changes to the database
-                        $product->save();
-                    }
+                    // Save the changes to the database
+                    $product->save();
                 }
-            );
-        }
+            }
+        );
         $this->emit('refreshDatatable');
         $this->dispatchBrowserEvent('success');
         $this->clear();
@@ -89,7 +84,6 @@ class StockIn extends Component
     }
     public function clear()
     {
-        $this->idNya = '';
         $this->data_p = '';
         $this->qty = '';
         $this->detail = '';
