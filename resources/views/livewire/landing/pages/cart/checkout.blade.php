@@ -251,7 +251,7 @@
                                         </ul>
                                     </div>
                                     <div class="payment-box">
-                                        <div class="upper-box">
+                                        {{-- <div class="upper-box">
                                             <div class="payment-options">
                                                 <ul>
                                                     <li>
@@ -277,7 +277,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="text-end">
                                             <button type="button" class="btn-solid btn" wire:click="pay"><i
                                                     wire:loading wire:target="pay"

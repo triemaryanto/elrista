@@ -12,14 +12,37 @@ use App\Models\ProductImageColor;
 class Shop extends Component
 {
     use WithPagination;
-    public $limit = 12, $order = "DESC";
+    public $limit = 12, $order = "DESC", $id_category, $oke, $color;
+
+    public function colore($color)
+    {
+        $this->color = $color;
+    }
+
+    public function updatedColor()
+    {
+        $this->dispatchBrowserEvent('change-color', [
+            'color' => $this->color,
+        ]);
+    }
+
+    public function updatedIdCategory($value)
+    {
+        $this->oke = $value;
+    }
+
     public function render()
     {
         $category = Category::get();
-        $colors = ProductImageColor::groupBy('color')->pluck('color');
+        $colors = ProductImageColor::selectRaw('ANY_VALUE(id) as id, color')
+        ->groupBy('color')
+        ->pluck('color', 'id');
+
+        // dd($colors);
+    
         $sizes = ProductSize::get();
         $data = Product::with('listImage', 'listSize');
-        
+
         $products = $data->where('status', 1)->orderBy('id', $this->order)->paginate($this->limit);;
         return view('livewire.landing.pages.shop', [
             'category' => $category,

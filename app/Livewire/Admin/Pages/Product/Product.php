@@ -15,7 +15,7 @@ class Product extends Component
 {
     use WithFileUploads;
 
-    public $idnya, $listCategory, $category, $name, $description, $specification, $shop_info, $img_path, $img_path_2, $color, $listColor = [], $listImage = [], $weight, $price, $status = false, $editListImage = [], $editListSize = [], $listSize = [], $size;
+    public $idnya, $listCategory, $category, $name, $description, $specification, $shop_info, $img_path, $img_path_2, $namecolor, $color, $listColor = [], $listImage = [], $weight, $price, $status = false, $editListImage = [], $editListSize = [], $listSize = [], $size;
     public $isAdd = false;
     public $isEdit = false;
     protected $listeners = ['edit', 'delete'];
@@ -48,8 +48,12 @@ class Product extends Component
     {
         $rules['color'] = 'required';
         $this->validate($rules);
-        $this->listColor[] = $this->color;
+        $this->listColor[] = [
+            'color' => $this->color,
+            'namecolor' => $this->namecolor
+        ];
         $this->color = null;
+        $this->namecolor = null;
     }
 
     public function closeViewModal()
@@ -59,7 +63,9 @@ class Product extends Component
 
     public function updatedColor()
     {
-        $this->dispatchBrowserEvent('change-color');
+        $this->dispatchBrowserEvent('change-color', [
+            'color' => $this->color,
+        ]);
     }
 
     public function save_image()
@@ -105,9 +111,9 @@ class Product extends Component
     public function deleteColor($id, $action)
     {
         if ($action == 'new') {
-            $this->listColor = array_values(array_filter($this->listColor, function ($color) use ($id) {
-                return $color !== $id;
-            }));
+            if (isset($this->listColor[$id])) {
+                unset($this->listColor[$id]);
+            }
         }
     }
 
@@ -174,11 +180,12 @@ class Product extends Component
                 foreach ($item['color'] as $col) {
                     ProductImageColor::create([
                         'product_image_id' => $a->id,
-                        'color' => $col
+                        'color' => $col['color'],
+                        'namecolor' => $col['namecolor']
                     ]);
                 }
             }
-            
+
             foreach ($this->listSize as $size) {
                 ProductSize::create([
                     'product_id' => $data->id,
@@ -223,7 +230,8 @@ class Product extends Component
                     foreach ($item['color'] as $col) {
                         ProductImageColor::create([
                             'product_image_id' => $a->id,
-                            'color' => $col
+                            'color' => $col['color'],
+                            'namecolor' => $col['namecolor']
                         ]);
                     }
                 }

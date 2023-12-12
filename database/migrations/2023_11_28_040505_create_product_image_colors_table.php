@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_image_id');
             $table->string('color')->nullable();
+            $table->string('namecolor')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

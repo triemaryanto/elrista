@@ -40,6 +40,7 @@ class Checkout extends Component
         $rules['city_id'] = 'required';
         $rules['courier'] = 'required';
         $rules['postal_code'] = 'required';
+        $rules['address'] = 'required|255';
         $this->validate($rules);
 
         $response = Http::withHeaders([

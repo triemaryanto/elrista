@@ -124,7 +124,7 @@
                                 <div class="col-lg-10">
                                     {{ Form::number(null, null, [
                                         'class' => 'form-control' . ($errors->has('weight') ? ' border-danger' : null),
-                                        'placeholder' => 'Price Product',
+                                        'placeholder' => 'Weight Product',
                                         'wire:model.lazy' => 'weight',
                                     ]) }}
                                     @error('weight')
@@ -342,6 +342,7 @@
                                 @if ($img_path_2)
                                     <div class="form-group">
                                         <div class="input-group">
+                                            <input type="text" class="form-control" wire:model="namecolor" disabled/>
                                             <input type="text" class="form-control" wire:model.live="color" />
                                             <span class="input-group-append">
                                                 <span class="input-group-text">
@@ -365,12 +366,12 @@
                                     </div>
                                     <div class="form-group">
                                         <ul>
-                                            @foreach ($listColor as $b)
+                                            @foreach ($listColor as $a => $b)
                                                 <li><span class="badge"
-                                                        style="background-color: {{ $b }}; color:{{ $b }};">
-                                                        = = </span>
-                                                    {{ $b }} <button type="button" class="btn btn-link"
-                                                        wire:click="confirmDelete('{{ $b }}','color','new')"><i
+                                                        style="background-color: {{ $b['color'] }}; color:{{ $b['color'] }};">
+                                                        = = </span> 
+                                                    {{ $b['color'] }} => {{ $b['namecolor'] }}<button type="button" class="btn btn-link"
+                                                        wire:click="confirmDelete('{{ $a }}','color','new')"><i
                                                             class="icon-trash
                                                         mr-2"></i></button>
                                                 </li>
@@ -473,6 +474,7 @@
     </style>
 @endpush
 @push('js')
+    <script type="text/javascript" src="https://chir.ag/projects/ntc/ntc.js"></script>
     <script>
         $(document).ready(function() {
             window.addEventListener('close-modal', event => {
@@ -492,6 +494,15 @@
             });
 
             window.addEventListener('change-color', event => {
+                const warna = event.detail.color;
+                var n_match = ntc.name(warna);
+                n_rgb = n_match[0]; // RGB value of closest match
+                n_name = n_match[1]; // Text string: Color name
+                n_exactmatch = n_match[2]; // True if exact color match
+
+                // console.log(n_name);
+                @this.set('namecolor', n_name);
+
                 // Get elements from the DOM
                 const color = document.querySelector(".color");
                 const colorInput = document.querySelector(".color-input");
