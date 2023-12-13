@@ -25,10 +25,10 @@ class LookBookList extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Images", "images")
+                Column::make("Judul", "name")->searchable()->sortable(),
+            Column::make("Images", "image")
                 ->sortable(),
-            Column::make("Action", "id")
-                ->sortable(),
+            Column::make("Action", "id")->view('components.table-action'),
         ];
     }
 }

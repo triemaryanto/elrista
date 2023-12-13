@@ -32,48 +32,17 @@
                                             <img src="{{ route('helper.show-picture', ['path' => $edit_image]) }}"
                                                 alt="" class="img-fluid" width="50%">
                                         @endif
-                                        @foreach (range(2, 19) as $number)
-                                            <div class="lookbook-dot dot{{ $number }}">
-                                                <i class="icon-plus-circle2 ml-2" wire:click="AddProduct_link"></i>
-                                                <span> dot{{ $number }}</span>
-                                                <a href="#">
-                                                    <div class="dot-showbox">
-                                                        @if ($product_id)
-                                                            <img src="{{ route('helper.show-picture', ['path' => $data_p->gambar_satu->img1]) }}"
-                                                                class="img-fluid blur-up lazyload" alt="">
-                                                            <div class="dot-info">
-                                                                <h5 class="title">{{ $data_p->name }}</h5>
-                                                                <h5>Rp. {{ number_format($data_p->price, 0, ',', '.') }}
-                                                                </h5>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </a>
+                                        @foreach (range(1, 25) as $number)
+                                            <div class="lookbook-dot dot{{ $number }}"
+                                                wire:click="AddProduct_link({{ $number }})">
+                                                <i class="ml-2">
+                                                    {{ $number }}</i>
+
                                             </div>
                                         @endforeach
                                     @else
-                                        <img src="{{ asset('images/') }}/188CA378-B204-453E-8F9C-88A5C37A208C.PNG"
+                                        <img src="{{ asset('limitless/') }}/global_assets/images/placeholders/placeholder.jpg"
                                             class="img-fluid" alt="">
-                                        @foreach (range(2, 19) as $number)
-                                            <div class="lookbook-dot dot{{ $number }}">
-                                                <i class="icon-plus-circle2 ml-2" wire:click="AddProduct_link"></i>
-                                                <span> dot{{ $number }}</span>
-                                                <a href="#">
-                                                    <div class="dot-showbox">
-                                                        @if ($product_id)
-                                                            <img src="{{ route('helper.show-picture', ['path' => $data_p->gambar_satu->img1]) }}"
-                                                                class="img-fluid blur-up lazyload" alt="">
-                                                            <div class="dot-info">
-                                                                <h5 class="title">{{ $data_p->name }}</h5>
-                                                                <h5>Rp.
-                                                                    {{ number_format($data_p->price, 0, ',', '.') }}
-                                                                </h5>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @endforeach
                                     @endif
 
                                 </div>
@@ -81,12 +50,53 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Judul:</label>
+                                <div class="col-lg-10">
+                                    <input wire:model="name" class="form-control" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Image</label>
                                 <div class="col-lg-10">
                                     <input wire:model="image" class="form-control" type="file"
                                         accept="image/png, image/jpeg">
                                 </div>
                             </div>
+                            @if ($pilih)
+                                <div class="form-group row">
+                                    <label class="col-lg-2 col-form-label"></label>
+                                    <div class="col-lg-10">
+                                        <table class="table table-strip text-center">
+                                            <thead>
+                                                <th>Nomor</th>
+                                                <th>Nama Product</th>
+                                                <th>Harga</th>
+                                                <th>Image</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($pilih as $index => $item)
+                                                    <tr>
+                                                        <td>{{ $item['dots'] }}</td>
+                                                        <td style="width: 25%;">{{ $data_p->name }}</td>
+                                                        <td style="width: 25%;">Rp.
+                                                            {{ number_format($data_p->price, 0, ',', '.') }}</td>
+                                                        <td style="width: 10%;">
+                                                            <img src="{{ route('helper.show-picture', ['path' => $data_p->gambar_satu->img1]) }}"
+                                                                class="kecil" alt="">
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-warning"
+                                                                wire:click="KonfirmasiHapus({{ $index }})"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary">Save LookBook</button>
@@ -119,6 +129,28 @@
         </div>
     </div>
     <livewire:admin.global.konfirmasi-hapus />
+    <div id="modal_title_basic" class="modal fade @if ($tampilModal) show @endif"
+        @if ($tampilModal) style="display: block;" @else style="display: none;" aria-hidden="true" @endif
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-orange">
+                    <span class="font-weight-semibold modal-title">Hapus Data</span>
+                    <button type="button" class="close" wire:click='showModal'>&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <p><i class="icon-warning22 mr-3 icon-2x text-danger"></i> Apakah Anda yakin akan menghapus
+                        data ini?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-warning" wire:click='showModal'>Tidak</button>
+                    <button type="button" class="btn bg-primary" wire:click="Kofirm">Ya</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @push('js')

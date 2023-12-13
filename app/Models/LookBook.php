@@ -10,10 +10,10 @@ use OwenIt\Auditing\Auditable as AuditableTrait;
  
 class LookBook extends Model implements Auditable
 {
-     use HasFactory;
+    use HasFactory;
     use AuditableTrait;
     use SoftDeletes;
     
-        protected $guarded = [];
+    protected $guarded = [];
 
 }

@@ -15,142 +15,106 @@
     transition: all 0.3s ease;
     top: 50%;
     left: 12%;
-    background-color: #fff;
 }
 .lookbook .lookbook-block .lookbook-dot.dot1 {
-    top: 17%;
-    left: 13%;
+    top: 23%;
+    left: 28%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot2 {
-    top: 17%;
-    left: 27%;
+    top: 23%;
+    left: 38%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot3 {
-    top: 17%;
-    left: 43%;
+    top: 23%;
+    left: 48%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot4 {
-    top: 17%;
-    left: 59%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot5 {
-    top: 17%;
-    left: 79%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot6 {
-    top: 80%;
+    top: 23%;
     left: 58%;
 }
+.lookbook .lookbook-block .lookbook-dot.dot5 {
+    top: 23%;
+    left: 68%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot6 {
+    top: 36%;
+    left: 28%;
+}
 .lookbook .lookbook-block .lookbook-dot.dot7 {
-    top: 67%;
-    left: 45%;
+    top: 36%;
+    left: 38%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot8 {
-    top: 43%;
-    left: 39%;
+    top: 36%;
+    left: 48%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot9 {
-    top: 32%;
-    left: 50%;
+    top: 36%;
+    left: 58%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot10 {
-    top: 60%;
-    left: 50%;
+    top: 36%;
+    left: 68%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot11 {
-    top: 50%;
-    left: 45%;
+    top: 49%;
+    left: 28%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot12 {
-    top: 75%;
-    left: 45%;
+    top: 49%;
+    left: 38%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot13 {
-    top: 40%;
-    left: 45%;
+    top: 49%;
+    left: 48%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot14 {
-    top: 76%;
-    left: 45%;
+    top: 49%;
+    left: 58%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot15 {
-    top: 50%;
-    left: 15%;
+    top: 49%;
+    left: 68%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot16 {
-    left: 30%;
+    top: 62%;
+    left: 28%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot17 {
-    top: 78%;
-    left: 30%;
+    top: 62%;
+    left: 38%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot18 {
-    top: 56%;
-    left: 62%;
+    top: 62%;
+    left: 48%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot19 {
-    top: 74%;
-    left: 75%;
+    top: 62%;
+    left: 58%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot20 {
-    top: 74%;
-    left: 75%;
+    top: 62%;
+    left: 68%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot21 {
-    top: 74%;
-    left: 75%;
+    top: 75%;
+    left: 28%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot22 {
-    top: 74%;
-    left: 75%;
+    top: 75%;
+    left: 38%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot23 {
-    top: 74%;
-    left: 75%;
+    top: 75%;
+    left: 48%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot24 {
+    top: 75%;
+    left: 58%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot25 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot26 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot27 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot28 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot29 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot30 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot31 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot32 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot33 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot34 {
-    top: 74%;
-    left: 75%;
-}
-.lookbook .lookbook-block .lookbook-dot.dot35 {
-    top: 74%;
-    left: 75%;
+    top: 75%;
+    left: 68%;
 }
 .lookbook .lookbook-block .lookbook-dot:before {
     position: absolute;
@@ -248,4 +212,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+}
+
+.kecil {
+    width: 100%;
+    height: auto;
 }

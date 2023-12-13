@@ -11,7 +11,7 @@
              <div class="col-md-6">
                  <div class="lookbook-block">
                      <div>
-                         <img src="{{ asset('images/') }}/188CA378-B204-453E-8F9C-88A5C37A208C.png"
+                         <img src="{{ asset('images/') }}/188CA378-B204-453E-8F9C-88A5C37A208C.PNG"
                              class="img-fluid blur-up lazyload bg-img" alt="">
                      </div>
                      <div class="lookbook-dot dot2"><span><i class="fa fa-plus" aria-hidden="true"></i></span>
