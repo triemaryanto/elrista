@@ -8,12 +8,12 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo">
-                            <img src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo ]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
+                            <img src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
                                 alt="" width="80%">
                         </div>
                         <p>{{ get_setting()->description ??
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam.' }}
+                                                                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam.' }}
                         </p>
                         <div class="footer-social">
                             <ul>
@@ -59,11 +59,9 @@
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">shipping &amp; return</a></li>
-                                <li><a href="#">secure shopping</a></li>
-                                <li><a href="#">gallary</a></li>
-                                <li><a href="#">affiliates</a></li>
-                                <li><a href="#">contacts</a></li>
+                                <li><a href="{{ route('pages', ['slug' => 'secure-shopping']) }}">secure shopping</a>
+                                </li>
+                                <li><a href="{{ route('pages', ['slug' => 'contacts']) }}">contacts</a></li>
                             </ul>
                         </div>
                     </div>
@@ -75,9 +73,13 @@
                         </div>
                         <div class="footer-contant">
                             <ul class="contact-list">
-                                <li><i class="fa fa-map-marker"></i>{{ get_setting()->address ?? 'Alamate Belum di Setting' }}</li>
-                                <li><i class="fa fa-phone"></i>Call Us: {{ get_setting()->phone ?? '123-456-7898' }}</li>
-                                <li><i class="fa fa-envelope"></i>Email Us: <a href="#">{{ get_setting()->email ?? 'Support@admin.com' }}</a>
+                                <li><i
+                                        class="fa fa-map-marker"></i>{{ get_setting()->address ?? 'Alamate Belum di Setting' }}
+                                </li>
+                                <li><i class="fa fa-phone"></i>Call Us: {{ get_setting()->phone ?? '123-456-7898' }}
+                                </li>
+                                <li><i class="fa fa-envelope"></i>Email Us: <a
+                                        href="#">{{ get_setting()->email ?? 'Support@admin.com' }}</a>
                                 </li>
                                 <li><i class="fa fa-fax"></i>Fax: {{ get_setting()->fax ?? '123456' }}</li>
                             </ul>
@@ -92,7 +94,7 @@
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-12">
                     <div class="footer-end">
-                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2023-24 t                     hemeforest powered by
+                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2023-24 t hemeforest powered by
                             pixelstrap</p>
                     </div>
                 </div>

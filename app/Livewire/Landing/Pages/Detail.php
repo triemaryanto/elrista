@@ -16,7 +16,7 @@ use Livewire\Component;
 class Detail extends Component
 {
 
-    public $data, $color, $image, $color_id, $size_id, $qty = 1;
+    public $data, $color, $image, $color_id, $size_id, $qty = 1, $retaled;
 
     public function addColor($id)
     {
@@ -120,6 +120,8 @@ class Detail extends Component
         $this->data = Product::with('listImage', 'listSize')->where('slug', $slug)->firstOrFail();
 
         $this->image = ProductImage::find($this->data->listImage[0]['id']);
+
+        $this->retaled = Product::inRandomOrder()->limit(6)->get();
 
 
         // $this->data->listImage[0]['id'];

@@ -40,7 +40,7 @@ class Checkout extends Component
         $rules['city_id'] = 'required';
         $rules['courier'] = 'required';
         $rules['postal_code'] = 'required';
-        $rules['address'] = 'required|255';
+        $rules['address'] = 'required';
         $this->validate($rules);
 
         $response = Http::withHeaders([
@@ -92,7 +92,7 @@ class Checkout extends Component
         $rules['city_id'] = 'required';
         $rules['courier'] = 'required';
         $rules['postal_code'] = 'required';
-        $rules['address'] = 'required|255';
+        $rules['address'] = 'required';
         $rules['wa'] = 'required|max:20';
         $this->validate($rules);
 

@@ -13,6 +13,7 @@ class Shop extends Component
 {
     use WithPagination;
     public $limit = 12, $order = "DESC", $id_category, $oke, $color;
+    public $new, $new1;
 
     public function colore($color)
     {
@@ -31,15 +32,21 @@ class Shop extends Component
         $this->oke = $value;
     }
 
+    public function mount()
+    {
+        $this->new = Product::inRandomOrder()->limit(3)->get();
+        $this->new1 = Product::inRandomOrder()->limit(3)->get();
+    }
+
     public function render()
     {
         $category = Category::get();
         $colors = ProductImageColor::selectRaw('ANY_VALUE(id) as id, color')
-        ->groupBy('color')
-        ->pluck('color', 'id');
+            ->groupBy('color')
+            ->pluck('color', 'id');
 
         // dd($colors);
-    
+
         $sizes = ProductSize::get();
         $data = Product::with('listImage', 'listSize');
 

@@ -24,9 +24,11 @@ use App\Livewire\Landing\Pages\Cart\DetailOrder;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 use App\Livewire\Landing\Pages\Wishlist\Wishlist;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Livewire\Admin\Pages\Page\PageView;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 use App\Livewire\Admin\Pages\Stock\StockIn;
 use App\Livewire\Admin\Pages\Stock\StockOut;
+use App\Livewire\Landing\Pages\Pages;
 use App\Models\Stock;
 
 /*
@@ -52,6 +54,7 @@ Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider'
 Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
 Route::get('/', PagesHome::class)->name('front.home');
 Route::get('/detail/{slug}', Detail::class)->name('detail');
+Route::get('/page/{slug}', Pages::class)->name('pages');
 Route::get('/shop', Shop::class)->name('shop');
 Route::get('/wishlist', Wishlist::class)->name('wishlist');
 Route::get('/blog', Blog::class)->name('blog');
@@ -80,6 +83,7 @@ Route::middleware([
         Route::get('/category', Category::class)->name('product.category');
         Route::get('/product', Product::class)->name('product');
         Route::get('/lookbook', LookBook::class)->name('lookbook');
+        Route::get('/page', PageView::class)->name('page');
         Route::get('/stock-in', StockIn::class)->name('stock.in');
         Route::get('/stock-out', StockOut::class)->name('stock.out');
         // User
@@ -95,3 +99,6 @@ Route::middleware([
 });
 
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
