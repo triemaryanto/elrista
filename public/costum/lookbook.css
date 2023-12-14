@@ -215,6 +215,8 @@
 }
 
 .kecil {
-    width: 100%;
-    height: auto;
+    background-position: -200px -130px;
+    background-image: url("image_name.png");
+    width: 200px;
+    height: 130px;
 }

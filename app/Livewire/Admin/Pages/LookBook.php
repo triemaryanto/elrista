@@ -12,7 +12,7 @@ use App\Models\LookBook as ModelsLookBook;
 class LookBook extends Component
 {
     use WithFileUploads;
-    public $isEdit, $tampilModal = false, $image, $edit_image, $data_p, $nomor, $idNya, $name;
+    public $isEdit, $tampilModal = false, $image, $edit_image, $data_p, $nomor, $idNya, $name, $edit_pilih;
     public $pilih = [], $listGetProduct = [
         'product_id' => '',
         'dots' => ''
@@ -22,22 +22,30 @@ class LookBook extends Component
     public function delete($id)
     {
         $data = Look::find($id);
-
-
-        // Use the Eloquent query builder to delete Dots records where 'look_book_id' matches $data->id
         Dots::where('look_book_id', $data->id)->delete();
-
-        // Optionally, you can also delete the Look model itself
         $data->delete();
+        $this->emit('refreshDatatable');
+        $this->tampilModal = false;
     }
     public function add()
     {
+        
         $this->isEdit = !$this->isEdit;
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $data = Look::find($id);
+        $this->name = $data->name;
+        $this->edit_image = $data->image;
+        $this->edit_pilih = Dots::where('look_book_id', $data->id)->get();
+        foreach($this->edit_pilih as $a){
+            $this->listGetProduct['dots'] = $a->dots;
+            $this->listGetProduct['product_id'] = $a->product_id;
+            $this->pilih[] = $this->listGetProduct;
+        }
         $this->isEdit = !$this->isEdit;
+
     }
     public function cancel()
     {
@@ -97,6 +105,7 @@ class LookBook extends Component
         $this->idNya = '';
         $this->nomor = '';
         $this->dispatchBrowserEvent('Success');
+        $this->emit('refreshDatatable');
         $this->isEdit = false;
     }
     public function render()

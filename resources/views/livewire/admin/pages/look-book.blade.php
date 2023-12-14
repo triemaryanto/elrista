@@ -1,5 +1,31 @@
 @push('css')
     <link href="{{ asset('costum/') }}/lookbook.css" rel="stylesheet" type="text/css">
+    <style rel="stylesheet" type="text/css">
+        .image-container {
+            height: 523px;
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+            position: relative;
+        }
+
+        .inner-div {
+            position: absolute;
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+            width: 520px;
+            height: 523px;
+            {{-- background: url('{{ $image->temporaryUrl() }}') center center / cover; --}}
+        }
+
+        @media (max-width: 767px) {
+            .image-container {
+                height: 300px;
+            }
+        }
+    </style>
 @endpush
 <div>
     <x-slot name="header">
@@ -21,16 +47,17 @@
                 <form action="#" wire:submit.prevent="save">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="lookbook form-group text-center">
+                            <div class="lookbook">
                                 <label class="font-weight-semibold">Image:</label>
-                                <div class="form_group lookbook-block">
-                                    @if ($image)
+                                <div class="lookbook-block">
+                                    @if ($image || $edit_image)
                                         @if ($image)
-                                            <img src="{{ $image->temporaryUrl() }}" class="img-fluid" id="mug"
-                                                alt="" width="50%">
-                                        @elseif($edit_image)
-                                            <img src="{{ route('helper.show-picture', ['path' => $edit_image]) }}"
-                                                alt="" class="img-fluid" width="50%">
+                                            <div class="image-container">
+                                                <div class="inner-div"
+                                                    style="background: url('{{ $image->temporaryUrl() }}') center center / cover;"">
+                                                    &nbsp;
+                                                </div>
+                                            </div>
                                         @endif
                                         @foreach (range(1, 25) as $number)
                                             <div class="lookbook-dot dot{{ $number }}"
@@ -40,9 +67,7 @@
 
                                             </div>
                                         @endforeach
-                                    @else
-                                        <img src="{{ asset('limitless/') }}/global_assets/images/placeholders/placeholder.jpg"
-                                            class="img-fluid" alt="">
+
                                     @endif
 
                                 </div>
@@ -75,6 +100,7 @@
                                                 <th></th>
                                             </thead>
                                             <tbody>
+
                                                 @foreach ($pilih as $index => $item)
                                                     <tr>
                                                         <td>{{ $item['dots'] }}</td>
