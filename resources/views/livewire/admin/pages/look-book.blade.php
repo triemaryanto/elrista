@@ -78,11 +78,13 @@
                                                 @foreach ($pilih as $index => $item)
                                                     <tr>
                                                         <td>{{ $item['dots'] }}</td>
-                                                        <td style="width: 25%;">{{ $data_p->name }}</td>
+                                                        <td style="width: 25%;">
+                                                            {{ get_product($item['product_id'])->name }}</td>
                                                         <td style="width: 25%;">Rp.
-                                                            {{ number_format($data_p->price, 0, ',', '.') }}</td>
+                                                            {{ number_format(get_product($item['product_id'])->price, 0, ',', '.') }}
+                                                        </td>
                                                         <td style="width: 10%;">
-                                                            <img src="{{ route('helper.show-picture', ['path' => $data_p->gambar_satu->img1]) }}"
+                                                            <img src="{{ route('helper.show-picture', ['path' => get_product($item['product_id'])->gambar_satu->img1]) }}"
                                                                 class="kecil" alt="">
                                                         </td>
                                                         <td>

@@ -59,3 +59,10 @@ if (!function_exists('get_category')) {
         return \App\Models\Category::get();
     }
 }
+
+if (!function_exists('get_product')) {
+    function get_product($code)
+    {
+        return \App\Models\Product::find($code);
+    }
+}

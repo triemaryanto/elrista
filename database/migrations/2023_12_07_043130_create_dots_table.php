@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('look_book_id')->nullable();
             $table->string('dots')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('look_book_id')->references('id')->on('look_books')->onUpdate('cascade')->onDelete('restrict');
