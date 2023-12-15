@@ -93,7 +93,10 @@ class Detail extends Component
                 $cart = [
                     'product_id' => $this->data->id,
                     'color_id' => $this->color_id,
+                    'color' => ProductImageColor::find($this->color_id)->pluck('color'),
+                    'namecolor' => ProductImageColor::find($this->color_id)->pluck('namecolor'),
                     'size_id' => $this->size_id,
+                    'size' => ProductSize::find($this->color_id)->pluck('size'),
                     'qty' => $this->qty,
                 ];
                 Session()->push('cart', $cart);
@@ -101,7 +104,10 @@ class Detail extends Component
                 $cart[] = [
                     'product_id' => $this->data->id,
                     'color_id' => $this->color_id,
+                    'color' => ProductImageColor::find($this->color_id)->pluck('color'),
+                    'namecolor' => ProductImageColor::find($this->color_id)->pluck('namecolor'),
                     'size_id' => $this->size_id,
+                    'size' => ProductSize::find($this->size_id)->pluck('size'),
                     'qty' => $this->qty,
                 ];
                 session(['cart' => $cart]);

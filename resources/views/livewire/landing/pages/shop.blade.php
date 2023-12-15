@@ -178,7 +178,6 @@
                                                         <div class="collection-view">
                                                             <ul>
                                                                 <li><i class="fa fa-th grid-layout-view"></i></li>
-                                                                <li><i class="fa fa-list-ul list-layout-view"></i></li>
                                                             </ul>
                                                         </div>
                                                         <div class="collection-grid-view">

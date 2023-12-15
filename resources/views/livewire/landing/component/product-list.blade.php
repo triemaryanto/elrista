@@ -24,9 +24,9 @@
         <h4>Rp. {{ number_format($data->price, 0, ',', '.') }}
         </h4>
         <ul class="color-variant">
-            <li class="bg-light0"></li>
-            <li class="bg-light1"></li>
-            <li class="bg-light2"></li>
+            @foreach ($data->gambar_satu->listColor as $item)
+                <li style="background-color: {{ $item->color }}"></li>
+            @endforeach
         </ul>
         <div class="add-btn">
             <a href="{{ route('detail', $data->slug) }}" class="">

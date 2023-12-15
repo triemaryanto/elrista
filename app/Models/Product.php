@@ -28,12 +28,13 @@ class Product extends Model implements Auditable
         ];
     }
 
-    public function listImage(){
+    public function listImage()
+    {
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
-
-    public function listSize(){
+    public function listSize()
+    {
         return $this->hasMany(ProductSize::class, 'product_id');
     }
 
