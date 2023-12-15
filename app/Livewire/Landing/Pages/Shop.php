@@ -41,9 +41,9 @@ class Shop extends Component
     public function render()
     {
         $category = Category::get();
-        $colors = ProductImageColor::selectRaw('ANY_VALUE(id) as id, color')
+        $colors = ProductImageColor::selectRaw('color')
             ->groupBy('color')
-            ->pluck('color', 'id');
+            ->pluck('color');
 
         // dd($colors);
 
