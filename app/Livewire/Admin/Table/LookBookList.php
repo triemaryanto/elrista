@@ -25,9 +25,16 @@ class LookBookList extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-                Column::make("Judul", "name")->searchable()->sortable(),
-            Column::make("Images", "image")
-                ->sortable(),
+            Column::make("Judul", "name")->searchable()->sortable(),
+            Column::make('Images', 'image')->format(
+                function ($value, $row, Column $column) {
+                    if ($row->image == 0) {
+                        return 'none';
+                    } else {
+                        return '<img src="' . route("helper.show-picture", ["path" => $row->image]) . '" width="100px>"';
+                    }
+                }
+            )->html(),
             Column::make("Action", "id")->view('components.table-action'),
         ];
     }

@@ -14081,103 +14081,171 @@ header.stickycls {
 }
 .lookbook .lookbook-block .lookbook-dot.dot1 {
     top: 3%;
-    left: 9%;
+    left: 8%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot2 {
     top: 3%;
-    left: 28%;
+    left: 24%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot3 {
     top: 3%;
-    left: 47%;
+    left: 40%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot4 {
     top: 3%;
-    left: 66%;
+    left: 56%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot5 {
     top: 3%;
-    left: 85%;
+    left: 72%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot6 {
-    top: 27%;
-    left: 9%;
+    top: 3%;
+    left: 88%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot7 {
-    top: 27%;
-    left: 28%;
+    top: 18%;
+    left: 8%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot8 {
-    top: 27%;
-    left: 47%;
+    top: 18%;
+    left: 24%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot9 {
-    top: 27%;
-    left: 66%;
+    top: 18%;
+    left: 40%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot10 {
-    top: 27%;
-    left: 85%;
+    top: 18%;
+    left: 56%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot11 {
-    top: 51%;
-    left: 9%;
+    top: 18%;
+    left: 72%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot12 {
-    top: 51%;
-    left: 28%;
+    top: 18%;
+    left: 88%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot13 {
-    top: 51%;
-    left: 47%;
+    top: 33%;
+    left: 8%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot14 {
-    top: 51%;
-    left: 66%;
+    top: 33%;
+    left: 24%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot15 {
-    top: 51%;
-    left: 85%;
+    top: 33%;
+    left: 40%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot16 {
-    top: 75%;
-    left: 9%;
+    top: 33%;
+    left: 56%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot17 {
-    top: 75%;
-    left: 28%;
+    top: 33%;
+    left: 72%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot18 {
-    top: 75%;
-    left: 47%;
+    top: 33%;
+    left: 88%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot19 {
-    top: 75%;
-    left: 66%;
+    top: 48%;
+    left: 8%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot20 {
-    top: 75%;
-    left: 85%;
+    top: 48%;
+    left: 24%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot21 {
-    top: 99%;
-    left: 9%;
+    top: 48%;
+    left: 40%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot22 {
-    top: 99%;
-    left: 28%;
+    top: 48%;
+    left: 56%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot23 {
-    top: 99%;
-    left: 47%;
+    top: 48%;
+    left: 72%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot24 {
-    top: 99%;
-    left: 66%;
+    top: 48%;
+    left: 88%;
 }
 .lookbook .lookbook-block .lookbook-dot.dot25 {
-    top: 99%;
-    left: 85%;
+    top: 63%;
+    left: 8%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot26 {
+    top: 63%;
+    left: 24%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot27 {
+    top: 63%;
+    left: 40%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot28 {
+    top: 63%;
+    left: 56%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot29 {
+    top: 63%;
+    left: 72%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot30 {
+    top: 63%;
+    left: 88%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot31 {
+    top: 78%;
+    left: 8%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot32 {
+    top: 78%;
+    left: 24%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot33 {
+    top: 78%;
+    left: 40%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot34 {
+    top: 78%;
+    left: 56%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot35 {
+    top: 78%;
+    left: 72%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot36 {
+    top: 78%;
+    left: 88%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot37 {
+    top: 93%;
+    left: 8%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot38 {
+    top: 93%;
+    left: 24%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot39 {
+    top: 93%;
+    left: 40%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot40 {
+    top: 93%;
+    left: 56%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot41 {
+    top: 93%;
+    left: 72%;
+}
+.lookbook .lookbook-block .lookbook-dot.dot42 {
+    top: 93%;
+    left: 88%;
 }
 .lookbook .lookbook-block .lookbook-dot:before {
     position: absolute;

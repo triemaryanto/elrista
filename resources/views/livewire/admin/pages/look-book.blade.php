@@ -59,7 +59,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        @foreach (range(1, 25) as $number)
+                                        @foreach (range(1, 42) as $number)
                                             <div class="lookbook-dot dot{{ $number }}"
                                                 wire:click="AddProduct_link({{ $number }})">
                                                 <i class="ml-2">
