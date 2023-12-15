@@ -16,7 +16,7 @@ use Livewire\Component;
 class Detail extends Component
 {
 
-    public $data, $color, $image, $color_id, $size_id, $qty = 1;
+    public $data, $color, $image, $color_id, $size_id, $qty = 1, $retaled;
 
     public function addColor($id)
     {
@@ -93,7 +93,10 @@ class Detail extends Component
                 $cart = [
                     'product_id' => $this->data->id,
                     'color_id' => $this->color_id,
+                    'color' => ProductImageColor::find($this->color_id)->pluck('color'),
+                    'namecolor' => ProductImageColor::find($this->color_id)->pluck('namecolor'),
                     'size_id' => $this->size_id,
+                    'size' => ProductSize::find($this->color_id)->pluck('size'),
                     'qty' => $this->qty,
                 ];
                 Session()->push('cart', $cart);
@@ -101,7 +104,10 @@ class Detail extends Component
                 $cart[] = [
                     'product_id' => $this->data->id,
                     'color_id' => $this->color_id,
+                    'color' => ProductImageColor::find($this->color_id)->pluck('color'),
+                    'namecolor' => ProductImageColor::find($this->color_id)->pluck('namecolor'),
                     'size_id' => $this->size_id,
+                    'size' => ProductSize::find($this->size_id)->pluck('size'),
                     'qty' => $this->qty,
                 ];
                 session(['cart' => $cart]);
@@ -120,6 +126,8 @@ class Detail extends Component
         $this->data = Product::with('listImage', 'listSize')->where('slug', $slug)->firstOrFail();
 
         $this->image = ProductImage::find($this->data->listImage[0]['id']);
+
+        $this->retaled = Product::inRandomOrder()->limit(6)->get();
 
 
         // $this->data->listImage[0]['id'];

@@ -25,7 +25,7 @@
                                     wire:click="deleteCart({{ $item->id }})"></i></a></div>
                     </li>
                     @php
-                        $sub_total = $sub_total + $item->product->price;
+                        $sub_total = $sub_total + $item->qty * $item->product->price;
                     @endphp
                 @endforeach
                 <li>
@@ -65,7 +65,7 @@
                                     wire:click="deleteCartsession({{ $val }})"></i></a></div>
                     </li>
                     @php
-                        $sub_total = $sub_total + $item['price'];
+                        $sub_total = $sub_total + $item['qty'] * $item['price'];
                     @endphp
                 @endforeach
                 <li>

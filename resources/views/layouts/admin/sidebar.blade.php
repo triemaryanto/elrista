@@ -128,7 +128,7 @@
                     </ul>
                 </li>
                 <li
-                    class="nav-item nav-item-submenu  {{ request()->is('admin/web') || request()->is('admin/banner') ? 'nav-item-expanded nav-item-open' : '' }} "">
+                    class="nav-item nav-item-submenu  {{ request()->is('admin/web') || request()->is('admin/banner') || request()->is('admin/page') ? 'nav-item-expanded nav-item-open' : '' }} "">
                     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>Setting</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Setting pages">
                         <li class="nav-item"><a href="{{ route('web') }}"
@@ -138,6 +138,10 @@
                         <li class="nav-item"><a href="{{ route('banner') }}"
                                 class="nav-link {{ request()->is('admin/banner') ? 'active' : '' }}"
                                 class="nav-link">Banner</a>
+                        </li>
+                        <li class="nav-item"><a href="{{ route('page') }}"
+                                class="nav-link {{ request()->is('admin/page') ? 'active' : '' }}"
+                                class="nav-link">Pages</a>
                         </li>
                     </ul>
                 </li>

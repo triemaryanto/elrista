@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col">
                 <div class="title3">
-                    <h4>Multikart</h4>
+                    <h4>{{ get_setting()->site_name }}</h4>
                     <h2 class="title-inner3">limited period offer</h2>
                     <div class="line"></div>
                 </div>

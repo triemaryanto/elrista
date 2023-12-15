@@ -36,18 +36,16 @@
         <div class="collection-wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div>
-                            @foreach ($data->listImage as $image)
-                                <div>
-                                    <img src="{{ route('helper.show-picture', ['path' => $image->img1]) }}"
-                                        alt="" class="img-1 img-fluid blur-up lazyload image_zoom_cls-0">
-                                </div>
-                                <div><img src="{{ route('helper.show-picture', ['path' => $image->img2]) }}"
-                                        alt="" class="img-2 img-fluid blur-up lazyload image_zoom_cls-0"></div>
-                                <div class="color"></div>
-                            @endforeach
-                        </div>
+                    <div class="col-lg-6" wire:ignore>
+                        @foreach ($data->listImage as $image)
+                            <div>
+                                <img src="{{ route('helper.show-picture', ['path' => $image->img1]) }}" alt=""
+                                    class="img-1 img-fluid blur-up lazyload image_zoom_cls-0">
+                            </div>
+                            <div><img src="{{ route('helper.show-picture', ['path' => $image->img2]) }}" alt=""
+                                    class="img-2 img-fluid blur-up lazyload image_zoom_cls-0"></div>
+                            <div class="color"></div>
+                        @endforeach
 
                     </div>
 
@@ -85,7 +83,7 @@
                             </div>
                             <h3 class="price-detail">Rp.
                                 {{ number_format($data->price, 0, ',', '.') }}</h3>
-                            <ul class="color-variant">
+                            <ul class="color-variant" wire:ignore>
                                 @foreach ($this->image->listColor as $color)
                                     <li id="color-{{ $color->id }}" style="background-color: {{ $color->color }};"
                                         wire:click="addColor({{ $color->id }})">
@@ -114,7 +112,7 @@
                                     </div>
                                 </div>
                                 <h6 class="error-message">please select size</h6>
-                                <div class="size-box">
+                                <div class="size-box" wire:ignore>
                                     <ul>
                                         @foreach ($data->listSize as $size)
                                             <li id="size-{{ $size->id }}">
@@ -285,240 +283,11 @@
                 </div>
             </div>
             <div class="row search-product">
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/33.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/34.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a
-                                    href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a
-                                    href="compare.html" title="Compare"><i class="ti-reload"
-                                        aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div>
-                            <a href="product-page(no-sidebar).html">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
+                @foreach ($retaled as $item)
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <livewire:landing.component.product-list :productId="$item->id" :wire:key="'item'.$item->id">
                     </div>
-                </div>
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/1.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/2.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a
-                                    href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a
-                                    href="compare.html" title="Compare"><i class="ti-reload"
-                                        aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div>
-                            <a href="product-page(no-sidebar).html">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/27.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/28.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a
-                                    href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a
-                                    href="compare.html" title="Compare"><i class="ti-reload"
-                                        aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div>
-                            <a href="product-page(no-sidebar).html">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/35.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/36.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a
-                                    href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a
-                                    href="compare.html" title="Compare"><i class="ti-reload"
-                                        aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div>
-                            <a href="product-page(no-sidebar).html">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/2.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/1.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a
-                                    href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a
-                                    href="compare.html" title="Compare"><i class="ti-reload"
-                                        aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div>
-                            <a href="product-page(no-sidebar).html">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/28.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="#"><img
-                                        src="{{ asset('multikart_all_in_one/') }}/assets/images/pro3/27.jpg"
-                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a
-                                    href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a
-                                    href="compare.html" title="Compare"><i class="ti-reload"
-                                        aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div>
-                            <a href="product-page(no-sidebar).html">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

@@ -9,7 +9,7 @@ class Product extends Component
 {
     public function render()
     {
-        $product2 = ModelsProduct::with('listImage')->limit(6)->get();
+        $product2 = ModelsProduct::with('listImage')->inRandomOrder()->limit(6)->get();
         return view('livewire.landing.component.product', [
             'product2' => $product2
         ]);
