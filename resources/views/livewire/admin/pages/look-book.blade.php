@@ -59,6 +59,14 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        @if ($edit_image)
+                                            <div class="image-container">
+                                                <div class="inner-div"
+                                                    style="background: url('{{ route('helper.show-picture', ['path' => $edit_image]) }}') center center / cover;">
+                                                    &nbsp;
+                                                </div>
+                                            </div>
+                                        @endif
                                         @foreach (range(1, 42) as $number)
                                             <div class="lookbook-dot dot{{ $number }}"
                                                 wire:click="AddProduct_link({{ $number }})">
