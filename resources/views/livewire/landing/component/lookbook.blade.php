@@ -1,5 +1,5 @@
 <div>
-    @if (isset($lookbook))
+    @if (!isset($lookbook))
         <section class="lookbook ratio_square lookbook-layout bg-light section-b-space">
             <div class="container">
                 <div class="row">
