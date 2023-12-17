@@ -122,6 +122,32 @@
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        window.addEventListener('Delete', event => {
+            Swal.fire(
+                'Deleted!', 'Data has been deleted.', 'success'
+            )
+        });
+        window.addEventListener('Success', event => {
+            Swal.fire(
+                'Good job!', 'Data has been added.', 'success'
+            )
+        });
+        window.addEventListener('Update', event => {
+            Swal.fire(
+                'Good job!', 'Data has been updated.', 'success'
+            )
+        });
+        window.addEventListener('UpdatePassword', event => {
+            Swal.fire(
+                'Good job!', 'Change Password Succesfull.', 'success'
+            )
+        });
+        window.addEventListener('Error', event => {
+            Swal.fire(
+                'Warning !', 'Data Not Excecution.', 'error'
+            )
+        });
+
         window.addEventListener('swal:modal', event => {
             Swal.fire({
                 icon: event.detail.type, // Jenis alert

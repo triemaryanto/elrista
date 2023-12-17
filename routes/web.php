@@ -24,11 +24,14 @@ use App\Livewire\Landing\Pages\Cart\DetailOrder;
 use App\Livewire\Landing\Pages\Home as PagesHome;
 use App\Livewire\Landing\Pages\Wishlist\Wishlist;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Livewire\Admin\Pages\Linktree as PagesLinktree;
 use App\Livewire\Admin\Pages\Page\PageView;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
 use App\Livewire\Admin\Pages\Setting\Blog\Blog as BlogBlog;
 use App\Livewire\Admin\Pages\Stock\StockIn;
 use App\Livewire\Admin\Pages\Stock\StockOut;
+use App\Livewire\Landing\Pages\Account;
+use App\Livewire\Landing\Pages\Linktree;
 use App\Livewire\Landing\Pages\Pages;
 use App\Models\Stock;
 
@@ -61,7 +64,7 @@ Route::get('/wishlist', Wishlist::class)->name('wishlist');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/blog/{slug}', Detailblog::class)->name('detailblog');
 Route::get('/cart', Cart::class)->name('cart');
-
+Route::get('/linktree', Linktree::class)->name('linktree');
 Route::get('show-picture}', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 
 Route::middleware([
@@ -72,7 +75,7 @@ Route::middleware([
     Route::get('/listorder', ListOrder::class)->name('listorder');
     Route::get('/detailorder/{idnya}', DetailOrder::class)->name('detailorder');
     Route::get('/checkout/{idnya}', Checkout::class)->name('checkout');
-
+    Route::get('/account', Account::class)->name('account');
     Route::group(["prefix" => "admin", 'middleware' => 'is_user'], function () {
 
         Route::get('/dashboard', Home::class)->name('home');
@@ -84,6 +87,7 @@ Route::middleware([
         Route::get('/category', Category::class)->name('product.category');
         Route::get('/product', Product::class)->name('product');
         Route::get('/lookbook', LookBook::class)->name('lookbook');
+        Route::get('/link', PagesLinktree::class)->name('pages.linktree');
         Route::get('/page', PageView::class)->name('page');
         Route::get('/stock-in', StockIn::class)->name('stock.in');
         Route::get('/stock-out', StockOut::class)->name('stock.out');

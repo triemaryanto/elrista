@@ -108,6 +108,15 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('pages.linktree') }}"
+                        class="nav-link {{ request()->is('admin/link') ? 'active' : '' }}">
+                        <i class="icon-link"></i>
+                        <span>
+                            Linktree
+                        </span>
+                    </a>
+                </li>
                 <li
                     class="nav-item nav-item-submenu  {{ request()->is('admin/user') || request()->is('admin/role') || request()->is('admin/permission') ? 'nav-item-expanded nav-item-open' : '' }} "">
                     <a href="#" class="nav-link"><i class="icon-people"></i> <span>User

@@ -29,7 +29,7 @@
 @endpush
 <div>
     <x-slot name="header">
-        <livewire:admin.global.page-header judul="Look Book" subjudul="" :breadcrumb="['List Look Book', '(Tahap Pengembangan Developer)']" />
+        <livewire:admin.global.page-header judul="Look Book" subjudul="" :breadcrumb="['List Look Book']" />
     </x-slot>
 
     <div class="card">

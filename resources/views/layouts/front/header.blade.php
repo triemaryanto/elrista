@@ -7,7 +7,8 @@
                     <div class="header-contact">
                         <ul>
                             <li>Welcome to Our store Elrista</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: {{ get_setting()->phone ?? '123 - 456 - 7890' }}</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us:
+                                {{ get_setting()->phone ?? '123 - 456 - 7890' }}</li>
                         </ul>
                     </div>
                 </div>
@@ -15,13 +16,18 @@
                     @if (Route::has('login'))
                         @auth
                             <ul class="header-dropdown">
+
                                 <li class="mobile-wishlist"><a href="{{ route('wishlist') }}"><i class="fa fa-heart"
                                             aria-hidden="true"></i></a>
+                                </li>
+                                <li class="mobile-wishlist">
+                                    Hallo, <b>{{ auth()->user()->name }} </b>
                                 </li>
                                 <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
                                     My Account
                                     <ul class="onhover-show-div">
-                                        <li><a href="{{ route('profile') }}">My Account</a></li>
+
+                                        <li><a href="{{ route('account') }}">My Account</a></li>
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
@@ -196,7 +202,8 @@
                             </div> --}}
                         </div>
                         <div class="brand-logo">
-                            <a href="{{ url('/') }}"><img src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo ]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
+                            <a href="{{ url('/') }}"><img
+                                    src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
                                     class="img-fluid blur-up lazyload" style="width:50%;" alt=""></a>
                         </div>
                     </div>
