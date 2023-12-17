@@ -34,9 +34,8 @@ class BannerController extends Component
             3 => ['halaman_depan_tengah_atas', 'Halaman Depan Tengah Atas', 'ukuran 610 x 610 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/Banner-2.jpg"],
             4 => ['halaman_depan_kanan_atas', 'Halaman Depan Kanan Atas', 'ukuran 610 x 610 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/Banner-3.jpg"],
             5 => ['halaman_depan_kiri_tengah', 'Halaman Depan kiri Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
-            6 => ['halaman_depan_kiri_2_tengah', 'Halaman Depan kiri 2 Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
-            7 => ['halaman_depan_Kanan_2_tengah', 'Halaman Depan Kanan 2 Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
-            8 => ['halaman_depan_Kanan_tengah', 'Halaman Depan Kanan Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
+            6 => ['halaman_depan_tengah_tengah', 'Halaman Depan Tengah Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
+            7 => ['halaman_depan_Kanan_tengah', 'Halaman Depan Kanan Tengah', 'ukuran 320 x 410 px', asset('multikart_all_in_one/assets/images/yoga') . "/banner/4.jpg"],
         ];
     }
 

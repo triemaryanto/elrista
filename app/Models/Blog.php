@@ -4,22 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Banner extends Model implements Auditable
+class Blog extends Model implements Auditable
 {
     use HasFactory;
     use AuditableTrait;
     use SoftDeletes;
 
+    use Sluggable;
+
     protected $guarded = [];
 
-    public function product()
+    public function sluggable(): array
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'author');
+    }
 }

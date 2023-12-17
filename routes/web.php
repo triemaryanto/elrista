@@ -26,6 +26,7 @@ use App\Livewire\Landing\Pages\Wishlist\Wishlist;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Livewire\Admin\Pages\Page\PageView;
 use App\Livewire\Admin\Pages\Setting\Banner\BannerController;
+use App\Livewire\Admin\Pages\Setting\Blog\Blog as BlogBlog;
 use App\Livewire\Admin\Pages\Stock\StockIn;
 use App\Livewire\Admin\Pages\Stock\StockOut;
 use App\Livewire\Landing\Pages\Pages;
@@ -95,6 +96,7 @@ Route::middleware([
         // Setting
         Route::get('/web', Web::class)->name('web');
         Route::get('/banner', BannerController::class)->name('banner');
+        Route::get('/blog', BlogBlog::class)->name('adminblog');
     });
 });
 
