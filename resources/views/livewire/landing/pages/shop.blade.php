@@ -221,9 +221,52 @@
                                             <div class="row margin-res">
                                                 @foreach ($products as $product)
                                                     <div class="col-xl-3 col-6 col-grid-box">
+                                                        <div class="product-box">
+                                                            <div class="img-wrapper">
+                                                                <div class="front">
+                                                                    <a
+                                                                        href="{{ route('detail', ['slug' => $product->slug]) }}">
+                                                                        <img src="{{ route('helper.show-picture', ['path' => $product->gambar_satu->img1]) }}"
+                                                                            class="img-fluid blur-up lazyload bg-img"
+                                                                            alt="">
 
-                                                        <livewire:landing.component.product-list :productId="$product->id"
-                                                            :wire:key="'product'.$product->id" />
+                                                                    </a>
+                                                                </div>
+                                                                <div class="cart-info cart-wrap">
+                                                                    <a href="javascript:void(0)"
+                                                                        title="Add to Wishlist">
+                                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                                    </a>
+                                                                    <button type="button"
+                                                                        wire:click="$emit('showModal', {{ $product->id }})"
+                                                                        title="Quick View">
+                                                                        <i class="ti-search" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="product-detail">
+                                                                <div>
+                                                                    <div class="rating"><i class="fa fa-star"></i> <i
+                                                                            class="fa fa-star"></i> <i
+                                                                            class="fa fa-star"></i> <i
+                                                                            class="fa fa-star"></i> <i
+                                                                            class="fa fa-star"></i></div>
+                                                                    <a href="product-page(no-sidebar).html">
+                                                                        <h6>{{ $product->name }}</h6>
+                                                                    </a>
+                                                                    <h4>Rp.
+                                                                        {{ number_format($product->price, 0, ',', '.') }}
+                                                                    </h4>
+                                                                    <ul class="color-variant">
+                                                                        @foreach ($product->gambar_satu->listColor as $item)
+                                                                            <li
+                                                                                style="background-color: {{ $item->color }}">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 @endforeach
                                             </div>
