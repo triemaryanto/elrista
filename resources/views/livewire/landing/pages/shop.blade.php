@@ -43,16 +43,14 @@
                                     <div class="collection-brand-filter">
                                         @foreach ($category as $key => $valueCategory)
                                             <div class="form-check collection-filter-checkbox">
-                                                <input type="checkbox" class="form-check-input" name="id_category[]"
-                                                    id="{{ $valueCategory->id }}"
-                                                    wire:model="id_category.{{ $valueCategory->id }}">
+                                                <input type="checkbox" class="form-check-input"
+                                                    wire:model="idCategory.{{ $valueCategory->id }}"
+                                                    value="{{ $valueCategory->id }}">
                                                 <label class="form-check-label" for="{{ $valueCategory->id }}">
                                                     {{ $valueCategory->name }}
                                                 </label>
                                             </div>
                                         @endforeach
-
-
                                     </div>
                                 </div>
                             </div>
@@ -63,9 +61,9 @@
                                     <div class="color-selector">
                                         <ul>
                                             @foreach ($colors as $color)
-                                                <li id="{{ $color }}"
-                                                    style="background-color: {{ $color }};"
-                                                    wire:click="colore('{{ $color }}')">
+                                                <li style="background-color: {{ $color->color }};"
+                                                    wire:click="toggleColor('{{ $color->color }}')"
+                                                    class="{{ $choiceColor === $color->color ? 'active' : '' }}">
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -79,31 +77,19 @@
                                     <div class="collection-brand-filter">
                                         @foreach ($sizes as $size)
                                             <div class="form-check collection-filter-checkbox">
-                                                <input type="checkbox" class="form-check-input" id="hundred"
-                                                    wire:model='choiceSize' value='{{ $size->id ?? '' }}'>
-                                                <label class="form-check-label"
-                                                    for="hundred">{{ $size->size ?? '' }}</label>
+                                                <input type="checkbox" class="form-check-input"
+                                                    wire:model='choiceSize.{{ $size->size }}'
+                                                    value="{{ $size->size }}">
+                                                <label class="form-check-label">{{ $size->size ?? '' }}</label>
                                             </div>
                                         @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- price filter start here -->
-                            <div class="collection-collapse-block border-0 open">
-                                <h3 class="collapse-block-title">price</h3>
-                                <div class="collection-collapse-block-content">
-                                    <div class="wrapper mt-3">
-                                        <div class="range-slider">
-                                            <input type="text" class="js-range-slider" value=""
-                                                wire:model='price' />
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- silde-bar colleps block end here -->
                         <!-- side-bar single product slider start -->
-                        <div class="theme-card">
+                        <div class="theme-card" wire:ignore>
                             <h5 class="title-border">new product</h5>
                             <div class="offer-slider slide-1">
                                 <div>
@@ -146,19 +132,12 @@
                         <div class="page-main-content">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{-- <div class="top-banner-wrapper">
+                                    <div class="top-banner-wrapper">
                                         <div class="top-banner-content small-section">
-                                            <h4>BIGGEST DEALS ON TOP BRANDS</h4>
-                                            <p>The trick to choosing the best wear for yourself is to keep in mind your
-                                                body type, individual style, occasion and also the time of day or
-                                                weather.
-                                                In addition to eye-catching products from top brands, we also offer an
-                                                easy 30-day return and exchange policy, free and fast shipping across
-                                                all pin codes, cash or card on delivery option, deals and discounts,
-                                                among other perks. So, sign up now and shop for westarn wear to your
-                                                heart’s content on Multikart. </p>
+                                            <input type="text" class="form-control" placeholder="search"
+                                                wire:model="search">
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="collection-product-wrapper">
                                         <div class="product-top-filter">
                                             <div class="row">
@@ -175,42 +154,22 @@
                                                         <div class="search-count">
                                                             <h5>Showing Products 1-24 of 10 Result</h5>
                                                         </div>
-                                                        <div class="collection-view">
-                                                            <ul>
-                                                                <li><i class="fa fa-th grid-layout-view"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="collection-grid-view">
-                                                            <ul>
-                                                                <li><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/2.png"
-                                                                        alt="" class="product-2-layout-view">
-                                                                </li>
-                                                                <li><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/3.png"
-                                                                        alt="" class="product-3-layout-view">
-                                                                </li>
-                                                                <li><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/4.png"
-                                                                        alt="" class="product-4-layout-view">
-                                                                </li>
-                                                                <li><img src="{{ asset('multikart_all_in_one/') }}/assets/images/icon/6.png"
-                                                                        alt="" class="product-6-layout-view">
-                                                                </li>
-                                                            </ul>
-                                                        </div>
                                                         <div class="product-page-per-view">
-                                                            <select>
-                                                                <option value="High to low">24 Products Par Page
+                                                            <select wire:model="limit">
+                                                                <option value="24">24 Products Par Page
                                                                 </option>
-                                                                <option value="Low to High">50 Products Par Page
+                                                                <option value="50">50 Products Par Page
                                                                 </option>
-                                                                <option value="Low to High">100 Products Par Page
+                                                                <option value="100">100 Products Par Page
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="product-page-filter">
-                                                            <select>
-                                                                <option value="High to low">Sorting items</option>
-                                                                <option value="Low to High">50 Products</option>
-                                                                <option value="Low to High">100 Products</option>
+                                                            <select wire:model="order">
+                                                                <option value="DESC">Latest
+                                                                    added</option>
+                                                                <option value="ASC">Oldest
+                                                                    added</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -220,62 +179,16 @@
                                         <div class="product-wrapper-grid">
                                             <div class="row margin-res">
                                                 @foreach ($products as $product)
-                                                    <div class="col-xl-3 col-6 col-grid-box">
-                                                        <div class="product-box">
-                                                            <div class="img-wrapper">
-                                                                <div class="front">
-                                                                    <a
-                                                                        href="{{ route('detail', ['slug' => $product->slug]) }}">
-                                                                        <img src="{{ route('helper.show-picture', ['path' => $product->gambar_satu->img1]) }}"
-                                                                            class="img-fluid blur-up lazyload bg-img"
-                                                                            alt="">
-
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cart-info cart-wrap">
-                                                                    <a href="javascript:void(0)"
-                                                                        title="Add to Wishlist">
-                                                                        <i class="ti-heart" aria-hidden="true"></i>
-                                                                    </a>
-                                                                    <button type="button"
-                                                                        wire:click="$emit('showModal', {{ $product->id }})"
-                                                                        title="Quick View">
-                                                                        <i class="ti-search" aria-hidden="true"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-detail">
-                                                                <div>
-                                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i></div>
-                                                                    <a href="product-page(no-sidebar).html">
-                                                                        <h6>{{ $product->name }}</h6>
-                                                                    </a>
-                                                                    <h4>Rp.
-                                                                        {{ number_format($product->price, 0, ',', '.') }}
-                                                                    </h4>
-                                                                    <ul class="color-variant">
-                                                                        @foreach ($product->gambar_satu->listColor as $item)
-                                                                            <li
-                                                                                style="background-color: {{ $item->color }}">
-                                                                            </li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <livewire:landing.component.product-list :productId="$product->id"
+                                                        :wire:key="'pro'.$product->id">
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="product-pagination">
-                                            @if (count($products))
-                                                {{ $products->links('pagination') }}
-                                            @endif
-                                        </div>
+
+                                        @if (count($products))
+                                            {{ $products->links('pagination') }}
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -285,6 +198,8 @@
             </div>
         </div>
     </section>
+
+
 </div>
 <!-- section End -->
 @push('js')

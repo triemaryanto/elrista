@@ -16,7 +16,8 @@ class ProductImage extends Model implements Auditable
 
     protected $guarded = [];
 
-    public function listColor(){
-        return $this->hasMany(ProductImageColor::class, 'product_image_id');
+    public function listColor()
+    {
+        return $this->hasMany(ProductImageColor::class, 'product_image_id', 'id');
     }
 }

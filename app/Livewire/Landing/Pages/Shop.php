@@ -12,12 +12,21 @@ use App\Models\ProductImageColor;
 class Shop extends Component
 {
     use WithPagination;
-    public $limit = 12, $order = "DESC", $id_category, $oke, $color;
+    public $limit = 24, $order = "DESC", $idCategory = [], $oke, $color, $search, $choiceSize, $choiceColor;
     public $new, $new1;
 
     public function colore($color)
     {
         $this->color = $color;
+    }
+
+    public function toggleColor($selectedColor)
+    {
+        if ($this->choiceColor === $selectedColor) {
+            $this->choiceColor = null; // Unset the color if it's already selected
+        } else {
+            $this->choiceColor = $selectedColor; // Set the selected color
+        }
     }
 
     public function updatedColor()
@@ -27,11 +36,34 @@ class Shop extends Component
         ]);
     }
 
-    public function updatedIdCategory($value)
+    public function updatedIdCategory()
     {
-        $this->oke = $value;
+        if (!is_array($this->idCategory)) {
+            return;
+        }
+
+        $this->idCategory = array_filter(
+            $this->idCategory,
+            function ($idCategory) {
+                return $idCategory !== false;
+            }
+        );
     }
 
+    public function updatedChoiceSize()
+    {
+
+        if (!is_array($this->choiceSize)) {
+            return;
+        }
+
+        $this->choiceSize = array_filter(
+            $this->choiceSize,
+            function ($choiceSize) {
+                return $choiceSize !== false;
+            }
+        );
+    }
     public function mount()
     {
         $this->new = Product::inRandomOrder()->limit(3)->get();
@@ -41,16 +73,35 @@ class Shop extends Component
     public function render()
     {
         $category = Category::get();
-        $colors = ProductImageColor::selectRaw('color')
-            ->groupBy('color')
-            ->pluck('color');
+        $colors = ProductImageColor::get();
+        $sizes = ProductSize::select('size')->groupBy('size')->get();
+        $data = Product::with('gambar_Satu');
 
-        // dd($colors);
+        $data->when($this->choiceSize, function ($query) {
+            $query->whereHas('listSize', function ($c) {
+                $c->whereIn('size', $this->choiceSize);
+            });
+        });
 
-        $sizes = ProductSize::get();
-        $data = Product::with('gambar_Satu', 'listSize');
+        $data->when($this->idCategory, function ($query) {
+            $query->whereIn('category_id', $this->idCategory);
+        });
+        $data->when($this->choiceColor, function ($query) {
+            // Ensure $this->choiceColor is an array before using whereHas
+            $colors = is_array($this->choiceColor) ? $this->choiceColor : [$this->choiceColor];
 
-        $products = $data->where('status', 1)->orderBy('id', $this->order)->paginate($this->limit);;
+            $query->whereHas('listImage.listColor', function ($d) use ($colors) {
+                $d->whereIn('color', $colors);
+            });
+        });
+
+        if ($this->search) {
+            $data->where('name', 'like', "%" . $this->search . "%");
+        }
+
+        $products = $data->where('status', 1)
+            ->orderBy('id', $this->order)
+            ->paginate($this->limit);
         return view('livewire.landing.pages.shop', [
             'category' => $category,
             'colors' => $colors,
