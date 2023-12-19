@@ -8,63 +8,28 @@
                      <div class="line"></div>
                  </div>
                  <div class="slide-3 no-arrow">
-                     <div class="col-md-12">
-                         <a href="#">
-                             <div class="classic-effect">
-                                 <div>
-                                     <img alt=""
-                                         src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/blog/1.jpg"
-                                         class="img-fluid blur-up lazyload bg-img">
-                                     <span></span>
+                     @foreach ($data as $item)
+                         <div class="col-md-12">
+                             <a href="{{ route('detailblog', ['slug' => $item->slug]) }}">
+                                 <div class="classic-effect">
+                                     <div>
+                                         <img alt=""
+                                             src="{{ route('helper.show-picture', ['path' => $item->picture]) }}"
+                                             class="img-fluid blur-up lazyload bg-img">
+                                         <span></span>
+                                     </div>
                                  </div>
-                             </div>
-                         </a>
-                         <div class="blog-details">
-                             <h4>25 January 2018</h4>
-                             <a href="#">
-                                 <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
                              </a>
-                             <h6>by: John Dio , 2 Comment</h6>
-                         </div>
-                     </div>
-                     <div class="col-md-12">
-                         <a href="#">
-                             <div class="classic-effect">
-                                 <div>
-                                     <img alt=""
-                                         src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/blog/2.jpg"
-                                         class="img-fluid blur-up lazyload bg-img">
-                                     <span></span>
-                                 </div>
+                             <div class="blog-details">
+                                 <h4>{{ $item->created_at->settings(['formatFunction' => 'translatedFormat'])->locale('id')->format('l, j F Y') }}
+                                 </h4>
+                                 <a href="{{ route('detailblog', ['slug' => $item->slug]) }}">
+                                     <p>{{ $item->title }}</p>
+                                 </a>
+                                 <h6>by: {{ $item->user->name }}</h6>
                              </div>
-                         </a>
-                         <div class="blog-details">
-                             <h4>25 January 2018</h4>
-                             <a href="#">
-                                 <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
-                             </a>
-                             <h6>by: John Dio , 2 Comment</h6>
                          </div>
-                     </div>
-                     <div class="col-md-12">
-                         <a href="#">
-                             <div class="classic-effect">
-                                 <div>
-                                     <img alt=""
-                                         src="{{ asset('multikart_all_in_one/') }}/assets/images/yoga/blog/3.jpg"
-                                         class="img-fluid blur-up lazyload bg-img">
-                                     <span></span>
-                                 </div>
-                             </div>
-                         </a>
-                         <div class="blog-details">
-                             <h4>25 January 2018</h4>
-                             <a href="#">
-                                 <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
-                             </a>
-                             <h6>by: John Dio , 2 Comment</h6>
-                         </div>
-                     </div>
+                     @endforeach
                  </div>
              </div>
          </div>
