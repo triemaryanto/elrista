@@ -178,9 +178,14 @@
                                         </div>
                                         <div class="product-wrapper-grid">
                                             <div class="row margin-res">
+
                                                 @foreach ($products as $product)
-                                                    <livewire:landing.component.product-list :productId="$product->id"
-                                                        :wire:key="'pro'.$product->id">
+                                                    <div class="col-xl-3 col-6 col-grid-box">
+                                                        <div class="product-box">
+                                                            <livewire:landing.component.product-list :productId="$product->id"
+                                                                :wire:key="'pro'.$product->id">
+                                                        </div>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                         </div>

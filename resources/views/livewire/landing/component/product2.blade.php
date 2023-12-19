@@ -11,8 +11,10 @@
             <div class="col-md-12">
                 <div class="row no-slider margin-default five-product">
                     @foreach ($product2 as $listProduk2)
-                        <livewire:landing.component.product-list  :productId="$listProduk2->id"
-                            :wire:key="'listProduk2'.$listProduk2->id">
+                        <div class="product-box product-wrap product-style-2">
+                            <livewire:landing.component.product-list :productId="$listProduk2->id"
+                                :wire:key="'listProduk2'.$listProduk2->id">
+                        </div>
                     @endforeach
                 </div>
             </div>
