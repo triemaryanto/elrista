@@ -55,6 +55,12 @@ class LookBook extends Component
     public function cancel()
     {
         $this->isEdit = !$this->isEdit;
+        $this->image = '';
+        $this->listGetProduct = [];
+        $this->pilih = [];
+        $this->name = '';
+        $this->idNya = '';
+        $this->nomor = '';
     }
 
     public function AddProduct_link($id)
@@ -92,34 +98,32 @@ class LookBook extends Component
 
     public function save()
     {
-        if ($this->idNya) {
-            $this->update();
-        } else {
-            $gambar_lookbook = $this->image->store('lookbook/image');
-            $lookbook = ModelsLookBook::create([
-                "name" => $this->name,
-                "image" => $gambar_lookbook
-            ]);
-            foreach ($this->pilih as $item) {
-                $a['product_id'] = $item['product_id'];
-                $a['dots'] = $item['dots'];
-                $a['look_book_id'] = $lookbook->id;
-                Dots::create($a);
-            }
-            $filePath = Storage::path($gambar_lookbook);
-            $image = Image::make($filePath);
-            list($width, $height) = getimagesize($filePath);
-            $sizeInBytes = Storage::size($gambar_lookbook);
-            if ($sizeInBytes > 2048) {
-                $a = 4;
-            } else if ($sizeInBytes > 1024) {
-                $a = 2;
-            } else {
-                $a = 2;
-            }
-            $image->resize($width / $a, $height / $a);
-            $image->save($filePath, 60); // Adjust quality as needed
+
+        $gambar_lookbook = $this->image->store('lookbook/image');
+        $lookbook = ModelsLookBook::create([
+            "name" => $this->name,
+            "image" => $gambar_lookbook
+        ]);
+        foreach ($this->pilih as $item) {
+            $a['product_id'] = $item['product_id'];
+            $a['dots'] = $item['dots'];
+            $a['look_book_id'] = $lookbook->id;
+            Dots::create($a);
         }
+        $filePath = Storage::path($gambar_lookbook);
+        $image = Image::make($filePath);
+        list($width, $height) = getimagesize($filePath);
+        $sizeInBytes = Storage::size($gambar_lookbook);
+        if ($sizeInBytes > 2048) {
+            $a = 4;
+        } else if ($sizeInBytes > 1024) {
+            $a = 2;
+        } else {
+            $a = 2;
+        }
+        $image->resize($width / $a, $height / $a);
+        $image->save($filePath, 60); // Adjust quality as needed
+
         $this->image = '';
         $this->listGetProduct = [];
         $this->pilih = [];
@@ -133,10 +137,18 @@ class LookBook extends Component
 
     public function update()
     {
+
         $a = look::find($this->idNya);
-        if ($this->image) {
-        }
         $a->name = $this->name;
+
+        if ($this->image) {
+            $gambar_lookbook = $this->image->store('lookbook/image');
+            $a->image = $gambar_lookbook;
+        }
+        $a->save();
+        $this->dispatchBrowserEvent('Update');
+        $this->emit('refreshDatatable');
+        $this->isEdit = false;
     }
     public function render()
     {

@@ -44,7 +44,8 @@
 
         <div class="card-body">
             @if ($isEdit)
-                <form action="#" wire:submit.prevent="save">
+                <form action="#"
+                    @if (isset($idNya)) wire:submit.prevent="update" @else wire:submit.prevent="save" @endif>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="lookbook">
