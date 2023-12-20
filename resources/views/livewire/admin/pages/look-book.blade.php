@@ -109,6 +109,28 @@
                                                 <th></th>
                                             </thead>
                                             <tbody>
+                                                @if ($edit_pilih)
+
+                                                    @foreach ($edit_pilih as $index => $item)
+                                                        <tr>
+                                                            <td>{{ $item['dots'] }}</td>
+                                                            <td style="width: 25%;">
+                                                                {{ get_product($item['product_id'])->name }}</td>
+                                                            <td style="width: 25%;">Rp.
+                                                                {{ number_format(get_product($item['product_id'])->price, 0, ',', '.') }}
+                                                            </td>
+                                                            <td style="width: 10%;">
+                                                                <img src="{{ route('helper.show-picture', ['path' => get_product($item['product_id'])->gambar_satu->img1]) }}"
+                                                                    class="kecil" alt="">
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-warning"
+                                                                    wire:click="KonfirmasiHapusEdit({{ $index }})"><span
+                                                                        aria-hidden="true">&times;</span></button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                                 @if ($pilih)
                                                     @foreach ($pilih as $index => $item)
                                                         <tr>
@@ -130,27 +152,7 @@
                                                         </tr>
                                                     @endforeach
                                                 @endif
-                                                @if ($edit_pilih)
-                                                    @foreach ($edit_pilih as $index => $item)
-                                                        <tr>
-                                                            <td>{{ $item['dots'] }}</td>
-                                                            {{-- <td style="width: 25%;">
-                                                            {{ get_product($value['product_id'])->name }}</td>
-                                                        <td style="width: 25%;">Rp.
-                                                            {{ number_format(get_product($value['product_id'])->price, 0, ',', '.') }}
-                                                        </td>
-                                                        <td style="width: 10%;">
-                                                            <img src="{{ route('helper.show-picture', ['path' => get_product($value['product_id'])->gambar_satu->img1]) }}"
-                                                                class="kecil" alt="">
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-warning"
-                                                                wire:click="KonfirmasiHapusEdit({{ $key }})"><span
-                                                                    aria-hidden="true">&times;</span></button>
-                                                        </td> --}}
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
+
                                             </tbody>
                                         </table>
                                     </div>

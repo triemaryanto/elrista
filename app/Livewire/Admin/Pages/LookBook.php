@@ -21,7 +21,6 @@ class LookBook extends Component
     ];
 
     public $edit_pilih = [], $edit_listGetProduct = [
-        'id' => '',
         'product_id' => '',
         'dots' => ''
     ];
@@ -41,7 +40,7 @@ class LookBook extends Component
     public function add()
     {
 
-        $this->isEdit = !$this->isEdit;`
+        $this->isEdit = !$this->isEdit;
     }
 
     public function edit($id)
@@ -51,8 +50,8 @@ class LookBook extends Component
         $this->name = $data->name;
         $this->edit_image = $data->image;
         $b = Dots::where('look_book_id', $data->id)->get();
+
         foreach ($b as $a) {
-            $this->edit_listGetProduct['id'] = $a->id;
             $this->edit_listGetProduct['dots'] = $a->dots;
             $this->edit_listGetProduct['product_id'] = $a->product_id;
             $this->edit_pilih[] = $this->edit_listGetProduct;
