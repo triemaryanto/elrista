@@ -139,6 +139,8 @@ class Checkout extends Component
         $this->weight = $this->order->weight ?? null;
         $this->pilih_service = $this->order->pilih_service ?? null;
         $this->total = $this->order->total_price ?? null;
+        $this->address = $this->order->addres ?? null;
+        $this->origin = get_setting()->city_id;
 
         $this->data = DetailOrder::with('product')->where('user_id', auth()->user()->id)->where('order_id', $idnya)->get();
 

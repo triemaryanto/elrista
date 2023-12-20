@@ -204,7 +204,7 @@
                         <div class="brand-logo">
                             <a href="{{ url('/') }}"><img
                                     src="{{ get_setting()->logo ? route('helper.show-picture', ['path' => get_setting()->logo]) : asset('multikart_all_in_one/assets/images/icon/logo/f5.png') }}"
-                                    class="img-fluid blur-up lazyload" style="width:50%;" alt=""></a>
+                                    class="img-fluid blur-up lazyload" style="width:150px;" alt=""></a>
                         </div>
                     </div>
                     <div class="menu-right pull-right">

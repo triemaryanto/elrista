@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
+            $table->string('provinsi_id')->nullable();
+            $table->string('city_id')->nullable();
             $table->string('link_fb')->nullable();
             $table->string('link_ig')->nullable();
             $table->string('link_x')->nullable();
