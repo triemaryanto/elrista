@@ -35,6 +35,8 @@ class SettingWebSeeder extends Seeder
             'link_ig' => null,
             'link_x' => null,
             'link_linkedin' => null,
+            'provinsi_id' => 5,
+            'city_id' => 501,
         ]);
     }
 }

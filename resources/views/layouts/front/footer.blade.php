@@ -18,19 +18,13 @@
                         <div class="footer-social">
                             <ul>
                                 <li>
-                                    <a href="#"><i class="fa fa-facebook-f"></i></a>
+                                    <a href="{{ get_setting()->link_fb ?? ''}}"><i class="fa fa-facebook-f"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="{{ get_setting()->link_x ?? ''}}"><i class="fa fa-twitter"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                                    <a href="{{ get_setting()->link_ig ?? ''}}"><i class="fa fa-instagram"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -98,7 +92,7 @@
                             pixelstrap</p>
                     </div>
                 </div>
-                <div class="col-xl-6 col-md-6 col-sm-12">
+                {{-- <div class="col-xl-6 col-md-6 col-sm-12">
                     <div class="payment-card-bottom">
                         <ul>
                             <li>
@@ -128,7 +122,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

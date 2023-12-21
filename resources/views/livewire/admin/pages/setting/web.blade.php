@@ -42,7 +42,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Keywords :</label>
                     <div class="col-md-8">
@@ -55,7 +55,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Slogan Web :</label>
                     <div class="col-md-8">
@@ -68,7 +68,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Phone :</label>
                     <div class="col-md-8">
@@ -81,7 +81,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Fax :</label>
                     <div class="col-md-8">
@@ -94,7 +94,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Email :</label>
                     <div class="col-md-8">
@@ -107,7 +107,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">link_fb :</label>
                     <div class="col-md-8">
@@ -120,7 +120,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">link_ig :</label>
                     <div class="col-md-8">
@@ -133,7 +133,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">link_x :</label>
                     <div class="col-md-8">
@@ -146,7 +146,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">link_linkedin :</label>
                     <div class="col-md-8">
@@ -159,37 +159,61 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Logo :</label>
                     <div class="col-md-6">
-                        @if ($edit_logo != '')
+                        @if ($logo)
+                            <img src="{{ $logo->temporaryUrl() }}" width="200"
+                                class="img-fluid mx-auto d-block float-left m-2">
+                        @elseif ($edit_logo != '')
                             <img src="{{ route('helper.show-picture', ['path' => $edit_logo]) }}" width="200"
                                 height="200" class="img-fluid mx-auto d-block float-left m-2">
-                        @else
-                            @if ($logo)
-                                <img src="{{ $logo->temporaryUrl() }}" width="200"
-                                    class="img-fluid mx-auto d-block float-left m-2">
-                            @endif
                         @endif
-                        <input type="file" wire:model="logo" accept="image/png, image/jpeg"
-                            class="form-control">
+                        <input type="file" wire:model="logo" accept="image/png, image/jpeg" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-lg-2 col-form-label">Favicon :</label>
                     <div class="col-md-6">
-                        @if ($edit_favicon != '')
+                        @if ($favicon)
+                            <img src="{{ $favicon->temporaryUrl() }}" width="200"
+                                class="img-fluid mx-auto d-block float-left m-2">
+                        @elseif ($edit_favicon != '')
                             <img src="{{ route('helper.show-picture', ['path' => $edit_favicon]) }}" width="200"
                                 height="40" class="img-fluid mx-auto d-block float-left m-2">
-                        @else
-                            @if ($favicon)
-                                <img src="{{ $favicon->temporaryUrl() }}" width="200"
-                                    class="img-fluid mx-auto d-block float-left m-2">
-                            @endif
                         @endif
-                        <input type="file" wire:model="favicon" accept="image/png, image/jpeg"
-                            class="form-control">
+                        <input type="file" wire:model="favicon" accept="image/png, image/jpeg" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2 col-form-label">Provinsi</div>
+                    <div class="col-md-6" wire:ignore>
+                        <select wire:model="provinsi_id" class="form-control">
+                            <option>Pilih Provinsi</option>
+                            @foreach ($provinsi_list as $provinsi)
+                                <option value="{{ $provinsi['province_id'] }}">
+                                    {{ $provinsi['province'] }}</option>
+                            @endforeach
+                        </select>
+                        @error('provinsi_id')
+                            <span class="form-text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2 col-form-label">City</div>
+                    <div class="col-md-6">
+                        <select wire:model="city_id" class="form-control">
+                            <option>Pilih Kota</option>
+                            @foreach ($city_list as $city)
+                                <option value="{{ $city['city_id'] }}">
+                                    {{ $city['city_name'] }}</option>
+                            @endforeach
+                        </select>
+                        @error('provinsi_id')
+                            <span class="form-text text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
         </div>
