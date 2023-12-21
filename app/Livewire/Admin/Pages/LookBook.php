@@ -14,8 +14,13 @@ use App\Models\LookBook as ModelsLookBook;
 class LookBook extends Component
 {
     use WithFileUploads;
-    public $isEdit, $tampilModal = false, $image, $edit_image, $data_p, $nomor, $idNya, $name, $edit_pilih;
+    public $isEdit, $tampilModal = false, $image, $edit_image, $data_p, $nomor, $idNya, $name;
     public $pilih = [], $listGetProduct = [
+        'product_id' => '',
+        'dots' => ''
+    ];
+
+    public $edit_pilih = [], $edit_listGetProduct = [
         'product_id' => '',
         'dots' => ''
     ];
@@ -44,11 +49,12 @@ class LookBook extends Component
         $this->idNya = $data->id;
         $this->name = $data->name;
         $this->edit_image = $data->image;
-        $this->edit_pilih = Dots::where('look_book_id', $data->id)->get();
-        foreach ($this->edit_pilih as $a) {
-            $this->listGetProduct['dots'] = $a->dots;
-            $this->listGetProduct['product_id'] = $a->product_id;
-            $this->pilih[] = $this->listGetProduct;
+        $b = Dots::where('look_book_id', $data->id)->get();
+
+        foreach ($b as $a) {
+            $this->edit_listGetProduct['dots'] = $a->dots;
+            $this->edit_listGetProduct['product_id'] = $a->product_id;
+            $this->edit_pilih[] = $this->edit_listGetProduct;
         }
         $this->isEdit = !$this->isEdit;
     }
