@@ -23,6 +23,7 @@ class Product extends Component
     public function AddProduct()
     {
         $this->isAdd = true;
+        $this->dispatchBrowserEvent('active_ckeditor');
     }
 
     public function CancelAddProduct()

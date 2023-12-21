@@ -60,11 +60,12 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Description</label>
-                                <div class="col-lg-10">
+                                <div class="col-lg-10" wire:ignore>
                                     {{ Form::textarea(null, null, [
                                         'class' => 'form-control' . ($errors->has('description') ? ' border-danger' : null),
                                         'placeholder' => 'Description Product',
                                         'wire:model.lazy' => 'description',
+                                        'id' => 'description',
                                     ]) }}
                                     @error('description')
                                         <span class="form-text text-danger">{{ $message }}</span>
@@ -76,11 +77,12 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Specification</label>
-                                <div class="col-lg-10">
+                                <div class="col-lg-10" wire:ignore>
                                     {{ Form::textarea(null, null, [
                                         'class' => 'form-control' . ($errors->has('specification') ? ' border-danger' : null),
                                         'placeholder' => 'Specification Product',
                                         'wire:model.lazy' => 'specification',
+                                        'id' => 'specification',
                                     ]) }}
                                     @error('specification')
                                         <span class="form-text text-danger">{{ $message }}</span>
@@ -92,11 +94,12 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Shop info</label>
-                                <div class="col-lg-10">
+                                <div class="col-lg-10" wire:ignore>
                                     {{ Form::textarea(null, null, [
                                         'class' => 'form-control' . ($errors->has('shop_info') ? ' border-danger' : null),
                                         'placeholder' => 'Shop Info Product',
                                         'wire:model.lazy' => 'shop_info',
+                                        'id' => 'shop_info',
                                     ]) }}
                                     @error('shop_info')
                                         <span class="form-text text-danger">{{ $message }}</span>
@@ -342,7 +345,8 @@
                                 @if ($img_path_2)
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" wire:model="namecolor" disabled/>
+                                            <input type="text" class="form-control" wire:model="namecolor"
+                                                disabled />
                                             <input type="text" class="form-control" wire:model.live="color" />
                                             <span class="input-group-append">
                                                 <span class="input-group-text">
@@ -369,8 +373,9 @@
                                             @foreach ($listColor as $a => $b)
                                                 <li><span class="badge"
                                                         style="background-color: {{ $b['color'] }}; color:{{ $b['color'] }};">
-                                                        = = </span> 
-                                                    {{ $b['color'] }} => {{ $b['namecolor'] }}<button type="button" class="btn btn-link"
+                                                        = = </span>
+                                                    {{ $b['color'] }} => {{ $b['namecolor'] }}<button
+                                                        type="button" class="btn btn-link"
                                                         wire:click="confirmDelete('{{ $a }}','color','new')"><i
                                                             class="icon-trash
                                                         mr-2"></i></button>
@@ -477,6 +482,45 @@
     <script type="text/javascript" src="https://chir.ag/projects/ntc/ntc.js"></script>
     <script>
         $(document).ready(function() {
+
+            window.addEventListener('active_ckeditor', event => {
+                var konten = document.getElementById("specification");
+                var konten1 = document.getElementById("description");
+                var konten2 = document.getElementById("shop_info");
+                var options = {
+                    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                    filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+                };
+                const specification = CKEDITOR.replace(konten, options);
+                const description = CKEDITOR.replace(konten1, options);
+                const shop_info = CKEDITOR.replace(konten2, options);
+                // CKEDITOR.config.allowedContent = true;
+                CKEDITOR.config.toolbar = [
+                    ['Bold', 'Italic', 'Underline', 'StrikeThrough', '-', 'Undo', 'Redo', '-', 'Cut',
+                        'Copy',
+                        'Paste', 'Find', 'Replace', '-', 'Outdent', 'Indent', '-', 'Print'
+                    ],
+                    ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter',
+                        'JustifyRight',
+                        'JustifyBlock'
+                    ]
+                ];
+                specification.on('change', function(event) {
+                    // console.log(event.editor.getData())
+                    @this.set('specification', event.editor.getData());
+                })
+                description.on('change', function(event) {
+                    // console.log(event.editor.getData())
+                    @this.set('description', event.editor.getData());
+                })
+                shop_info.on('change', function(event) {
+                    // console.log(event.editor.getData())
+                    @this.set('shop_info', event.editor.getData());
+                })
+            });
+
             window.addEventListener('close-modal', event => {
                 $('#viewModal').modal('hide');
             });
