@@ -275,6 +275,7 @@ class Product extends Component
         $this->getSize($id);
         $this->isAdd = true;
         $this->isEdit = true;
+        $this->dispatchBrowserEvent('active_ckeditor');
     }
 
     public function getImage($id)
