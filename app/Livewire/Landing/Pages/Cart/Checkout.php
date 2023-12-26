@@ -129,6 +129,7 @@ class Checkout extends Component
     public function mount($idnya)
     {
         $this->order = Order::find($idnya);
+        $this->wa = auth()->user()->wa;
 
         $this->provinsi = $this->order->provinsi ?? null;
         $this->provinsi_id = $this->order->provinsi_id ?? null;

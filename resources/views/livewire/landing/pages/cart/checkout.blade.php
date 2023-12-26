@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Phone</div>
-                                            <input type="number" name="field-name"
+                                            <input type="text" name="field-name"
                                                 value="{{ auth()->user()->wa ?? '' }}" placeholder="" wire:model="wa">
 
                                             @error('wa')

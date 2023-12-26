@@ -20,4 +20,14 @@ class Cart extends Model implements Auditable
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function size()
+    {
+        return $this->belongsTo(ProductSize::class, 'size_id');
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(ProductImageColor::class, 'color_id');
+    }
 }
