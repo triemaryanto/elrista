@@ -32,6 +32,8 @@
                             <tr class="table-head">
                                 <th scope="col">image</th>
                                 <th scope="col">product name</th>
+                                <th scope="col">size</th>
+                                <th scope="col">color</th>
                                 <th scope="col">price</th>
                                 <th scope="col">quantity</th>
                                 <th scope="col">action</th>
@@ -48,7 +50,11 @@
                                                         src="{{ route('helper.show-picture', ['path' => $item->product->gambar_satu->img1]) }}"
                                                         alt=""></a>
                                             </td>
-                                            <td>{{ $item->product->name }}
+                                            <td>{{ $item->product->name }}</td>
+                                            <td>{{ $item->size->size }}</td>
+                                            <td><span class="badge"
+                                                style="background-color: {{ $item->color->color }}; color:{{ $item->color->color }};">
+                                                = = </span>  {{ $item->color->namecolor }}</td>
                                             <td>
                                                 <h2>Rp. {{ number_format($item->product->price, 0, ',', '.') }}</h2>
                                             </td>
@@ -81,7 +87,11 @@
                                                         src="{{ route('helper.show-picture', ['path' => $item['img1']]) }}"
                                                         alt=""></a>
                                             </td>
-                                            <td>{{ $item['name'] }}
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>{{ $item['size'] }}</td>
+                                            <td><span class="badge"
+                                                style="background-color: {{ $item['color'] }}; color:{{ $item['color'] }};">
+                                                = = </span> {{ $item['namecolor'] }}</td>
                                             <td>
                                                 <h2>Rp, {{ number_format($item['price'], 0, ',', '.') }}</h2>
                                             </td>

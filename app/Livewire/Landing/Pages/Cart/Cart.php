@@ -33,6 +33,7 @@ class Cart extends Component
                     'name' => Product::find($item['product_id'])->name,
                     'qty' => $item['qty'],
                     'price' => Product::find($item['product_id'])->price,
+                    'namecolor' => ProductImageColor::find($item['color_id'])->namecolor,
                     'color' => ProductImageColor::find($item['color_id'])->color,
                     'size' => ProductSize::find($item['size_id'])->size,
                 ];
