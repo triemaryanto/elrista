@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('setting_webs', function (Blueprint $table) {
+            $table->string('background_image')->after('link_linkedin')->nullable();
+        });
     }
 
     /**
