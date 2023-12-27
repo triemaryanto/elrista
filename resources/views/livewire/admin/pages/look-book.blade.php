@@ -96,68 +96,67 @@
                                         accept="image/png, image/jpeg">
                                 </div>
                             </div>
-                            @if ($pilih)
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-form-label"></label>
-                                    <div class="col-lg-10">
-                                        <table class="table table-strip text-center">
-                                            <thead>
-                                                <th>Nomor</th>
-                                                <th>Nama Product</th>
-                                                <th>Harga</th>
-                                                <th>Image</th>
-                                                <th></th>
-                                            </thead>
+
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label"></label>
+                                <div class="col-lg-10">
+                                    <table class="table table-strip text-center">
+                                        <thead>
+                                            <th>Nomor</th>
+                                            <th>Nama Product</th>
+                                            <th>Harga</th>
+                                            <th>Image</th>
+                                            <th></th>
+                                        </thead>
+                                        @if ($pilih)
                                             <tbody>
-                                                @if ($edit_pilih)
-
-                                                    @foreach ($edit_pilih as $index => $item)
-                                                        <tr>
-                                                            <td>{{ $item['dots'] }}</td>
-                                                            <td style="width: 25%;">
-                                                                {{ get_product($item['product_id'])->name }}</td>
-                                                            <td style="width: 25%;">Rp.
-                                                                {{ number_format(get_product($item['product_id'])->price, 0, ',', '.') }}
-                                                            </td>
-                                                            <td style="width: 10%;">
-                                                                <img src="{{ route('helper.show-picture', ['path' => get_product($item['product_id'])->gambar_satu->img1]) }}"
-                                                                    class="kecil" alt="">
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-warning"
-                                                                    wire:click="KonfirmasiHapusEdit({{ $index }})"><span
-                                                                        aria-hidden="true">&times;</span></button>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-                                                @if ($pilih)
-                                                    @foreach ($pilih as $index => $item)
-                                                        <tr>
-                                                            <td>{{ $item['dots'] }}</td>
-                                                            <td style="width: 25%;">
-                                                                {{ get_product($item['product_id'])->name }}</td>
-                                                            <td style="width: 25%;">Rp.
-                                                                {{ number_format(get_product($item['product_id'])->price, 0, ',', '.') }}
-                                                            </td>
-                                                            <td style="width: 10%;">
-                                                                <img src="{{ route('helper.show-picture', ['path' => get_product($item['product_id'])->gambar_satu->img1]) }}"
-                                                                    class="kecil" alt="">
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-warning"
-                                                                    wire:click="KonfirmasiHapus({{ $index }})"><span
-                                                                        aria-hidden="true">&times;</span></button>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-
+                                                @foreach ($pilih as $index => $item)
+                                                    <tr>
+                                                        <td>{{ $item['dots'] }}</td>
+                                                        <td style="width: 25%;">
+                                                            {{ get_product($item['product_id'])->name }}</td>
+                                                        <td style="width: 25%;">Rp.
+                                                            {{ number_format(get_product($item['product_id'])->price, 0, ',', '.') }}
+                                                        </td>
+                                                        <td style="width: 10%;">
+                                                            <img src="{{ route('helper.show-picture', ['path' => get_product($item['product_id'])->gambar_satu->img1]) }}"
+                                                                class="kecil" alt="">
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-warning"
+                                                                wire:click="KonfirmasiHapus({{ $index }})"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
-                                        </table>
-                                    </div>
+                                        @endif
+                                        @if ($editPilih)
+                                            <tbody>
+                                                @foreach ($editPilih as $index => $row)
+                                                    <tr>
+                                                        <td>{{ $row->dots }}</td>
+                                                        <td style="width: 25%;">
+                                                            {{ $row->product->name }}</td>
+                                                        <td style="width: 25%;">Rp.
+                                                            {{ number_format($row->product->price, 0, ',', '.') }}
+                                                        </td>
+                                                        <td style="width: 10%;">
+                                                            <img src="{{ route('helper.show-picture', ['path' => $row->product->gambar_satu->img1]) }}"
+                                                                class="kecil" alt="">
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-warning"
+                                                                wire:click="KonfirmasiHapusEdit({{ $row->id }})"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        @endif
+                                    </table>
                                 </div>
-                            @endif
+                            </div>
 
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary">Save LookBook</button>
@@ -208,6 +207,28 @@
                 <div class="modal-footer">
                     <button type="button" class="btn bg-warning" wire:click='showModal'>Tidak</button>
                     <button type="button" class="btn bg-primary" wire:click="Kofirm">Ya</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal_title_basic" class="modal fade @if ($hapusEdit) show @endif"
+        @if ($hapusEdit) style="display: block;" @else style="display: none;" aria-hidden="true" @endif
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-orange">
+                    <span class="font-weight-semibold modal-title">Hapus Data</span>
+                    <button type="button" class="close" wire:click='showModal'>&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <p><i class="icon-warning22 mr-3 icon-2x text-danger"></i> Apakah Anda yakin akan menghapus
+                        data ini?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-warning" wire:click='showModal'>Tidak</button>
+                    <button type="button" class="btn bg-primary" wire:click="KofirmHapusEdit">Ya</button>
                 </div>
             </div>
         </div>

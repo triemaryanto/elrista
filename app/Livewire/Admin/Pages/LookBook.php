@@ -14,16 +14,13 @@ use App\Models\LookBook as ModelsLookBook;
 class LookBook extends Component
 {
     use WithFileUploads;
-    public $isEdit, $tampilModal = false, $image, $edit_image, $data_p, $nomor, $idNya, $name;
-    public $pilih = [], $listGetProduct = [
+    public $isEdit, $tampilModal = false, $image, $edit_image, $data_p, $nomor, $idNya, $name, $hapusEdit;
+    public $editPilih, $pilih = [], $listGetProduct = [
         'product_id' => '',
         'dots' => ''
     ];
+    protected $debug = true;
 
-    public $edit_pilih = [], $edit_listGetProduct = [
-        'product_id' => '',
-        'dots' => ''
-    ];
     protected $listeners = ['edit', 'GetProduct', 'delete'];
 
     public $rules = [
@@ -49,13 +46,8 @@ class LookBook extends Component
         $this->idNya = $data->id;
         $this->name = $data->name;
         $this->edit_image = $data->image;
-        $b = Dots::where('look_book_id', $data->id)->get();
+        $this->editPilih = Dots::where('look_book_id', $data->id)->get();
 
-        foreach ($b as $a) {
-            $this->edit_listGetProduct['dots'] = $a->dots;
-            $this->edit_listGetProduct['product_id'] = $a->product_id;
-            $this->edit_pilih[] = $this->edit_listGetProduct;
-        }
         $this->isEdit = !$this->isEdit;
     }
     public function cancel()
@@ -64,6 +56,7 @@ class LookBook extends Component
         $this->image = '';
         $this->listGetProduct = [];
         $this->pilih = [];
+        $this->editPilih = '';
         $this->name = '';
         $this->idNya = '';
         $this->nomor = '';
@@ -80,6 +73,7 @@ class LookBook extends Component
         $this->listGetProduct['product_id'] = $id;
         $this->listGetProduct['dots'] = $this->nomor;
         $this->pilih[] = $this->listGetProduct;
+
         $this->dispatchBrowserEvent('close-product-modal');
     }
 
@@ -87,6 +81,13 @@ class LookBook extends Component
     {
         $this->idNya = $id;
         $this->tampilModal = true;
+    }
+
+    public function KonfirmasiHapusEdit($id)
+    {
+        dd($id);
+        $this->idNya = $id;
+        $this->hapusEdit = true;
     }
 
     public function Kofirm()
