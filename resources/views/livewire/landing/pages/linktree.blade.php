@@ -1,10 +1,12 @@
 @push('css')
-    <style rel="stylesheet" type="text/css">
+    <style type="text/css" rel="stylesheet">
         body {
-            background-image: url("https://bit.ly/3nFVqJh");
+            background-image: url({{ route('helper.show-picture', ['path' => get_setting()->background_image]) }});
+
         }
     </style>
 @endpush
+
 <div>
     <!-- Parallax Pixel Background Animation -->
     <section class="animated-background">
@@ -24,10 +26,11 @@
     </div>
 
     <div id="links">
-        <a class="link" href="#" target="_blank">
-            Website Elrista
-        </a>
-        </a>
+        @foreach ($data as $item)
+            <a class="link" href="{{ $item->url }}" target="_blank">
+                {{ $item->title }}
+            </a>
+        @endforeach
     </div>
 
     <div id="hashtag">

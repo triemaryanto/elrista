@@ -105,7 +105,6 @@ class LookBook extends Component
 
     public function save()
     {
-
         $gambar_lookbook = $this->image->store('lookbook/image');
         $lookbook = ModelsLookBook::create([
             "name" => $this->name,
@@ -153,6 +152,12 @@ class LookBook extends Component
             $a->image = $gambar_lookbook;
         }
         $a->save();
+        foreach ($this->pilih as $item) {
+            $a['product_id'] = $item['product_id'];
+            $a['dots'] = $item['dots'];
+            $a['look_book_id'] = $a->id;
+            Dots::create($a);
+        }
         $this->dispatchBrowserEvent('Update');
         $this->emit('refreshDatatable');
         $this->isEdit = false;

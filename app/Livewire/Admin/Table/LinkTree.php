@@ -20,10 +20,11 @@ class LinkTree extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Tittle", "tittle")
+            Column::make("Title", "title")
                 ->sortable(),
             Column::make("Link", "url")
                 ->sortable(),
+            Column::make("Action", "id")->view('components.table-action'),
         ];
     }
 }

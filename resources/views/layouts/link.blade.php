@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Core theme CSS -->
     <link rel="stylesheet" href="{{ asset('costum/') }}/linktree.css">
+
     @stack('css')
     @vite(['resources/js/app.js'])
     @livewireStyles
